@@ -1,0 +1,1418 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.0.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '7.4.2',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: '',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: '复制',
+      copy_success: '复制成功',
+      copy_failure: '复制失败'
+    },
+    sidebarPadding: 40
+  };
+</script>
+
+  <meta property="og:type" content="website">
+<meta property="og:title" content="Hexo">
+<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:locale" content="zh-CN">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://yoursite.com/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: true,
+    isPost: false,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>Hexo</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Hexo</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <p class="site-subtitle">把无穷无尽握于手掌，永恒宁非是刹那时光</p>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/11/30/cs/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/assets/blogImg/6711866_014214_8838.jpg">
+      <meta itemprop="name" content="XXX">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/11/30/cs/" class="post-title-link" itemprop="url">cs</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2019-11-30 17:33:09 / 修改时间：17:34:29" itemprop="dateCreated datePublished" datetime="2019-11-30T17:33:09+08:00">2019-11-30</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>123</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/11/27/hello-world/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/assets/blogImg/6711866_014214_8838.jpg">
+      <meta itemprop="name" content="XXX">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/11/27/hello-world/" class="post-title-link" itemprop="url">Hello World</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-11-27 20:04:25" itemprop="dateCreated datePublished" datetime="2019-11-27T20:04:25+08:00">2019-11-27</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
+<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
+<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
+<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/11/13/Python%E5%AE%89%E8%A3%85/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/assets/blogImg/6711866_014214_8838.jpg">
+      <meta itemprop="name" content="XXX">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/11/13/Python%E5%AE%89%E8%A3%85/" class="post-title-link" itemprop="url">Python安装</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-11-13 19:23:47" itemprop="dateCreated datePublished" datetime="2019-11-13T19:23:47+08:00">2019-11-13</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2019-11-27 20:04:25" itemprop="dateModified" datetime="2019-11-27T20:04:25+08:00">2019-11-27</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Python/" itemprop="url" rel="index">
+                    <span itemprop="name">Python</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h3 id="Linux上安装python"><a href="#Linux上安装python" class="headerlink" title="Linux上安装python"></a>Linux上安装python</h3><p>目前Linux中都自带python2，使用</p>
+<pre><code>python --version</code></pre><p>查看python版本</p>
+<blockquote>
+<p>python2已成过去，以后不会有支持，建议不用，但是Linux中有依赖python2，所以也不能卸载，直接安装python3即可</p>
+</blockquote>
+<h3 id="安装前准备"><a href="#安装前准备" class="headerlink" title="安装前准备"></a>安装前准备</h3><pre><code>cd /usr/local/
+mkdir python3</code></pre><p>此目录作为Python的主目录</p>
+<ol>
+<li>安装GCC编译器</li>
+</ol>
+<pre><code>gcc --version</code></pre><p>查看是否安装，若没有安装，则</p>
+<pre><code>yum -y install gcc</code></pre><ol start="2">
+<li><p>安装其他依赖包</p>
+<pre><code>yum -y install zlib-devel bzip2-devel openssl-devel ncurses-devel sqlite-develreadline-devel tk-devel gdbm-devel db4-devel libpcap-devel xz-devel libffi-devel</code></pre></li>
+</ol>
+<h3 id="下载安装包"><a href="#下载安装包" class="headerlink" title="下载安装包"></a>下载安装包</h3><pre><code>cd python3/
+wget https://www.python.org/ftp/python/3.7.0/Python-3.7.0.tgz</code></pre><h3 id="解压"><a href="#解压" class="headerlink" title="解压"></a>解压</h3><pre><code>tar -xzvf Python-3.7.0.tgz</code></pre><blockquote>
+<p>tar命令报错，可能是没有安装tar，直接yum -y install tar</p>
+</blockquote>
+<p>使用</p>
+<pre><code>tree -d -L 1 Python-3.7.0</code></pre><p>可以使用树形查看目录，更清楚</p>
+<blockquote>
+<p>若没有该命令则，yum -y install tree</p>
+</blockquote>
+<h3 id="开始安装"><a href="#开始安装" class="headerlink" title="开始安装"></a>开始安装</h3><p>进入到刚解压出来的文件中即Python -3.7.0</p>
+<h4 id="将创建的文件夹设置为程序主目录"><a href="#将创建的文件夹设置为程序主目录" class="headerlink" title="将创建的文件夹设置为程序主目录"></a>将创建的文件夹设置为程序主目录</h4><p>意思是：安装的目录就是这个指定的目录，相关文件全放在这里</p>
+<pre><code>./configure --prefix=/usr/local/python3</code></pre><h3 id="编译安装"><a href="#编译安装" class="headerlink" title="编译安装"></a>编译安装</h3><p>还是在刚才目录</p>
+<pre><code>make &amp;&amp; make install</code></pre><h3 id="建立软连接"><a href="#建立软连接" class="headerlink" title="建立软连接"></a>建立软连接</h3><p>如果不建立连接，则只有在安装的目录中才能使用Python,建立连接是要在任何地方都能使用，要达到这个目的，还需要环境变量，即在任何地方使用命令，都会在环境变量路径中查找该命令</p>
+<pre><code>ln -s /usr/local/python3/bin/python3.7 /usr/bin/python3
+
+ln -s /usr/local/python3/pip3.7 /usr/bin/pip3</code></pre><blockquote>
+<p>pip是python的包管理工具，相当于nodejs中的npm</p>
+</blockquote>
+<p><strong>安装成功后此Linux中就有两个python 版本2和版本3，现在只想使用版本3</strong></p>
+<pre><code>file /usr/bin/python</code></pre><p>输出打印</p>
+<pre><code>/usr/bin/python: symbolic link to `python2&apos;</code></pre><p>表示输入python实际上运行的是python2</p>
+<pre><code>which python2</code></pre><p>找到Python2安装的位置，在环境变量的路径中找，python3也一样</p>
+<pre><code>mv /usr/bin/python /usr/bin/python_bk</code></pre><p>将该路径去除，实际上是改名了，然后就可以将Python3连接过来</p>
+<pre><code>ln -s /usr/bin/python3 /usr/bin/python</code></pre><blockquote>
+<p>/usr/bin/python就相当于python</p>
+</blockquote>
+<pre><code>python -V
+Python 3.7.0</code></pre><p>file命令是查看一个文件的属性，可以看到它的连接，然后依次往下查找就可以找到唯一的运行文件，因为连接也是文件</p>
+<p>ln是创建连接，源文件  目标文件</p>
+<p>which是在环境变量中查找文件</p>
+<p>链接（link）：系统中的链接是一个已经存在的文件的另一个名字，它不复制文件的内容。有两种链接方式，一种是硬链接（hard link），另一种是符号链接（symbolic link），又称软链接。硬链接和原有文件是存储在同一物理地址的两个不同的名字，因此硬链接是相互的；符号链接的内容只是一个所链接文件的文件名，在使用ls –l时，符号链接的第一项的第一位为“l”。 </p>
+<p>指向一个文件的所有 硬链接都删掉的话文件的内容才会被删掉<br>软链接只要删掉了源链接文件，软链接也就失效了</p>
+<p>ln和file在查看上是相反的，ln将存在的文件创建一个新名字，file是显示目前查看的文件的本名字是谁</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/11/10/%E5%85%B3%E4%BA%8E%E5%A4%96%E7%BA%BF%E6%9C%8D%E5%8A%A1%E5%8F%B0%E5%A3%B0%E9%9F%B3%E5%B0%8F%E6%83%85%E5%86%B5%E8%AF%B4%E6%98%8E/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/assets/blogImg/6711866_014214_8838.jpg">
+      <meta itemprop="name" content="XXX">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/11/10/%E5%85%B3%E4%BA%8E%E5%A4%96%E7%BA%BF%E6%9C%8D%E5%8A%A1%E5%8F%B0%E5%A3%B0%E9%9F%B3%E5%B0%8F%E6%83%85%E5%86%B5%E8%AF%B4%E6%98%8E/" class="post-title-link" itemprop="url">关于外线服务台话音失真情况说明</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-11-10 11:21:41" itemprop="dateCreated datePublished" datetime="2019-11-10T11:21:41+08:00">2019-11-10</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2019-11-27 20:04:25" itemprop="dateModified" datetime="2019-11-27T20:04:25+08:00">2019-11-27</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h3 id="故障现象"><a href="#故障现象" class="headerlink" title="故障现象"></a>故障现象</h3><p>根据船上外线服务台使用情况反馈，当船外用户呼叫船上值班室的外线服务台时，通话质量不佳，主要体现在：当船外用户声音低沉时，外线服务台收听到的声音非常小，而且会出现掉字的情况，如，当船外用户说出“1、2、3”时，如果“2”的声音小，则外线服务台只能听到“1、3”。</p>
+<h3 id="业务流程"><a href="#业务流程" class="headerlink" title="业务流程"></a>业务流程</h3><p>流程如图所示：<img src="/2019/11/10/%E5%85%B3%E4%BA%8E%E5%A4%96%E7%BA%BF%E6%9C%8D%E5%8A%A1%E5%8F%B0%E5%A3%B0%E9%9F%B3%E5%B0%8F%E6%83%85%E5%86%B5%E8%AF%B4%E6%98%8E/%E6%88%AA%E5%9B%BE20191110114449.png" alt></p>
+<ol>
+<li>当船外用户拨打船内提供的外线号码后，第一跳到达岸上的程控交换机中，通过电信号交换将主叫用户的呼叫请求转发到相应的出端口上</li>
+<li>出端口出来后通过光缆到达船上的光缆卷车室</li>
+<li>由光缆卷车室到达广播室的网元中的O卡上，通过该网元的CMUE板卡的交换功能找到被叫用户即外线服务台</li>
+<li>外线服务台振铃并接通后，即可与船外用户通话</li>
+</ol>
+<h3 id="问题分析"><a href="#问题分析" class="headerlink" title="问题分析"></a>问题分析</h3><p>业务流程如上所述，假设船外用户呼叫外线服务台这一系列链路中无任何信号衰减，则可视为一条透传的链路，即两端话音不失真的传递到对端，但目前的故障问题显然是话音在传递的过程中有失真，该失真有可能出现自链路中的任何一环节，故需要做一组对比试验来判定失真出现在哪一段</p>
+<h3 id="试验环境"><a href="#试验环境" class="headerlink" title="试验环境"></a>试验环境</h3><p>试验环境如图：<br><img src="/2019/11/10/%E5%85%B3%E4%BA%8E%E5%A4%96%E7%BA%BF%E6%9C%8D%E5%8A%A1%E5%8F%B0%E5%A3%B0%E9%9F%B3%E5%B0%8F%E6%83%85%E5%86%B5%E8%AF%B4%E6%98%8E/%E6%88%AA%E5%9B%BE20191110121549.png" alt></p>
+<p><strong>经过分析怀疑是岸上的程控交换机到船上这一段链路上有信号的衰减，为了验证该结论于是搭建上述试验环境，将“岸上的程控交换机-光缆卷车室”替换成“生活电话-自备的程控交换机-网元”模式。</strong></p>
+<blockquote>
+<p>该模式下可正常使用，“生活电话”相当于之前的“船外用户”，“自备的程控交换机”相当于“岸上的程控交换机”</p>
+</blockquote>
+<h3 id="试验过程"><a href="#试验过程" class="headerlink" title="试验过程"></a>试验过程</h3><ol>
+<li>生活电话摘机拨打602<blockquote>
+<p>602是自备的程控交换机上连接网元侧的号码，拨打此号码相当于入局</p>
+</blockquote>
+</li>
+</ol>
+<ol start="2">
+<li>网元1中fox卡相应的指示灯亮起，表示有用户入局</li>
+<li>fxo卡将入局信号转发到cmue板卡上，cmue通过查号表得知被叫用户在网元3，于是将呼叫请求转发到网元3</li>
+<li>网元3的cmue板卡收到呼叫请求，查找本地的号码表得知被叫号码是本网元的外线服务台，于是将请求转发到外线服务台</li>
+<li>外线服务台振铃，摘机接听，生活电话端故意压低声音依次从1数到10</li>
+<li><strong>外线服务台声音清晰，未出现掉字、模糊的现象</strong></li>
+<li>经过多次试验，且多次更换网元、生活电话、外线服务台后，现象没有变化</li>
+</ol>
+<h3 id="试验结论"><a href="#试验结论" class="headerlink" title="试验结论"></a>试验结论</h3><p>多次试验并对比后可以得出结论：外线服务台话音失真问题原因在于岸上程控交换机到船内一段链路有较大信号衰减，</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/11/06/%E5%8F%8D%E5%B0%84/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/assets/blogImg/6711866_014214_8838.jpg">
+      <meta itemprop="name" content="XXX">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/11/06/%E5%8F%8D%E5%B0%84/" class="post-title-link" itemprop="url">反射</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-11-06 16:21:59" itemprop="dateCreated datePublished" datetime="2019-11-06T16:21:59+08:00">2019-11-06</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2019-11-27 20:04:25" itemprop="dateModified" datetime="2019-11-27T20:04:25+08:00">2019-11-27</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/java/" itemprop="url" rel="index">
+                    <span itemprop="name">java</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h3 id="反射：框架设计的灵魂"><a href="#反射：框架设计的灵魂" class="headerlink" title="反射：框架设计的灵魂"></a>反射：框架设计的灵魂</h3><ul>
+<li>框架： 半成品软件，可以在框架上进行软件开发，简化编码</li>
+<li>概念： 将类的各个组成部分封装为其他对象</li>
+</ul>
+<h3 id="java代码的三个阶段"><a href="#java代码的三个阶段" class="headerlink" title="java代码的三个阶段"></a>java代码的三个阶段</h3><p><img src="/2019/11/06/%E5%8F%8D%E5%B0%84/Java%E4%BB%A3%E7%A0%81%E7%9A%84%E4%B8%89%E4%B8%AA%E9%98%B6%E6%AE%B5.bmp" alt></p>
+<ol>
+<li><p>编写好的代码，一个类中包括成员变量和方法两大部分，变量记录状态，方法提供解决方案，方法可以改变变量的值，也即是改变对象状态。编写好的代码经过javac编译变成class文件，即源代码与目标文件（person.class文件）都是在<strong>硬盘上</strong>还没有进入到内存</p>
+</li>
+<li><p>类加载器（ClassLoader）将字节码文件（class文件）加载到内存中。只有将类加载到内存中后，才能new对象出来，因为程序必须要在内存中才能运行，在内存中要描述person.class这个文件，万物皆对象，所以有一个<strong>Class类</strong>专门用来描述.class文件，注意：是一个类描述一个物理文件！所有字节码文件中都会有：<strong>成员变量</strong>、<strong>构造方法</strong>、<strong>成员方法</strong>，所以Class对象中就有描述这三种的东西，实际上是Class中的成员变量</p>
+<blockquote>
+<p>如：将person.class文件中成员变量封装成Class类中的Field[]对象并作为其成员变量，构造方法封装成constructor[]对象并作为成员变量，成员方法封装成Method[]对象并作为其成员变量，数组是因为有多个成员变量、构造方法、成员方法需要封装</p>
+</blockquote>
+</li>
+<li><p>创建对象，通过new来创建对象都是通过<strong>Class类对象</strong>来创建对象的，也就是说，person.class有一个Class类对象，它负责创建person的对象</p>
+</li>
+</ol>
+<blockquote>
+<p>反射的好处：可在程序运行的过程中，操作这些对象。比如eclipse的代码提示功能，当String str = “abc”,然后使用str.时，后面会自动弹出很多方法，这些方法都是通过反射得来的，定义了字符串后，程序会将String的字节码文件加载进内存也即是String.class文件加载进内存，在内存中有一个Class类对象，该对象已经把所有的String中的方法抽取出来组成了Method[]对象，所以只要遍历该数组，即可得到String中的所有方法</p>
+</blockquote>
+<h3 id="获取Class类对象的三种方式"><a href="#获取Class类对象的三种方式" class="headerlink" title="获取Class类对象的三种方式"></a>获取Class类对象的三种方式</h3><ol>
+<li>ClassforName(“类的全名”) ：主要用于字节码文件阶段，该文件还没进入内存中，将字节码文件加载进内存，并返回Class类对象，该文件的Class类对象，一个文件一个Class类对象</li>
+<li>类名.class：通过属性获取，若class文件已经进入了内存，也即是<strong>已经生成了该文件的Class类对象</strong>只需要获取</li>
+<li>对象.getClass():通过方法获取，此时已经生成了对象(new或者其他方法生成对象)，可以使用该对象继承自object类的getClass()方法</li>
+</ol>
+<blockquote>
+<p>同一个字节码文件在一次程序运行过程中<strong>只会被加载一次</strong>，不论哪一种方法获取的Class对象都是同一个，都是该加载进内存的对象如：person和student的Class类对象就不相同</p>
+</blockquote>
+<h3 id="使用Class对象的功能"><a href="#使用Class对象的功能" class="headerlink" title="使用Class对象的功能"></a>使用Class对象的功能</h3><ol>
+<li>获取成员对象们<ul>
+<li>Field[] getFields() 获取所有public修饰的成员变量</li>
+<li>Field[] getField(String name)获取指定成员变量</li>
+<li>加上declared表示不考虑修饰符，获取所有成员变量，若要获取指定的成员变量切不考虑修饰符则要是用暴力反射，在成员变量名上使用setAccessible(true)方法</li>
+<li>获取遍历数组后得到一个Field对象，该对象有set()和get()方法可以设置、获取成员变量的值</li>
+</ul>
+</li>
+<li>获取构造方法们<ul>
+<li>Constructor[] getConstructors()</li>
+<li>Constructor getConstructors(String.class,int.class…) （此处是将类的class文件对象作为参数传递，所以传递的形式是String.class或者int.class）</li>
+<li>Constructor中有newInstance()方法可创建对象</li>
+<li>Class类中有一个newInstance（）方法，可以直接用来床架空参的对象，就不用了先获取构造器了</li>
+</ul>
+</li>
+<li>获取成员方法们<ul>
+<li>Methods[] getMethod()</li>
+<li>Method getMethod(String name,String.class,int.class…)</li>
+<li>Method类中有一个执行方法，invoke（Object obj,Object…arg）(传递真实的对象和实际参数，真实的对象就是哪个对象执行该方法，因为一个类有多个对象，每个对象状态都不一样)</li>
+</ul>
+</li>
+</ol>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>获取对应类的Class对象，有了它就能获取到类的所有信息，有如上三种方式可获取，获取之后可以通过Class类中的方法得到成员变量、构造方法、成员方法，获取这些部分后，这些部分也被封装成为新的类（Field、Constructor、Method），这些新的类又有各自的方法，这些方法可以直接操作原类，如改变成员变量的值、创建对象、执行方法。Class对象中有newInstance（）方法可直接创建空参对象，不需要获得原类的构造器，故经常使用。</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/10/31/%E5%AE%8C%E5%85%A8%E5%8D%B8%E8%BD%BDmysql/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/assets/blogImg/6711866_014214_8838.jpg">
+      <meta itemprop="name" content="XXX">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/10/31/%E5%AE%8C%E5%85%A8%E5%8D%B8%E8%BD%BDmysql/" class="post-title-link" itemprop="url">完全卸载mysql</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-10-31 10:30:00" itemprop="dateCreated datePublished" datetime="2019-10-31T10:30:00+08:00">2019-10-31</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2019-11-27 20:04:25" itemprop="dateModified" datetime="2019-11-27T20:04:25+08:00">2019-11-27</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/" itemprop="url" rel="index">
+                    <span itemprop="name">数据库</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <ol>
+<li>先停止mysql服务</li>
+<li>进入控制面板卸载mysql</li>
+<li>删除mysql文件，一般在C:\Program Files (x86)下有个mysql文件夹，直接删除</li>
+<li>在运行中输入regedit打开注册表，删除<strong>HKEY_LOCAL_MACHINE\SYSTEM\ControlSet001\Services\Eventlog\Application\MySQL文件夹</strong>和<strong>HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\Eventlog\Application\MySQL的文件夹</strong><blockquote>
+<p>ControlSet001和CurrentControlSet的区别若后者没有mysql可以不删</p>
+</blockquote>
+</li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/10/26/git%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/assets/blogImg/6711866_014214_8838.jpg">
+      <meta itemprop="name" content="XXX">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/10/26/git%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C/" class="post-title-link" itemprop="url">git基本操作</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-10-26 15:48:20" itemprop="dateCreated datePublished" datetime="2019-10-26T15:48:20+08:00">2019-10-26</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2019-11-27 20:04:25" itemprop="dateModified" datetime="2019-11-27T20:04:25+08:00">2019-11-27</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%B7%A5%E5%85%B7/" itemprop="url" rel="index">
+                    <span itemprop="name">工具</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h2><p><img src="/2019/10/26/git%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C/image1.png" alt></p>
+<h3 id="运行前配置"><a href="#运行前配置" class="headerlink" title="运行前配置"></a>运行前配置</h3><pre><code>git config --global user.name &quot;shuihan&quot;
+git config --global user.email lxq_xsyu@163.com</code></pre><p>该信息用于每次<strong>本地提交</strong>也即是commit时记录提交人的信息，不是上传至github的账号密码</p>
+<h3 id="查看配置信息"><a href="#查看配置信息" class="headerlink" title="查看配置信息"></a>查看配置信息</h3><pre><code>git config --list</code></pre><h3 id="获取帮助"><a href="#获取帮助" class="headerlink" title="获取帮助"></a>获取帮助</h3><pre><code>git help &lt;verb&gt;</code></pre><p>git的命令都是git+想要操作的范围+操作如：git remote -v</p>
+<blockquote>
+<p>-后面跟首字母缩写，–后面跟整个单词</p>
+</blockquote>
+<h2 id="基础"><a href="#基础" class="headerlink" title="基础"></a>基础</h2><h3 id="获取仓库"><a href="#获取仓库" class="headerlink" title="获取仓库"></a>获取仓库</h3><p>仓库就是一个文件夹，在任意文件夹内输入<br>    git init<br>就可以将此文件夹变成仓库</p>
+<p>克隆仓库</p>
+<pre><code>git clone git://github.com/test/gittest.git</code></pre><p>git clone 后面跟仓库全地址，即可将整个仓库克隆下来这样默认目录会是gittest,如果要更改目录名称可以追加在后面。</p>
+<pre><code>git clone git://github.com/test/gittest.git newname</code></pre><h3 id="查看文件状态"><a href="#查看文件状态" class="headerlink" title="查看文件状态"></a>查看文件状态</h3><pre><code>git status</code></pre><p>课显示出工作目录中有哪些变化的文件</p>
+<h3 id="跳过暂存区"><a href="#跳过暂存区" class="headerlink" title="跳过暂存区"></a>跳过暂存区</h3><pre><code>git commit -a -m &quot;注释&quot;</code></pre><h3 id="添加远程仓库"><a href="#添加远程仓库" class="headerlink" title="添加远程仓库"></a>添加远程仓库</h3><pre><code>git commit add [自己随便起个仓库名字但通常会叫origin] [url]</code></pre><blockquote>
+<p>git commit add origin git://github.com/test/gittest.git</p>
+</blockquote>
+<p>该操作是在本地绑定远程的仓库，以后可直接上传至github，地址可以使用两种协议，一种是https一种是ssh，https上传时候需要github的账号密码，ssh需要公钥</p>
+<h3 id="查看远程仓库"><a href="#查看远程仓库" class="headerlink" title="查看远程仓库"></a>查看远程仓库</h3><pre><code>git remote -v</code></pre><blockquote>
+<p>可以添加多个远程仓库</p>
+</blockquote>
+<h3 id="将本地仓库内容上传到远程仓库"><a href="#将本地仓库内容上传到远程仓库" class="headerlink" title="将本地仓库内容上传到远程仓库"></a>将本地仓库内容上传到远程仓库</h3><pre><code>git push origin master</code></pre><p>该命令会自动使用之前绑定的路径上传,origin是自己起的仓库别名，origin就代表了git://github.com/test/gittest.git这个url，master代表分支</p>
+<h3 id="删除远程仓库"><a href="#删除远程仓库" class="headerlink" title="删除远程仓库"></a>删除远程仓库</h3><pre><code>git remote rm origin</code></pre><p>同样的origin就代表了仓库别名，实际是git://github.com/test/gittest.git</p>
+<h2 id="分支"><a href="#分支" class="headerlink" title="分支"></a>分支</h2><h3 id="分支的理解"><a href="#分支的理解" class="headerlink" title="分支的理解"></a>分支的理解</h3><p>假设此时我们的工作目录有三个文件，把它们暂存后提交</p>
+<ol>
+<li><p>暂存 git使用blob类型的对象存储了这些快照</p>
+<blockquote>
+<p>暂存就是add后的状态，实际上存储的是文件的快照</p>
+</blockquote>
+</li>
+<li><p>提交 git commit -m “commit three files”</p>
+</li>
+</ol>
+<p>此时git仓库中有5个对象（三个文件快照内容的blob对象，一个记录着目录树内容及其各个文件对应blob对象索引的tree对象，一个指向tree对象的索引和其他提交信息数据的commit对象）</p>
+<blockquote>
+<p>一个文件一个快照即Blog对象，一次提交一个目录树和一个commit对象<br>他们的关系是一层指向一层</p>
+</blockquote>
+<p><img src="/2019/10/26/git%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C/image2.png" alt></p>
+<ol start="3">
+<li>多做几次修改再提交 后一次提交的commit对象会指向前一次提交的commit对象</li>
+</ol>
+<p><img src="/2019/10/26/git%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C/image3.png" alt></p>
+<p>git中的分支实际上仅仅是一个指向commit对象的可变指针，git会使用master为分支的默认名字，每次提交后master（当前分支）都会自动向前移动。</p>
+<p><img src="/2019/10/26/git%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C/image4.png" alt></p>
+<blockquote>
+<p>分支之间不会互相影响</p>
+</blockquote>
+<ol start="4">
+<li>创建新分支</li>
+</ol>
+<pre><code>git branch testing</code></pre><p><img src="/2019/10/26/git%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C/image5.png" alt></p>
+<p>那么git是如何知道你在哪个分支上工作呢？它保留着一个名为HEAD的特别指针</p>
+<p><img src="/2019/10/26/git%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C/image6.png" alt></p>
+<ol start="5">
+<li><p>切换分支</p>
+<pre><code>git checkout testing</code></pre></li>
+</ol>
+<h3 id="分支管理"><a href="#分支管理" class="headerlink" title="分支管理"></a>分支管理</h3><p>git branch命令可以列出当前所有分支清单， 当前分支带 * 号</p>
+<pre><code>$ git branch
+* master
+  work</code></pre><p>删除本地分支 git branch -d <branch-name> 删除远程分支 git push <remote-name> –delete <branch-name></branch-name></remote-name></branch-name></p>
+<pre><code>$ git branch -d work
+$ git push origin --delete work</code></pre><blockquote>
+<p>-d等于–delete</p>
+</blockquote>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/10/25/%E5%88%A9%E7%94%A8%E5%88%86%E6%94%AF%E5%90%8C%E6%AD%A5%E5%8D%9A%E5%AE%A2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/assets/blogImg/6711866_014214_8838.jpg">
+      <meta itemprop="name" content="XXX">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/10/25/%E5%88%A9%E7%94%A8%E5%88%86%E6%94%AF%E5%90%8C%E6%AD%A5%E5%8D%9A%E5%AE%A2/" class="post-title-link" itemprop="url">利用分支同步博客</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-10-25 19:08:48" itemprop="dateCreated datePublished" datetime="2019-10-25T19:08:48+08:00">2019-10-25</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2019-11-27 20:04:25" itemprop="dateModified" datetime="2019-11-27T20:04:25+08:00">2019-11-27</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%8D%9A%E5%AE%A2/" itemprop="url" rel="index">
+                    <span itemprop="name">博客</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h3 id="利用分支进行多终端操作"><a href="#利用分支进行多终端操作" class="headerlink" title="利用分支进行多终端操作"></a>利用分支进行多终端操作</h3><p>一台电脑将博客提交到github上后另一台电脑想接着后面提交文章，则之前的文章会被覆盖，github上传不是追加而是直接覆盖，所以需要利用分支将博客源文件和生成的html文件分开存储</p>
+<h3 id="机制"><a href="#机制" class="headerlink" title="机制"></a>机制</h3><p>由于 hexo d命令是将Public文件夹下的内容同步到github上，不包含源文件</p>
+<p><img src="/2019/10/25/%E5%88%A9%E7%94%A8%E5%88%86%E6%94%AF%E5%90%8C%E6%AD%A5%E5%8D%9A%E5%AE%A2/v2-32ab30d0d28b916a204c03de4ed0fc4f_hd.jpg" alt></p>
+<p>也就是说上传的内容在.deploy_git里面其他所有文件都不上传</p>
+<p><img src="/2019/10/25/%E5%88%A9%E7%94%A8%E5%88%86%E6%94%AF%E5%90%8C%E6%AD%A5%E5%8D%9A%E5%AE%A2/v2-59bb330178a4e010d9818911f789082b_hd.jpg" alt></p>
+<p>所以可以利用git的分支管理，将源文件上传到github的另一个分支即可。</p>
+<h3 id="创建并上传分支"><a href="#创建并上传分支" class="headerlink" title="创建并上传分支"></a>创建并上传分支</h3><p>首先，先在github上新建一个hexo分支，如图：<br><img src="/2019/10/25/%E5%88%A9%E7%94%A8%E5%88%86%E6%94%AF%E5%90%8C%E6%AD%A5%E5%8D%9A%E5%AE%A2/v2-ebb3e05632e85ab036663390305caa1c_hd.jpg" alt><br>然后在这个仓库的settings中，选择默认分支为hexo分支（这样每次同步的时候就不用指定分支，比较方便）</p>
+<blockquote>
+<p>github默认上传的分支是master</p>
+</blockquote>
+<p><img src="/2019/10/25/%E5%88%A9%E7%94%A8%E5%88%86%E6%94%AF%E5%90%8C%E6%AD%A5%E5%8D%9A%E5%AE%A2/v2-1899b6219f3787832652813b958b9b3d_hd.jpg" alt></p>
+<p>然后在本地的任意目录下，打开git bash 输入：</p>
+<pre><code>git clone git@github.com:GCPD123/GCPD123.github.io.git</code></pre><p>将刚创建好的分支拷贝到本地</p>
+<blockquote>
+<p>创建的分支是从master拷贝来的，也就是说此时两个分支都是一样的，但是当你修改并上传后，就不一样的，因为全部会覆盖<br>接下来将克隆下来的文件把<strong>除了.git以外的文件全部删除</strong>，接着，把之前写的博客源文件全部复制过来，<strong>除了.deploy_git</strong><br>这里应该说一句，复制过来的源文件应该有一个.gitignore，用来忽略一些不需要的文件，如果没有的话，自己新建一个，在里面写上如下，表示这些类型文件不需要git：<br>.DS_Store<br>Thumbs.db<br>db.json<br><em>.log<br>node_modules/<br>public/<br>.deploy</em>/</p>
+</blockquote>
+<p>注意，如果你之前克隆过theme中的主题文件，那么应该把主题文件中的.git文件夹删掉，因为git不能嵌套上传，最好是显示隐藏文件，检查一下有没有，否则上传的时候会出错，导致你的主题文件无法上传，这样你的配置在别的电脑上就用不了了。</p>
+<blockquote>
+<p>因为使用Git上传必须有企鹅仅有一个.git文件，嵌套都不行</p>
+</blockquote>
+<p>然后</p>
+<pre><code>git add .
+git commit –m &quot;add branch&quot;
+git push </code></pre><blockquote>
+<p>add .是添加当前目录的所有文件</p>
+</blockquote>
+<p>这样就上传完了，可以去你的github上看一看hexo分支有没有上传上去，其中node_modules、public、db.json已经被忽略掉了，没有关系，不需要上传的，因为在别的电脑上需要重新输入命令安装 </p>
+<p><img src="/2019/10/25/%E5%88%A9%E7%94%A8%E5%88%86%E6%94%AF%E5%90%8C%E6%AD%A5%E5%8D%9A%E5%AE%A2/v2-a94330ca825f4debde8ce7ceeb8f8394_hd.jpg" alt></p>
+<p>这样就上传完了。</p>
+<h3 id="更换电脑操作"><a href="#更换电脑操作" class="headerlink" title="更换电脑操作"></a>更换电脑操作</h3><p>与之前一样</p>
+<pre><code>安装Git，设置用户，设置ssh key
+安装nodejs
+安装hexo</code></pre><p>但是安装好hexo后不需要初始化了直接在博客目录下</p>
+<pre><code>git clone git@github.com:GCPD213/GCPD123.github.io.git</code></pre><p>然后到克隆的目录下</p>
+<pre><code>npm install
+npm install hexo-deployer-git --save</code></pre><p>然后</p>
+<pre><code>hexo g
+hexo d -g</code></pre><blockquote>
+<p>此时是克隆下来的源文件，所以要生成然后部署，即与github上同步，之后就可以开始新文章的编写了</p>
+</blockquote>
+<h3 id="Tips"><a href="#Tips" class="headerlink" title="Tips"></a>Tips</h3><ol>
+<li><p>不要忘了每次写完文章后要同步提交到branch分支（此时已经是默认分支）</p>
+<p> git add .<br> git commit –m “xxxx”<br> git push </p>
+<blockquote>
+<p>此时当前目录已经有之前的所有文章了，所以可以覆盖之前的</p>
+</blockquote>
+</li>
+<li><p>若在已经提交过的电脑上，已经有clone文件夹了，那么</p>
+<p> git pull</p>
+</li>
+</ol>
+<p>将github上的全部同步过来即可，它会自动比较文件，全部更新。</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/10/24/Hexo-github%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E7%B3%BB%E7%BB%9F/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/assets/blogImg/6711866_014214_8838.jpg">
+      <meta itemprop="name" content="XXX">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/10/24/Hexo-github%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E7%B3%BB%E7%BB%9F/" class="post-title-link" itemprop="url">Hexo+github搭建个人博客系统</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-10-24 20:13:22" itemprop="dateCreated datePublished" datetime="2019-10-24T20:13:22+08:00">2019-10-24</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2019-11-27 20:04:25" itemprop="dateModified" datetime="2019-11-27T20:04:25+08:00">2019-11-27</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%8D%9A%E5%AE%A2/" itemprop="url" rel="index">
+                    <span itemprop="name">博客</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="前期准备工作"><a href="#前期准备工作" class="headerlink" title="前期准备工作"></a>前期准备工作</h2><h3 id="安装Node-Js"><a href="#安装Node-Js" class="headerlink" title="安装Node.Js"></a>安装Node.Js</h3><p>下载地址 </p>
+<pre><code>http://nodejs.cn/download/
+
+打开CMD命令行
+
+node -v
+npm -v</code></pre><p>  查看是否安装成功（有版本显示则是成功），安装Node.Js主要是使用它的npm工具，使用npm可以下载软件，相当于使用git下载软件一样，是一个软件包管理平台</p>
+<h3 id="安装Git"><a href="#安装Git" class="headerlink" title="安装Git"></a>安装Git</h3><p>下载地址 </p>
+<pre><code>https://git-scm.com/downloads</code></pre><p>无脑下一步安装好即可，使用Git主要是将写好的博客（文章）上传到Github平台上，以便可以使用网络访问</p>
+<pre><code>git --version</code></pre><p>查看是否安装成功，若有软件版本出来证明安装成功</p>
+<blockquote>
+<p>注意：git空客后是两个减号 –</p>
+</blockquote>
+<h3 id="在Github中创建此博客的仓库"><a href="#在Github中创建此博客的仓库" class="headerlink" title="在Github中创建此博客的仓库"></a>在Github中创建此博客的仓库</h3><p><img src="/2019/10/24/Hexo-github%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E7%B3%BB%E7%BB%9F/1108615-20171021223639881-1998790649.png" alt></p>
+<p>这里注意创建的仓库的名字必须是githu.io结尾，只要以此结尾github就默认知道该仓库是个人主页</p>
+<hr>
+<p><strong>前期准备工作结束，下面开始安装软件</strong></p>
+<h3 id="安装Hexo"><a href="#安装Hexo" class="headerlink" title="安装Hexo"></a>安装Hexo</h3><p>Hexo即时此次使用的博客系统，首先在选定的地方创建一个文件夹，我取名为blog(名字可任意)，该文件夹既是安装Hexo的地方，也是以后博客文章存放的地方，也是配置的地方</p>
+<pre><code>npm install hexo -g</code></pre><p>即可安装完成 输入</p>
+<pre><code>hexo -v</code></pre><p>可查看是否安装成功。若有版本显示，则安装成功<br></p>
+<blockquote>
+<p>以后所有的操作全部在blog这个文件夹进行</p>
+</blockquote>
+<p>输入</p>
+<pre><code>hexo init</code></pre><p>初始化该文件夹</p>
+<blockquote>
+<p>若有报错则可能是git没有安装，该初始化需要用到git</p>
+</blockquote>
+<p><img src="/2019/10/24/Hexo-github%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E7%B3%BB%E7%BB%9F/1108615-20171021230241646-1660449756.png" alt><br><strong>表示安装成功</strong></p>
+<p>输入</p>
+<pre><code>npm install</code></pre><p>自动安装所需的组件    </p>
+<p>输入</p>
+<pre><code>hexo g</code></pre><p><img src="/2019/10/24/Hexo-github%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E7%B3%BB%E7%BB%9F/1108615-20171021231705474-1404994153.png" alt><br><br>将blog文件下的所有博客文章全部生成，g代表generate（生成），此时只是生成，还没有部署</p>
+<p>输入</p>
+<pre><code>hexo s</code></pre><p>开启服务器，即部署到本地<br><img src="/2019/10/24/Hexo-github%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E7%B3%BB%E7%BB%9F/1108615-20171021231833912-663774637.png" alt><br></p>
+<p><strong>在浏览器中输入localhost:4000访问博客首页</strong><br></p>
+<p><img src="/2019/10/24/Hexo-github%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E7%B3%BB%E7%BB%9F/1108615-20171021232413224-1288183746.png" alt><br></p>
+<p><strong>表示成功！</strong><br><br><strong>至此本地博客系统已经搭建好了</strong></p>
+<hr>
+<h3 id="将本地博客与github关联"><a href="#将本地博客与github关联" class="headerlink" title="将本地博客与github关联"></a>将本地博客与github关联</h3><p>如果电脑是第一次使用关联操作，则需要指定Git的用户名和邮箱<br></p>
+<blockquote>
+<p>也是在blog文件夹中操作，在blog文件夹空白处右键选择git的bash命令</p>
+</blockquote>
+<p><img src="/2019/10/24/Hexo-github%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E7%B3%BB%E7%BB%9F/1108615-20171021233157224-1386748377.png" alt><br></p>
+<p>该用户名和邮箱是对一个Github上的，到时候关联需要验证<br></p>
+<h4 id="使用ssh将本地博客上传到github仓库中"><a href="#使用ssh将本地博客上传到github仓库中" class="headerlink" title="使用ssh将本地博客上传到github仓库中"></a>使用ssh将本地博客上传到github仓库中</h4><p>输入</p>
+<pre><code>cd ~/.ssh</code></pre><p>查看是否有.ssh文件，该文件是ssh的密钥文件，公钥和私钥上传的时候需要用此来加密和解密，若没有则继续输入：</p>
+<pre><code>ssh-keygen -t rsa -C “295048600@qq.com”</code></pre><p>会在C:\Users\Administrator.ssh中生成两个文件id_rsa和id_rsa.pub，pub的是公钥，上传的时候接收方需要知道公钥，即github需要拥有这台电脑的公钥才能上传<br></p>
+<blockquote>
+<p>输入后连续回车即可创建</p>
+</blockquote>
+<p>输入</p>
+<pre><code>eval &quot;$(ssh-agent -s)&quot;</code></pre><p><img src="/2019/10/24/Hexo-github%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E7%B3%BB%E7%BB%9F/1108615-20171021234314146-695835137.png" alt><br><br>添加密钥到ssh-agent<br><br>在输入</p>
+<pre><code>ssh-add ~/.ssh/id_rsa</code></pre><p><img src="/2019/10/24/Hexo-github%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E7%B3%BB%E7%BB%9F/1108615-20171021234528552-610835964.png" alt><br><br>添加生成的SSH key到ssh-agent<br></p>
+<h4 id="登录Github-设置ssh公钥"><a href="#登录Github-设置ssh公钥" class="headerlink" title="登录Github,设置ssh公钥"></a>登录Github,设置ssh公钥</h4><p><img src="/2019/10/24/Hexo-github%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E7%B3%BB%E7%BB%9F/1108615-20171021234636834-426105098.png" alt><br></p>
+<p>新建一个new ssh key，将id_rsa.pub文件里的内容复制上去<br></p>
+<p><img src="/2019/10/24/Hexo-github%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E7%B3%BB%E7%BB%9F/1108615-20171021234906724-1938556332.png" alt><br></p>
+<p>输入</p>
+<pre><code>ssh -T git@github.com</code></pre><p>测试添加ssh是否成功<br></p>
+<p><img src="/2019/10/24/Hexo-github%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E7%B3%BB%E7%BB%9F/1108615-20171021235116271-1521882533.png" alt></p>
+<h3 id="最后一步，在hexo中配置上传到github中的哪个仓库中"><a href="#最后一步，在hexo中配置上传到github中的哪个仓库中" class="headerlink" title="最后一步，在hexo中配置上传到github中的哪个仓库中"></a>最后一步，在hexo中配置上传到github中的哪个仓库中</h3><p>在blog文件夹中找到_config.yml文件，修改repo值<br><strong>直接在最后添加字段和值即可，注意每个冒号之后都要有一个空格，否则文件会报错</strong><br><br><img src="/2019/10/24/Hexo-github%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E7%B3%BB%E7%BB%9F/1108615-20171021235812974-84318377.png" alt><br></p>
+<blockquote>
+<p>repository的值是下载该仓库十的地址 如下：</p>
+</blockquote>
+<p><img src="/2019/10/24/Hexo-github%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E7%B3%BB%E7%BB%9F/1108615-20171021235722365-818312042.png" alt></p>
+<h2 id="至此环境搭建完毕！"><a href="#至此环境搭建完毕！" class="headerlink" title="至此环境搭建完毕！"></a><strong>至此环境搭建完毕！</strong></h2><h3 id="部署到github让大家访问"><a href="#部署到github让大家访问" class="headerlink" title="部署到github让大家访问"></a>部署到github让大家访问</h3><p>在cmd中输入</p>
+<pre><code>hexo new post “博客名”</code></pre><p>即可在blog/source/_posts目录下创建一个文章</p>
+<p><img src="/2019/10/24/Hexo-github%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E7%B3%BB%E7%BB%9F/1108615-20171022000508865-46787156.png" alt><br></p>
+<h4 id="在部署前安装一个扩展"><a href="#在部署前安装一个扩展" class="headerlink" title="在部署前安装一个扩展"></a>在部署前安装一个扩展</h4><pre><code>npm install hexo-deployer-git --save</code></pre><p>忽略告警即可<br></p>
+<p>使用编辑器编辑好文章后使用：</p>
+<pre><code>hexo d -g</code></pre><p>即可完成部署，d是deploye(部署) -g是全局此时是部署到github上，通过ssh加密传输，其他没有私钥的主机无法上传</p>
+<p><img src="/2019/10/24/Hexo-github%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E7%B3%BB%E7%BB%9F/1108615-20171022001410662-1611125904.png" alt><br><br><strong>部署成功后访问你的地址：http://用户名.github.io。那么将看到生成的文章</strong></p>
+<p><img src="/2019/10/24/Hexo-github%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E7%B3%BB%E7%BB%9F/1108615-20171022001738037-1195721153.png" alt><br><br><strong>至此，搭建加部署全部完成</strong></p>
+<p>在使用的时候<br><br>先使用</p>
+<pre><code>hexo clean</code></pre><p>清除，再使用</p>
+<pre><code>hexo g</code></pre><p>在本地生成文章，最后使用</p>
+<pre><code>hexo d -g</code></pre><p>部署到github上去</p>
+<h3 id="容易犯错的地方"><a href="#容易犯错的地方" class="headerlink" title="容易犯错的地方"></a>容易犯错的地方</h3><ul>
+<li><p>直接在blog/source/_post目录下右键新建文件并编辑，这样的文章无法生成，因为缺少相关配置，必须使用</p>
+<pre><code>hexo new &quot;文章名字&quot;</code></pre></li>
+<li><p>插入图片</p>
+</li>
+</ul>
+<p>使用网络上图片的URL有时候不能显示图片，特别是部署到github后，所以需要使用插件上传图片，hexo博客图片的问题在于，markdown文章使用的图片路径和hexo博客发布时的图片路径不一致。需要安装插件，再blog或者hexo目录下执行：</p>
+<pre><code>npm install hexo-asset-image --save</code></pre><p>然后在blog下的_config.yml中修改</p>
+<pre><code>post_asset_folder:true</code></pre><p>完成安装后用hexo新建文章的时候会发现_posts目录下面会多出一个和文章名字一样的文件夹。图片就可以放在文件夹下面。</p>
+<blockquote>
+<p>之前新建的文章不会有该目录！</p>
+</blockquote>
+<p>该目录的作用是将文章中需要用到的图片放入其中，在生成文章时hexo会将其和生成的文章一起放在public文件下。</p>
+<p>使用时只需要：</p>
+<pre><code>![logo](logo.jpg)</code></pre><p>即可，不需要加前缀，因为默认在同名文件下查找！</p>
+<ul>
+<li>Markdownpad2秘钥</li>
+</ul>
+<pre><code>邮箱：
+
+Soar360@live.com
+
+
+授权秘钥：
+
+GBPduHjWfJU1mZqcPM3BikjYKF6xKhlKIys3i1MU2eJHqWGImDHzWd    D6xhMNLGVpbP2M5SN6bnxn2kSE8qHqNY5QaaRxmO3YSMHxlv2EYpjd    wLcPwfeTG7kUdnhKE0vVy4RidP6Y2wZ0q74f47fzsZo45JE2hfQBFi    2O9Jldjp1mW8HUpTtLA2a5/sQytXJUQl/    QKO0jUQY4pa5CCx20sV1ClOTZtAGngSOJtIOFXK599sBr5aIEFyH0K    7H4BoNMiiDMnxt1rD8Vb/ikJdhGMMQr0R4B    +L3nWU97eaVPTRKfWGDE8/eAgKzpGwrQQoDh+nzX1xoVQ8NAuH    +s4UcSeQ==</code></pre><p>使用后可解锁更多功能！</p>
+<ul>
+<li>主题头像</li>
+</ul>
+<p>使用网络上的图像的URL后再本地可以显示，但是上传到github上不能显示，所以将图片都存入一个文件内，将头像地址直接指向本地文件的路径，等上传到github上的时候文件也会一并上传</p>
+<pre><code>在blog/source下创建文件夹assets/blogImg目录，在该目录中存放图片6711866_014214_8838.jpg</code></pre><p>在主题配置文件中使用该地址即可</p>
+<pre><code>/assets/blogImg/6711866_014214_8838.jpg</code></pre><p>默认会在source文件下寻找，即source就是根目录。</p>
+<ul>
+<li><p>标签和分类<br>标签和分类都是页面，所以要先创建页面：</p>
+<pre><code>hexo new page tags</code></pre><p>会在source文件夹下创建一个tags目录，里面有index.md文件，该文件就是标签页</p>
+<blockquote>
+<p>当点击博客中的标签选项时就会跳转到该页面，每个文章中的tags就会集中显示</p>
+</blockquote>
+</li>
+</ul>
+<p>打开后是：</p>
+<pre><code>---
+title: tags
+date: 2019-10-31 14:10:12
+---</code></pre><p>要添加一行：</p>
+<pre><code>---
+title: tags
+date: 2019-10-31 14:10:12
+type: &quot;tags&quot;
+---</code></pre><p><strong>保存并关闭文件</strong></p>
+<p>在<strong>博客文章的头部</strong>新增属性：</p>
+<pre><code>---
+title: Hexo 添加分类及标签
+date: 2019-04-24 15:40:24
+categories: hexo
+tags: hexo
+---</code></pre>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/10/24/%E6%B5%8B%E8%AF%95/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/assets/blogImg/6711866_014214_8838.jpg">
+      <meta itemprop="name" content="XXX">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/10/24/%E6%B5%8B%E8%AF%95/" class="post-title-link" itemprop="url">测试</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-10-24 18:57:56" itemprop="dateCreated datePublished" datetime="2019-10-24T18:57:56+08:00">2019-10-24</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2019-11-27 20:04:25" itemprop="dateModified" datetime="2019-11-27T20:04:25+08:00">2019-11-27</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p><img src="/2019/10/24/%E6%B5%8B%E8%AF%95/1108615-20171021223639881-1998790649.png" alt></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+  </div>
+
+  
+
+
+
+          </div>
+          
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <img class="site-author-image" itemprop="image" alt="XXX"
+    src="/assets/blogImg/6711866_014214_8838.jpg">
+  <p class="site-author-name" itemprop="name">XXX</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">10</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">XXX</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v4.0.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v7.4.2
+  </div>
+
+        
+
+
+
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script>
+<script src="/js/schemes/muse.js"></script>
+<script src="/js/next-boot.js"></script>
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

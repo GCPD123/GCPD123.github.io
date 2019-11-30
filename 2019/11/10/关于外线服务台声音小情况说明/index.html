@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.0.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '7.4.2',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: '',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: '复制',
+      copy_success: '复制成功',
+      copy_failure: '复制失败'
+    },
+    sidebarPadding: 40
+  };
+</script>
+
+  <meta name="description" content="故障现象根据船上外线服务台使用情况反馈，当船外用户呼叫船上值班室的外线服务台时，通话质量不佳，主要体现在：当船外用户声音低沉时，外线服务台收听到的声音非常小，而且会出现掉字的情况，如，当船外用户说出“1、2、3”时，如果“2”的声音小，则外线服务台只能听到“1、3”。 业务流程流程如图所示：  当船外用户拨打船内提供的外线号码后，第一跳到达岸上的程控交换机中，通过电信号交换将主叫用户的呼叫请求转发">
+<meta name="keywords" content="工作">
+<meta property="og:type" content="article">
+<meta property="og:title" content="关于外线服务台话音失真情况说明">
+<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;11&#x2F;10&#x2F;%E5%85%B3%E4%BA%8E%E5%A4%96%E7%BA%BF%E6%9C%8D%E5%8A%A1%E5%8F%B0%E5%A3%B0%E9%9F%B3%E5%B0%8F%E6%83%85%E5%86%B5%E8%AF%B4%E6%98%8E&#x2F;index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="故障现象根据船上外线服务台使用情况反馈，当船外用户呼叫船上值班室的外线服务台时，通话质量不佳，主要体现在：当船外用户声音低沉时，外线服务台收听到的声音非常小，而且会出现掉字的情况，如，当船外用户说出“1、2、3”时，如果“2”的声音小，则外线服务台只能听到“1、3”。 业务流程流程如图所示：  当船外用户拨打船内提供的外线号码后，第一跳到达岸上的程控交换机中，通过电信号交换将主叫用户的呼叫请求转发">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;11&#x2F;10&#x2F;%E5%85%B3%E4%BA%8E%E5%A4%96%E7%BA%BF%E6%9C%8D%E5%8A%A1%E5%8F%B0%E5%A3%B0%E9%9F%B3%E5%B0%8F%E6%83%85%E5%86%B5%E8%AF%B4%E6%98%8E&#x2F;%E6%88%AA%E5%9B%BE20191110114449.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;11&#x2F;10&#x2F;%E5%85%B3%E4%BA%8E%E5%A4%96%E7%BA%BF%E6%9C%8D%E5%8A%A1%E5%8F%B0%E5%A3%B0%E9%9F%B3%E5%B0%8F%E6%83%85%E5%86%B5%E8%AF%B4%E6%98%8E&#x2F;%E6%88%AA%E5%9B%BE20191110121549.png">
+<meta property="og:updated_time" content="2019-11-27T12:04:25.350Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;11&#x2F;10&#x2F;%E5%85%B3%E4%BA%8E%E5%A4%96%E7%BA%BF%E6%9C%8D%E5%8A%A1%E5%8F%B0%E5%A3%B0%E9%9F%B3%E5%B0%8F%E6%83%85%E5%86%B5%E8%AF%B4%E6%98%8E&#x2F;%E6%88%AA%E5%9B%BE20191110114449.png">
+
+<link rel="canonical" href="http://yoursite.com/2019/11/10/%E5%85%B3%E4%BA%8E%E5%A4%96%E7%BA%BF%E6%9C%8D%E5%8A%A1%E5%8F%B0%E5%A3%B0%E9%9F%B3%E5%B0%8F%E6%83%85%E5%86%B5%E8%AF%B4%E6%98%8E/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>关于外线服务台话音失真情况说明 | Hexo</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Hexo</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <p class="site-subtitle">把无穷无尽握于手掌，永恒宁非是刹那时光</p>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/11/10/%E5%85%B3%E4%BA%8E%E5%A4%96%E7%BA%BF%E6%9C%8D%E5%8A%A1%E5%8F%B0%E5%A3%B0%E9%9F%B3%E5%B0%8F%E6%83%85%E5%86%B5%E8%AF%B4%E6%98%8E/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/assets/blogImg/6711866_014214_8838.jpg">
+      <meta itemprop="name" content="XXX">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          关于外线服务台话音失真情况说明
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-11-10 11:21:41" itemprop="dateCreated datePublished" datetime="2019-11-10T11:21:41+08:00">2019-11-10</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2019-11-27 20:04:25" itemprop="dateModified" datetime="2019-11-27T20:04:25+08:00">2019-11-27</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h3 id="故障现象"><a href="#故障现象" class="headerlink" title="故障现象"></a>故障现象</h3><p>根据船上外线服务台使用情况反馈，当船外用户呼叫船上值班室的外线服务台时，通话质量不佳，主要体现在：当船外用户声音低沉时，外线服务台收听到的声音非常小，而且会出现掉字的情况，如，当船外用户说出“1、2、3”时，如果“2”的声音小，则外线服务台只能听到“1、3”。</p>
+<h3 id="业务流程"><a href="#业务流程" class="headerlink" title="业务流程"></a>业务流程</h3><p>流程如图所示：<img src="/2019/11/10/%E5%85%B3%E4%BA%8E%E5%A4%96%E7%BA%BF%E6%9C%8D%E5%8A%A1%E5%8F%B0%E5%A3%B0%E9%9F%B3%E5%B0%8F%E6%83%85%E5%86%B5%E8%AF%B4%E6%98%8E/%E6%88%AA%E5%9B%BE20191110114449.png" alt></p>
+<ol>
+<li>当船外用户拨打船内提供的外线号码后，第一跳到达岸上的程控交换机中，通过电信号交换将主叫用户的呼叫请求转发到相应的出端口上</li>
+<li>出端口出来后通过光缆到达船上的光缆卷车室</li>
+<li>由光缆卷车室到达广播室的网元中的O卡上，通过该网元的CMUE板卡的交换功能找到被叫用户即外线服务台</li>
+<li>外线服务台振铃并接通后，即可与船外用户通话</li>
+</ol>
+<h3 id="问题分析"><a href="#问题分析" class="headerlink" title="问题分析"></a>问题分析</h3><p>业务流程如上所述，假设船外用户呼叫外线服务台这一系列链路中无任何信号衰减，则可视为一条透传的链路，即两端话音不失真的传递到对端，但目前的故障问题显然是话音在传递的过程中有失真，该失真有可能出现自链路中的任何一环节，故需要做一组对比试验来判定失真出现在哪一段</p>
+<h3 id="试验环境"><a href="#试验环境" class="headerlink" title="试验环境"></a>试验环境</h3><p>试验环境如图：<br><img src="/2019/11/10/%E5%85%B3%E4%BA%8E%E5%A4%96%E7%BA%BF%E6%9C%8D%E5%8A%A1%E5%8F%B0%E5%A3%B0%E9%9F%B3%E5%B0%8F%E6%83%85%E5%86%B5%E8%AF%B4%E6%98%8E/%E6%88%AA%E5%9B%BE20191110121549.png" alt></p>
+<p><strong>经过分析怀疑是岸上的程控交换机到船上这一段链路上有信号的衰减，为了验证该结论于是搭建上述试验环境，将“岸上的程控交换机-光缆卷车室”替换成“生活电话-自备的程控交换机-网元”模式。</strong></p>
+<blockquote>
+<p>该模式下可正常使用，“生活电话”相当于之前的“船外用户”，“自备的程控交换机”相当于“岸上的程控交换机”</p>
+</blockquote>
+<h3 id="试验过程"><a href="#试验过程" class="headerlink" title="试验过程"></a>试验过程</h3><ol>
+<li>生活电话摘机拨打602<blockquote>
+<p>602是自备的程控交换机上连接网元侧的号码，拨打此号码相当于入局</p>
+</blockquote>
+</li>
+</ol>
+<ol start="2">
+<li>网元1中fox卡相应的指示灯亮起，表示有用户入局</li>
+<li>fxo卡将入局信号转发到cmue板卡上，cmue通过查号表得知被叫用户在网元3，于是将呼叫请求转发到网元3</li>
+<li>网元3的cmue板卡收到呼叫请求，查找本地的号码表得知被叫号码是本网元的外线服务台，于是将请求转发到外线服务台</li>
+<li>外线服务台振铃，摘机接听，生活电话端故意压低声音依次从1数到10</li>
+<li><strong>外线服务台声音清晰，未出现掉字、模糊的现象</strong></li>
+<li>经过多次试验，且多次更换网元、生活电话、外线服务台后，现象没有变化</li>
+</ol>
+<h3 id="试验结论"><a href="#试验结论" class="headerlink" title="试验结论"></a>试验结论</h3><p>多次试验并对比后可以得出结论：外线服务台话音失真问题原因在于岸上程控交换机到船内一段链路有较大信号衰减，</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E5%B7%A5%E4%BD%9C/" rel="tag"># 工作</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+                <a href="/2019/11/06/%E5%8F%8D%E5%B0%84/" rel="next" title="反射">
+                  <i class="fa fa-chevron-left"></i> 反射
+                </a>
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+                <a href="/2019/11/13/Python%E5%AE%89%E8%A3%85/" rel="prev" title="Python安装">
+                  Python安装 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#故障现象"><span class="nav-number">1.</span> <span class="nav-text">故障现象</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#业务流程"><span class="nav-number">2.</span> <span class="nav-text">业务流程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#问题分析"><span class="nav-number">3.</span> <span class="nav-text">问题分析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#试验环境"><span class="nav-number">4.</span> <span class="nav-text">试验环境</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#试验过程"><span class="nav-number">5.</span> <span class="nav-text">试验过程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#试验结论"><span class="nav-number">6.</span> <span class="nav-text">试验结论</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <img class="site-author-image" itemprop="image" alt="XXX"
+    src="/assets/blogImg/6711866_014214_8838.jpg">
+  <p class="site-author-name" itemprop="name">XXX</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">10</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">XXX</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v4.0.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v7.4.2
+  </div>
+
+        
+
+
+
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script>
+<script src="/js/schemes/muse.js"></script>
+<script src="/js/next-boot.js"></script>
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
