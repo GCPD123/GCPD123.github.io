@@ -12,9 +12,9 @@ categories: 博客
 下载地址 
 
 	http://nodejs.cn/download/
-
+	
 	打开CMD命令行
-
+	
 	node -v
 	npm -v
   查看是否安装成功（有版本显示则是成功），安装Node.Js主要是使用它的npm工具，使用npm可以下载软件，相当于使用git下载软件一样，是一个软件包管理平台
@@ -92,7 +92,7 @@ Hexo即时此次使用的博客系统，首先在选定的地方创建一个文�
 该用户名和邮箱是对一个Github上的，到时候关联需要验证<br>
 
 #### 使用ssh将本地博客上传到github仓库中
- 
+
 输入
 
 	cd ~/.ssh
@@ -192,7 +192,7 @@ Hexo即时此次使用的博客系统，首先在选定的地方创建一个文�
 然后在blog下的_config.yml中修改
 
 	post_asset_folder:true
-		
+
 完成安装后用hexo新建文章的时候会发现_posts目录下面会多出一个和文章名字一样的文件夹。图片就可以放在文件夹下面。
 >之前新建的文章不会有该目录！
 
@@ -207,12 +207,12 @@ Hexo即时此次使用的博客系统，首先在选定的地方创建一个文�
 
 
 		邮箱：
-
+	
 		Soar360@live.com
 
 
 		授权秘钥：
-
+	
 		GBPduHjWfJU1mZqcPM3BikjYKF6xKhlKIys3i1MU2eJHqWGImDHzWd	D6xhMNLGVpbP2M5SN6bnxn2kSE8qHqNY5QaaRxmO3YSMHxlv2EYpjd	wLcPwfeTG7kUdnhKE0vVy4RidP6Y2wZ0q74f47fzsZo45JE2hfQBFi	2O9Jldjp1mW8HUpTtLA2a5/sQytXJUQl/	QKO0jUQY4pa5CCx20sV1ClOTZtAGngSOJtIOFXK599sBr5aIEFyH0K	7H4BoNMiiDMnxt1rD8Vb/ikJdhGMMQr0R4B	+L3nWU97eaVPTRKfWGDE8/eAgKzpGwrQQoDh+nzX1xoVQ8NAuH	+s4UcSeQ==
 
 使用后可解锁更多功能！
@@ -232,10 +232,11 @@ Hexo即时此次使用的博客系统，首先在选定的地方创建一个文�
 默认会在source文件下寻找，即source就是根目录。
 
 * 标签和分类
-标签和分类都是页面，所以要先创建页面：
+  标签和分类都是页面，所以要先创建页面：
 
-		hexo new page tags
-会在source文件夹下创建一个tags目录，里面有index.md文件，该文件就是标签页
+  	hexo new page tags
+
+  会在source文件夹下创建一个tags目录，里面有index.md文件，该文件就是标签页
 >当点击博客中的标签选项时就会跳转到该页面，每个文章中的tags就会集中显示
 
 打开后是：
