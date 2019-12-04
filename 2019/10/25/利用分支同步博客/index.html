@@ -63,7 +63,7 @@
 <meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;10&#x2F;25&#x2F;%E5%88%A9%E7%94%A8%E5%88%86%E6%94%AF%E5%90%8C%E6%AD%A5%E5%8D%9A%E5%AE%A2&#x2F;v2-ebb3e05632e85ab036663390305caa1c_hd.jpg">
 <meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;10&#x2F;25&#x2F;%E5%88%A9%E7%94%A8%E5%88%86%E6%94%AF%E5%90%8C%E6%AD%A5%E5%8D%9A%E5%AE%A2&#x2F;v2-1899b6219f3787832652813b958b9b3d_hd.jpg">
 <meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;10&#x2F;25&#x2F;%E5%88%A9%E7%94%A8%E5%88%86%E6%94%AF%E5%90%8C%E6%AD%A5%E5%8D%9A%E5%AE%A2&#x2F;v2-a94330ca825f4debde8ce7ceeb8f8394_hd.jpg">
-<meta property="og:updated_time" content="2019-11-30T12:07:01.918Z">
+<meta property="og:updated_time" content="2019-12-04T12:50:23.380Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;10&#x2F;25&#x2F;%E5%88%A9%E7%94%A8%E5%88%86%E6%94%AF%E5%90%8C%E6%AD%A5%E5%8D%9A%E5%AE%A2&#x2F;v2-32ab30d0d28b916a204c03de4ed0fc4f_hd.jpg">
 
@@ -221,7 +221,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2019-11-30 20:07:01" itemprop="dateModified" datetime="2019-11-30T20:07:01+08:00">2019-11-30</time>
+                <time title="修改时间：2019-12-04 20:50:23" itemprop="dateModified" datetime="2019-12-04T20:50:23+08:00">2019-12-04</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -298,6 +298,25 @@ hexo d -g</code></pre><blockquote>
 </li>
 </ol>
 <p>将github上的全部同步过来即可，它会自动比较文件，全部更新。</p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><ol>
+<li><p>正常写文章时用于部署到github上的命令是hexo d -g该命令会将public文件夹下的所有内容部署到github主页上</p>
+</li>
+<li><p>在hexo根目录中.gitignore文件中记录的是不上传到github上的文件，其中就包括public,所以可以利用这点将博客源文件同步到github同一个仓库到的其他分支</p>
+</li>
+<li><p>在hexo根目录上新建一个hexo分支</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git branch hexo</span><br><span class="line">git checkout hexo</span><br></pre></td></tr></table></figure>
+
+<p>此时是与master分支到内容一模一样，然后</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git status</span><br><span class="line">git add .</span><br><span class="line">git commit -m &quot;上传理由&quot;</span><br></pre></td></tr></table></figure>
+
+<p>这样就把源文件上传到本地仓库到hexo分支中了</p>
+</li>
+<li><p>将本地分支上传到github对应的分支，如果github上没有hexo分支，则会自动创建，有的话会提示你要上传有冲突（因为原来该分支上已经存在文件）要先fetch后再上传这里直接强行同步就可以将之前的覆盖</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git push origin hexo -f</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>之后换电脑了，直接安装git然后使用git pull从仓库拉取博客源文件，安装相应的hexo和插件后就可以正常运行，注意，hexo d -g使用的是hexo配置中已经指定好的仓库和分支，与git push制定的仓库是同一个但是分支不同，以此达到备份源文件的目的</p>
+</li>
+</ol>
 
     </div>
 
@@ -363,7 +382,7 @@ hexo d -g</code></pre><blockquote>
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#利用分支进行多终端操作"><span class="nav-number">1.</span> <span class="nav-text">利用分支进行多终端操作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#机制"><span class="nav-number">2.</span> <span class="nav-text">机制</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#创建并上传分支"><span class="nav-number">3.</span> <span class="nav-text">创建并上传分支</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#更换电脑操作"><span class="nav-number">4.</span> <span class="nav-text">更换电脑操作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Tips"><span class="nav-number">5.</span> <span class="nav-text">Tips</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#利用分支进行多终端操作"><span class="nav-number">1.</span> <span class="nav-text">利用分支进行多终端操作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#机制"><span class="nav-number">2.</span> <span class="nav-text">机制</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#创建并上传分支"><span class="nav-number">3.</span> <span class="nav-text">创建并上传分支</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#更换电脑操作"><span class="nav-number">4.</span> <span class="nav-text">更换电脑操作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Tips"><span class="nav-number">5.</span> <span class="nav-text">Tips</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#总结"><span class="nav-number">6.</span> <span class="nav-text">总结</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
