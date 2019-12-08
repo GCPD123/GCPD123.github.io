@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.0.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '7.4.2',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: '',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: '复制',
+      copy_success: '复制成功',
+      copy_failure: '复制失败'
+    },
+    sidebarPadding: 40
+  };
+</script>
+
+  <meta name="description" content="为什么要用maven 目前开发中存在的问题：  一个项目就是一个工程如果项目非常庞大，就不适合继续使用package来划分模块。最好是每一个模块对应一个项目，利于分工协作。借助于maven就可以将一个项目拆分成多个工程。 项目中需要的jar包必须手动“复制”、”粘贴” 到WEB-INF&#x2F;lib 项目下带来的问题：同样的jar包文件重复出现在不同的项目工程中，一方面浪费存储空间，另外也让工程比较臃肿">
+<meta name="keywords" content="maven">
+<meta property="og:type" content="article">
+<meta property="og:title" content="maven">
+<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;12&#x2F;07&#x2F;maven&#x2F;index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="为什么要用maven 目前开发中存在的问题：  一个项目就是一个工程如果项目非常庞大，就不适合继续使用package来划分模块。最好是每一个模块对应一个项目，利于分工协作。借助于maven就可以将一个项目拆分成多个工程。 项目中需要的jar包必须手动“复制”、”粘贴” 到WEB-INF&#x2F;lib 项目下带来的问题：同样的jar包文件重复出现在不同的项目工程中，一方面浪费存储空间，另外也让工程比较臃肿">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;12&#x2F;07&#x2F;maven&#x2F;1.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;12&#x2F;07&#x2F;maven&#x2F;2.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;12&#x2F;07&#x2F;maven&#x2F;3.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;12&#x2F;07&#x2F;maven&#x2F;4.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;12&#x2F;07&#x2F;maven&#x2F;5.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;12&#x2F;07&#x2F;maven&#x2F;6.png">
+<meta property="og:updated_time" content="2019-12-08T15:04:09.174Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;12&#x2F;07&#x2F;maven&#x2F;1.png">
+
+<link rel="canonical" href="http://yoursite.com/2019/12/07/maven/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>maven | Hexo</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Hexo</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <p class="site-subtitle">把无穷无尽握于手掌，永恒宁非是刹那时光</p>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/12/07/maven/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/assets/blogImg/6711866_014214_8838.jpg">
+      <meta itemprop="name" content="XXX">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          maven
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-12-07 21:16:03" itemprop="dateCreated datePublished" datetime="2019-12-07T21:16:03+08:00">2019-12-07</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2019-12-08 23:04:09" itemprop="dateModified" datetime="2019-12-08T23:04:09+08:00">2019-12-08</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/java/" itemprop="url" rel="index">
+                    <span itemprop="name">java</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h3 id="为什么要用maven"><a href="#为什么要用maven" class="headerlink" title="为什么要用maven"></a>为什么要用maven</h3><p><img src="/2019/12/07/maven/1.png" alt></p>
+<p>目前开发中存在的问题：</p>
+<ol>
+<li>一个项目就是一个工程<br>如果项目非常庞大，就不适合继续使用package来划分模块。最好是每一个模块对应一个项目，利于分工协作。<br>借助于maven就可以将一个项目拆分成多个工程。</li>
+<li>项目中需要的jar包必须手动“复制”、”粘贴” 到WEB-INF/lib 项目下<br>带来的问题：同样的jar包文件重复出现在不同的项目工程中，一方面浪费存储空间，另外也让工程比较臃肿。<br>借助Maven，可以将jar包仅仅保存在“仓库”中，有需要使用的工程“引用”这个文件，并不需要重复复制。</li>
+<li>jar包需要别人替我们准备好，或到官网下载<br>所有知名框架或第三方工具jar包已经按照统一规范放在了Maven的中央仓库中。</li>
+<li>一个jar包依赖的其他jar包需要自己手动加到项目中<br>Maven会自动将被依赖的jar包导入进来。</li>
+</ol>
+<h3 id="maven是什么"><a href="#maven是什么" class="headerlink" title="maven是什么"></a>maven是什么</h3><ol>
+<li>Maven 是 Apache 软件基金会组织维护的一款自动化构建工具，专注服务于 Java 平台的项目构建和依赖管理 。Maven 这个单词的本意是：专家，内行。读音是[‘meɪv(ə)n]或[‘mevn]。<br>构建工具的发展：Make→Ant→Maven→Gradle</li>
+<li>构建：就是以我们编写的Java代码、框架配置文件、国际化等其他资源文件、jsp页面和图片等静态资源作为“原材料”，去“生产”出一个可以运行的项目的过程。</li>
+</ol>
+<p><img src="/2019/12/07/maven/2.png" alt></p>
+<p>在web工程中主要有三个目录：src(存放源文件)、build(存放编译后的class文件)、WebContent(存放页面资源和配置的文件)。工程经过部署后就要在服务器上运行，也就是tomcat上，tomcat对部署的工程有严格的目录要求，对应关系是：<strong>工程名字就是运行的根目录，Chiken是工程名也是tomcat上应用的名字</strong>WebContent目录下的所有文件都会到应用到根目录下，其中build下的内容会到WEB-INF目录下，所谓的类路径说的就是编译后的class文件的路径，即：<strong>tomcat中WEB-INF=build+WEB-INF，应用根目录=WebContent</strong></p>
+<p>总结：应用=WebContent+build 其中build到了WEB-INF中了，因为WEB-INF中的东西不能直接访问，为了安全所以class文件在其中</p>
+<h4 id="构建的几个主要环节"><a href="#构建的几个主要环节" class="headerlink" title="构建的几个主要环节"></a>构建的几个主要环节</h4><p>①清理：删除以前的编译结果，为重新编译做好准备。<br>②编译：将Java源程序编译为字节码文件。<br>③测试：针对项目中的关键点进行测试，确保项目在迭代开发过程中关键点的正确性。<br>④报告：将每一次测试后以标准的格式记录和展示测试结果。<br>⑤打包：将一个包含诸多文件的工程封装为一个压缩文件用于安装或部署。Java工程对应jar包，Web工程对象war包。<br>⑥安装：在Maven环境下特指将打包的结果——Jar包或War包安装到本地仓库中。<br>⑦部署：将打包的结果部署到远程仓库或将war包部署到服务器上运行。</p>
+<h3 id="maven工程"><a href="#maven工程" class="headerlink" title="maven工程"></a>maven工程</h3><p><img src="/2019/12/07/maven/3.png" alt></p>
+<p>遵守约定的目录结构的意义</p>
+<p>我们在开发中如果需要让第三方工具或框架知道我们自己创建的资源在哪，那么基本上就是两种方式：<br>①以配置文件的方式明确告诉框架 如 &lt; param-value&gt;classpath:spring-context.xml &lt; /param-value&gt;<br>②遵循框架内部已经存在的约定 如log4j的配置文件名规定必须为 log4j.properties 或 log4j.xml ；Maven 使用约定的目录结构</p>
+<p>第三方：第一方是JDK、第二方是开发者、第三方是JDK和开发者都无法解决的东西需要其他包来完成</p>
+<p>###maven常用命令</p>
+<p>【1】mvn clean : 清理<br>【2】mvn compile : 编译主程序<br>【3】mvn test-compile : 编译测试程序<br>【4】mvn test : 执行测试<br>【5】mvn package : 打包<br>【6】mvn install ： 安装<br>【7】mvn site ：生成站点</p>
+<ol>
+<li>Maven 的核心程序中仅仅定义了抽象的生命周期，但是具体的工作必须有特定的插件来完成。而插件本身不包含在Maven核心程序中。</li>
+<li>当我们执行的Maven命令需要用到某些插件时，Maven核心程序会首先到本地仓库中查找。</li>
+<li>本地仓库的默认位置：[系统登陆用户的家目录] \ .m2\repository</li>
+<li>Maven核心程序如果在本地仓库中找不到需要的插件，那么它会自动连接外网，到中央仓库下载。</li>
+<li>如果此时无法连接外网，则构建失败。</li>
+<li>修改默认本地仓库的位置可以让Maven核心程序到我们事先准备好的目录下查找插件<br>①找到Maven解压目录\conf\settings.xml<br>②在setting.xml 文件中找到 localRepository 标签<br>③将 &lt; localRepository&gt;/path/to/local/repo&lt; /localRepository&gt;从注释中取出<br>④将标签体内容修改为自定义的Maven仓库目录</li>
+</ol>
+<h3 id="POM"><a href="#POM" class="headerlink" title="POM"></a>POM</h3><ol>
+<li>含义：Project Object Model 项目对象模型<br>DOM ：Document Object Model 文档对象模型</li>
+<li>pom.xml 对于 Maven工程是核心配置文件，与构建过程相关的一切设置都在这个文件中进行配置。<br>重要程度相当于web.xml 对于动态web工程</li>
+</ol>
+<h3 id="坐标"><a href="#坐标" class="headerlink" title="坐标"></a>坐标</h3><ol>
+<li><p>数学中的坐标：<br>①在平面中，使用X,Y坐标可以唯一的定位平面中任何一个点。<br>②在空间中，使用X,Y，Z三个向量可以唯一的定位空间中的任何一个点。</p>
+</li>
+<li><p>Maven的坐标：<br>使用下面三个向量在仓库中唯一定位一个Maven工程</p>
+</li>
+<li><p>①groupid:公司或组织域名倒序+项目名</p>
+<blockquote>
+<p>&lt; groupid&gt;com.atguigu.maven&lt; /groupid&gt;</p>
+</blockquote>
+<p>②artifactid:模块名</p>
+<blockquote>
+<p>&lt; artifactid&gt;Hello&lt; /artifactid&gt;</p>
+</blockquote>
+<p>③version：版本</p>
+<blockquote>
+<p>&lt; version&gt;1.0.0&lt; /version&gt;</p>
+</blockquote>
+<p>坐标又叫“gav”，全部是第一个首字母</p>
+</li>
+</ol>
+<p>   Maven 工程的坐标与仓库中路径的对应关系，以spring为例</p>
+<blockquote>
+<p>&lt; groupId&gt;org.springframework&lt; /groupId&gt;<br>&lt; artifactId&gt;spring-core&lt; /artifactId&gt;<br>&lt; version&gt;4.0.0.RELEASE&lt; /version&gt;</p>
+<p>org/springframework/spring-core/4.0.0.RELEASE/spring-core-4.0.0.RELEASE.jar</p>
+</blockquote>
+<p>全部一个一个拼起来就可以定位一个文件的位置，所以称作坐标</p>
+<h3 id="依赖"><a href="#依赖" class="headerlink" title="依赖"></a>依赖</h3><p>当 A jar 包用到了 B jar 包中的某些类时，A 就对 B 产生了依赖，这是概念上的描述。Maven解析依赖信息时会到仓库中查找被依赖的jar包。<br>对于我们自己开发的Maven工程，要使用mvn install 命令安装后就可以进入仓库。</p>
+<p><img src="/2019/12/07/maven/4.png" alt></p>
+<h4 id="依赖的范围"><a href="#依赖的范围" class="headerlink" title="依赖的范围"></a>依赖的范围</h4><p><img src="/2019/12/07/maven/5.png" alt></p>
+<p>compile范围的依赖主要在编译阶段有效，即主程序和测试程序都需要编译，所以都有效，有效的意思是：在源码中导入相应的包后可以使用</p>
+<p>test范围的依赖只在测试阶段有效，即在主程序的源码中导包后并不能使用，提示没有相应的依赖</p>
+<p>compile范围依赖<br>》对主程序是否有效：有效<br>》对测试程序是否有效：有效<br>》是否参与打包：参与<br>》是否参与部署：参与<br>》典型例子：spring-core</p>
+<p>test范围依赖<br>》对主程序是否有效：无效<br>》对测试程序是否有效：有效<br>》是否参与打包：不参与<br>》是否参与部署：不参与<br>》典型例子：Junit</p>
+<p>因为test的包不需要部署到服务器上，所以也不需要打包，打包的目的就是为了部署（编译测试打包安装部署运行）</p>
+<p><img src="/2019/12/07/maven/6.png" alt></p>
+<p>provided的依赖意思是：在开发阶段可以使用，打包和部署则由servlet容器提供</p>
+<p>》对主程序是否有效：有效<br>》对测试程序是否有效：有效<br>》是否参与打包：不参与<br>》是否参与部署：不参与<br>》典型例子：Servlet-api.jar</p>
+<h3 id="生命周期"><a href="#生命周期" class="headerlink" title="生命周期"></a>生命周期</h3><ol>
+<li>各个构建环节执行的顺序：不能打乱顺序，必须按照既定的正确顺序来执行。</li>
+<li>Maven的核心程序中定义了抽象的生命周期，生命周期中各个阶段的具体任务是由插件来完成的。</li>
+<li>Maven核心程序为了更好的实现自动化构建，按照这一特点执行生命周期中各个阶段：不论现在要执行生命周期中的哪一阶段，都是从这个生命周期最初的位置开始执行。</li>
+<li>Maven有三套相互独立的生命周期，分别是：<br>①Clean Lifecycle 在进行真正的构建之前进行一些清理工作。<br>②Default Lifecycle 构建的核心部分，编译、测试、打包、安装、部署等等。<br>③Site Lifecycle 生成项目报告，站点，发布站点。</li>
+</ol>
+<p>他们相互独立。也可以直接运行 mvn clean install site 运行所有这三套生命周期。</p>
+<p>每套生命周期都由一组阶段(Phase)组成，我们平时在命令行输入的命令总会对应于一个特定的阶段。比如，运行 mvn clean，这个 clean 是 Clean 生命周期的一个阶段。有 Clean 生命周期，也有 clean 阶段。</p>
+<p>Default声明周期<br>Default 生命周期是 Maven 生命周期中最重要的一个，绝大部分工作都发生在这个生命周期中。这里，只解释一些比较重要和常用的阶段：<br>validate<br>generate-sources<br>process-sources<br>generate-resources<br>process-resources 复制并处理资源文件，至目标目录，准备打包。<br>compile 编译项目的源代码。<br>process-classes<br>generate-test-sources<br>process-test-sources<br>generate-test-resources<br>process-test-resources 复制并处理资源文件，至目标测试目录。<br>test-compile 编译测试源代码。<br>process-test-classes<br>test 使用合适的单元测试框架运行测试。这些测试代码不会被打包或部署。<br>prepare-package<br>package 接受编译好的代码，打包成可发布的格式，如 JAR。<br>pre-integration-test<br>integration-test<br>post-integration-test<br>verify<br>install 将包安装至本地仓库，以让其它项目依赖。<br>deploy 将最终的包复制到远程的仓库，以让其它开发人员与项目共享或部署到服务器上运行。</p>
+<p><strong>总结：编译 测试 打包 安装 部署运行</strong></p>
+<p>插件和目标<br>Maven的核心仅仅定义了抽象的生命周期，具体的任务都是交由插件完成的。<br>每个插件都实现多个功能，每个功能就是一个插件目标<br>Maven的生命周期与插件目标相互绑定，以完成某个具体的构建任务。<br>可以将目标看做“调用插件功能的命令”</p>
+<p>例如：compile 就是插件 maven-compiler-plugin 的一个目标；pre-clean 是插件 maven-clean-plugin 的一个目标。</p>
+<p>插件：目标（一个插件可以有多个目标）</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/maven/" rel="tag"># maven</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+                <a href="/2019/12/02/iterm2-oh-my-zsh%E6%9B%BF%E4%BB%A3mac%E7%BB%88%E7%AB%AF/" rel="next" title="iterm2+oh-my-zsh替代mac终端">
+                  <i class="fa fa-chevron-left"></i> iterm2+oh-my-zsh替代mac终端
+                </a>
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+            </div>
+          </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#为什么要用maven"><span class="nav-number">1.</span> <span class="nav-text">为什么要用maven</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#maven是什么"><span class="nav-number">2.</span> <span class="nav-text">maven是什么</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#构建的几个主要环节"><span class="nav-number">2.1.</span> <span class="nav-text">构建的几个主要环节</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#maven工程"><span class="nav-number">3.</span> <span class="nav-text">maven工程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#POM"><span class="nav-number">4.</span> <span class="nav-text">POM</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#坐标"><span class="nav-number">5.</span> <span class="nav-text">坐标</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#依赖"><span class="nav-number">6.</span> <span class="nav-text">依赖</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#依赖的范围"><span class="nav-number">6.1.</span> <span class="nav-text">依赖的范围</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#生命周期"><span class="nav-number">7.</span> <span class="nav-text">生命周期</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <img class="site-author-image" itemprop="image" alt="XXX"
+    src="/assets/blogImg/6711866_014214_8838.jpg">
+  <p class="site-author-name" itemprop="name">XXX</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">10</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">XXX</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v4.0.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v7.4.2
+  </div>
+
+        
+
+
+
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script>
+<script src="/js/schemes/muse.js"></script>
+<script src="/js/next-boot.js"></script>
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
