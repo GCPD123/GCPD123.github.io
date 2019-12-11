@@ -212,7 +212,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2019-12-08 23:04:09" itemprop="dateModified" datetime="2019-12-08T23:04:09+08:00">2019-12-08</time>
+                <time title="修改时间：2019-12-11 15:35:14" itemprop="dateModified" datetime="2019-12-11T15:35:14+08:00">2019-12-11</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -321,6 +321,13 @@
 <p>插件和目标<br>Maven的核心仅仅定义了抽象的生命周期，具体的任务都是交由插件完成的。<br>每个插件都实现多个功能，每个功能就是一个插件目标<br>Maven的生命周期与插件目标相互绑定，以完成某个具体的构建任务。<br>可以将目标看做“调用插件功能的命令”</p>
 <p>例如：compile 就是插件 maven-compiler-plugin 的一个目标；pre-clean 是插件 maven-clean-plugin 的一个目标。</p>
 <p>插件：目标（一个插件可以有多个目标）</p>
+<h3 id="继承"><a href="#继承" class="headerlink" title="继承"></a>继承</h3><p>现状<br>Hello依赖的Junit：4.0<br>HelloFriend依赖的Junit：4.0<br>MakeFriends依赖的Junit：4.9</p>
+<p>由于test范围的依赖不能传递，所以必然会分散在各个模块工程中，很容易造成版本不一致。</p>
+<p>需求：统一管理各个模块工程中对Junit依赖的版本。</p>
+<p>解决思路：将Junit依赖统一提取到“父”工程中，在子工程中声明Junit依赖是不指定版本，以父工程中统一设定的为准。同时也便于修改。</p>
+<p>子工程依赖父工程，在子工程中删除不同的地方，也即是版本号，也就继承了父的版本号</p>
+<h3 id="聚合"><a href="#聚合" class="headerlink" title="聚合"></a>聚合</h3><p>非聚合状态下是一个一个工程编译打包安装，但是聚合后就可以一键安装，指定聚合工程中包含的模块，然后只用在聚合工程上点击安装，其他模块都会自动安装。</p>
+<p><img src="/2019/12/07/maven/7.png" alt></p>
 
       
     </div>
