@@ -181,6 +181,116 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/12/22/springIoc/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/assets/blogImg/6711866_014214_8838.jpg">
+      <meta itemprop="name" content="XXX">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/12/22/springIoc/" class="post-title-link" itemprop="url">springIoc</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2019-12-22 11:06:15 / 修改时间：21:41:42" itemprop="dateCreated datePublished" datetime="2019-12-22T11:06:15+08:00">2019-12-22</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/java%E6%A1%86%E6%9E%B6/" itemprop="url" rel="index">
+                    <span itemprop="name">java框架</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="工厂类"><a href="#工厂类" class="headerlink" title="工厂类"></a>工厂类</h2><p>工厂类主要解决类之间的依赖问题，只是减少依赖而不能完全消除，一个工厂首先要能生产类（根据配置文件创建出类）然后在根据用户需要获取出类（根据唯一名称获取出相关类）</p>
+<ol>
+<li><p>首先要有配置文件，就是告诉工厂首先要生产（通过反射创建）出什么类</p>
+<p><img src="/2019/12/22/springIoc/1.png" alt></p>
+<p>properties类专门加载配置文件，通过类加载器的getResourceAsStream()方法可以直接加载类路径下的配置文件，作为输入流，所谓类路径实际就是<strong>编译后目标文件的</strong>目录结构中的根目录</p>
+<p><img src="/2019/12/22/springIoc/2.png" alt></p>
+<p>classes就是类路径的根目录也就是说源代码中src和resources目录下所有内容都会原封不动的进入类路径中所以放在resources目录下的配置文件就相当于在编译后的类路径下</p>
+<p>因为加载配置文件是在工厂类一运行后就加载一次，所以放在静态代码块中最好，静态代码块随着类的加载而运行，且只运行一次，<strong>注意：静态代码块只能引用静态变量，因为只有静态才在同一个时间加载</strong></p>
+</li>
+<li><p>加载配置文件后就可以创建获取对象的方法，通过传入相应的唯一id来通过反射创建对象</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> object <span class="title">getBean</span><span class="params">(String beanName)</span></span>&#123;</span><br><span class="line">  String beanPath = properties.getPropery(beanName);</span><br><span class="line">  object bean = Class.forName(beanPath).newInstance();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>也就是根据唯一id从配置文件中取出该类的全限定类名，然后通过反射创建对象。</p>
+</li>
+</ol>
+<h3 id="工厂类升级"><a href="#工厂类升级" class="headerlink" title="工厂类升级"></a>工厂类升级</h3><p>上面工厂类的不足：每次通过读取配置文件得出类名然后通过反射创建的对象是多例的，也就是每次对象不一样</p>
+<p>解决方法：将创建出来的对象保存起来，需要用的时候直接拿出来，这就需要用到一个“容器”来存储对象，也就是spring的核心容器（实际是一个map集合）</p>
+<p><img src="/2019/12/22/springIoc/3.png" alt></p>
+<p>静态代码块中要做的是</p>
+<ol>
+<li>创建配置文件对象和集合对象</li>
+<li>读取配置文件，将所有类加载</li>
+</ol>
+<p><img src="/2019/12/22/springIoc/4.png" alt></p>
+<p>将所有的key取出来，一个一个的通过反射创建对象，然后存储到map中</p>
+<p>然后方法中要做的</p>
+<p><img src="/2019/12/22/springIoc/5.png" alt></p>
+<p>从map中取出来即可，特点是：工厂类一加载就会将配置文件中的所有类都通过反射创建出来然后存储到map中，也就是说是提前加载，不管你需不需要，然后需要的类直接从map中取出来，就不用通过配置文件了，这样对象就只创建了一次，也就保证了唯一性</p>
+<h3 id="springIoc"><a href="#springIoc" class="headerlink" title="springIoc"></a>springIoc</h3><p>springIoc即是spring的核心容器，他是存储配置文件中所有类的容器，在容器中创建对象，然后直接向容器中索取对象</p>
+<p>首先通过maven创建spring工程依赖：</p>
+<p><img src="/2019/12/22/springIoc/6.png" alt></p>
+<p><img src="/2019/12/22/springIoc/7.png" alt></p>
+<p>其中aop是注解需要的类</p>
+<p>配置文件就相当于工厂中的properties</p>
+<p><img src="/2019/12/22/springIoc/8.png" alt></p>
+<p>配置的<bean>标签中的内容就是自动创建并且存储到容器中的类，需要的话直接从容器中取出即可</bean></p>
+<blockquote>
+<p>该标签中的类会通过反射创建，且是通过该类的空参造方法创建，如果没有空参构造方法，则创建失败会报错</p>
+</blockquote>
+<p><img src="/2019/12/22/springIoc/9.png" alt></p>
+<p>通过ApplicationContext对象来获取容器，其中实现类的作用是读取类路径下的配置文件，<strong>配置文件一读取，则spring容器就会初始化，其中所有的类都会自动创建且存入核心容器中</strong></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/12/11/iterm2%E5%BF%AB%E6%8D%B7%E7%99%BB%E9%99%86%E8%BF%9C%E7%A8%8B%E6%9C%8D%E5%8A%A1%E5%99%A8/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -206,7 +316,7 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2019-12-11 15:45:11 / 修改时间：16:24:19" itemprop="dateCreated datePublished" datetime="2019-12-11T15:45:11+08:00">2019-12-11</time>
+              <time title="创建时间：2019-12-11 15:45:11 / 修改时间：16:31:10" itemprop="dateCreated datePublished" datetime="2019-12-11T15:45:11+08:00">2019-12-11</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -1249,214 +1359,6 @@ hexo d -g</code></pre><blockquote>
   
   
 
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/10/24/Hexo-github%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E7%B3%BB%E7%BB%9F/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/assets/blogImg/6711866_014214_8838.jpg">
-      <meta itemprop="name" content="XXX">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/10/24/Hexo-github%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E7%B3%BB%E7%BB%9F/" class="post-title-link" itemprop="url">Hexo+github搭建个人博客系统</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2019-10-24 20:13:22" itemprop="dateCreated datePublished" datetime="2019-10-24T20:13:22+08:00">2019-10-24</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2019-12-03 19:27:18" itemprop="dateModified" datetime="2019-12-03T19:27:18+08:00">2019-12-03</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%8D%9A%E5%AE%A2/" itemprop="url" rel="index">
-                    <span itemprop="name">博客</span>
-                  </a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="前期准备工作"><a href="#前期准备工作" class="headerlink" title="前期准备工作"></a>前期准备工作</h2><h3 id="安装Node-Js"><a href="#安装Node-Js" class="headerlink" title="安装Node.Js"></a>安装Node.Js</h3><p>下载地址 </p>
-<pre><code>http://nodejs.cn/download/
-
-打开CMD命令行
-
-node -v
-npm -v</code></pre><p>  查看是否安装成功（有版本显示则是成功），安装Node.Js主要是使用它的npm工具，使用npm可以下载软件，相当于使用git下载软件一样，是一个软件包管理平台</p>
-<h3 id="安装Git"><a href="#安装Git" class="headerlink" title="安装Git"></a>安装Git</h3><p>下载地址 </p>
-<pre><code>https://git-scm.com/downloads</code></pre><p>无脑下一步安装好即可，使用Git主要是将写好的博客（文章）上传到Github平台上，以便可以使用网络访问</p>
-<pre><code>git --version</code></pre><p>查看是否安装成功，若有软件版本出来证明安装成功</p>
-<blockquote>
-<p>注意：git空客后是两个减号 –</p>
-</blockquote>
-<h3 id="在Github中创建此博客的仓库"><a href="#在Github中创建此博客的仓库" class="headerlink" title="在Github中创建此博客的仓库"></a>在Github中创建此博客的仓库</h3><p><img src="/2019/10/24/Hexo-github%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E7%B3%BB%E7%BB%9F/1108615-20171021223639881-1998790649.png" alt></p>
-<p>这里注意创建的仓库的名字必须是githu.io结尾，只要以此结尾github就默认知道该仓库是个人主页</p>
-<hr>
-<p><strong>前期准备工作结束，下面开始安装软件</strong></p>
-<h3 id="安装Hexo"><a href="#安装Hexo" class="headerlink" title="安装Hexo"></a>安装Hexo</h3><p>Hexo即时此次使用的博客系统，首先在选定的地方创建一个文件夹，我取名为blog(名字可任意)，该文件夹既是安装Hexo的地方，也是以后博客文章存放的地方，也是配置的地方</p>
-<pre><code>npm install hexo -g</code></pre><p>即可安装完成 输入</p>
-<pre><code>hexo -v</code></pre><p>可查看是否安装成功。若有版本显示，则安装成功<br></p>
-<blockquote>
-<p>以后所有的操作全部在blog这个文件夹进行</p>
-</blockquote>
-<p>输入</p>
-<pre><code>hexo init</code></pre><p>初始化该文件夹</p>
-<blockquote>
-<p>若有报错则可能是git没有安装，该初始化需要用到git</p>
-</blockquote>
-<p><img src="/2019/10/24/Hexo-github%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E7%B3%BB%E7%BB%9F/1108615-20171021230241646-1660449756.png" alt><br><strong>表示安装成功</strong></p>
-<p>输入</p>
-<pre><code>npm install</code></pre><p>自动安装所需的组件    </p>
-<p>输入</p>
-<pre><code>hexo g</code></pre><p><img src="/2019/10/24/Hexo-github%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E7%B3%BB%E7%BB%9F/1108615-20171021231705474-1404994153.png" alt><br><br>将blog文件下的所有博客文章全部生成，g代表generate（生成），此时只是生成，还没有部署</p>
-<p>输入</p>
-<pre><code>hexo s</code></pre><p>开启服务器，即部署到本地<br><img src="/2019/10/24/Hexo-github%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E7%B3%BB%E7%BB%9F/1108615-20171021231833912-663774637.png" alt><br></p>
-<p><strong>在浏览器中输入localhost:4000访问博客首页</strong><br></p>
-<p><img src="/2019/10/24/Hexo-github%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E7%B3%BB%E7%BB%9F/1108615-20171021232413224-1288183746.png" alt><br></p>
-<p><strong>表示成功！</strong><br><br><strong>至此本地博客系统已经搭建好了</strong></p>
-<hr>
-<h3 id="将本地博客与github关联"><a href="#将本地博客与github关联" class="headerlink" title="将本地博客与github关联"></a>将本地博客与github关联</h3><p>如果电脑是第一次使用关联操作，则需要指定Git的用户名和邮箱<br></p>
-<blockquote>
-<p>也是在blog文件夹中操作，在blog文件夹空白处右键选择git的bash命令</p>
-</blockquote>
-<p><img src="/2019/10/24/Hexo-github%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E7%B3%BB%E7%BB%9F/1108615-20171021233157224-1386748377.png" alt><br></p>
-<p>该用户名和邮箱是对一个Github上的，到时候关联需要验证<br></p>
-<h4 id="使用ssh将本地博客上传到github仓库中"><a href="#使用ssh将本地博客上传到github仓库中" class="headerlink" title="使用ssh将本地博客上传到github仓库中"></a>使用ssh将本地博客上传到github仓库中</h4><p>输入</p>
-<pre><code>cd ~/.ssh</code></pre><p>查看是否有.ssh文件，该文件是ssh的密钥文件，公钥和私钥上传的时候需要用此来加密和解密，若没有则继续输入：</p>
-<pre><code>ssh-keygen -t rsa -C “295048600@qq.com”</code></pre><p>会在C:\Users\Administrator.ssh中生成两个文件id_rsa和id_rsa.pub，pub的是公钥，上传的时候接收方需要知道公钥，即github需要拥有这台电脑的公钥才能上传<br></p>
-<blockquote>
-<p>输入后连续回车即可创建</p>
-</blockquote>
-<p>输入</p>
-<pre><code>eval &quot;$(ssh-agent -s)&quot;</code></pre><p><img src="/2019/10/24/Hexo-github%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E7%B3%BB%E7%BB%9F/1108615-20171021234314146-695835137.png" alt><br><br>添加密钥到ssh-agent<br><br>在输入</p>
-<pre><code>ssh-add ~/.ssh/id_rsa</code></pre><p><img src="/2019/10/24/Hexo-github%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E7%B3%BB%E7%BB%9F/1108615-20171021234528552-610835964.png" alt><br><br>添加生成的SSH key到ssh-agent<br></p>
-<h4 id="登录Github-设置ssh公钥"><a href="#登录Github-设置ssh公钥" class="headerlink" title="登录Github,设置ssh公钥"></a>登录Github,设置ssh公钥</h4><p><img src="/2019/10/24/Hexo-github%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E7%B3%BB%E7%BB%9F/1108615-20171021234636834-426105098.png" alt><br></p>
-<p>新建一个new ssh key，将id_rsa.pub文件里的内容复制上去<br></p>
-<p><img src="/2019/10/24/Hexo-github%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E7%B3%BB%E7%BB%9F/1108615-20171021234906724-1938556332.png" alt><br></p>
-<p>输入</p>
-<pre><code>ssh -T git@github.com</code></pre><p>测试添加ssh是否成功<br></p>
-<p><img src="/2019/10/24/Hexo-github%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E7%B3%BB%E7%BB%9F/1108615-20171021235116271-1521882533.png" alt></p>
-<h3 id="最后一步，在hexo中配置上传到github中的哪个仓库中"><a href="#最后一步，在hexo中配置上传到github中的哪个仓库中" class="headerlink" title="最后一步，在hexo中配置上传到github中的哪个仓库中"></a>最后一步，在hexo中配置上传到github中的哪个仓库中</h3><p>在blog文件夹中找到_config.yml文件，修改repo值<br><strong>直接在最后添加字段和值即可，注意每个冒号之后都要有一个空格，否则文件会报错</strong><br><br><img src="/2019/10/24/Hexo-github%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E7%B3%BB%E7%BB%9F/1108615-20171021235812974-84318377.png" alt><br></p>
-<blockquote>
-<p>repository的值是下载该仓库十的地址 如下：</p>
-</blockquote>
-<p><img src="/2019/10/24/Hexo-github%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E7%B3%BB%E7%BB%9F/1108615-20171021235722365-818312042.png" alt></p>
-<h2 id="至此环境搭建完毕！"><a href="#至此环境搭建完毕！" class="headerlink" title="至此环境搭建完毕！"></a><strong>至此环境搭建完毕！</strong></h2><h3 id="部署到github让大家访问"><a href="#部署到github让大家访问" class="headerlink" title="部署到github让大家访问"></a>部署到github让大家访问</h3><p>在cmd中输入</p>
-<pre><code>hexo new post “博客名”</code></pre><p>即可在blog/source/_posts目录下创建一个文章</p>
-<p><img src="/2019/10/24/Hexo-github%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E7%B3%BB%E7%BB%9F/1108615-20171022000508865-46787156.png" alt><br></p>
-<h4 id="在部署前安装一个扩展"><a href="#在部署前安装一个扩展" class="headerlink" title="在部署前安装一个扩展"></a>在部署前安装一个扩展</h4><pre><code>npm install hexo-deployer-git --save</code></pre><p>忽略告警即可<br></p>
-<p>使用编辑器编辑好文章后使用：</p>
-<pre><code>hexo d -g</code></pre><p>即可完成部署，d是deploye(部署) -g是全局此时是部署到github上，通过ssh加密传输，其他没有私钥的主机无法上传</p>
-<p><img src="/2019/10/24/Hexo-github%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E7%B3%BB%E7%BB%9F/1108615-20171022001410662-1611125904.png" alt><br><br><strong>部署成功后访问你的地址：http://用户名.github.io。那么将看到生成的文章</strong></p>
-<p><img src="/2019/10/24/Hexo-github%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E7%B3%BB%E7%BB%9F/1108615-20171022001738037-1195721153.png" alt><br><br><strong>至此，搭建加部署全部完成</strong></p>
-<p>在使用的时候<br><br>先使用</p>
-<pre><code>hexo clean</code></pre><p>清除，再使用</p>
-<pre><code>hexo g</code></pre><p>在本地生成文章，最后使用</p>
-<pre><code>hexo d -g</code></pre><p>部署到github上去</p>
-<h3 id="容易犯错的地方"><a href="#容易犯错的地方" class="headerlink" title="容易犯错的地方"></a>容易犯错的地方</h3><ul>
-<li><p>直接在blog/source/_post目录下右键新建文件并编辑，这样的文章无法生成，因为缺少相关配置，必须使用</p>
-<pre><code>hexo new &quot;文章名字&quot;</code></pre></li>
-<li><p>插入图片</p>
-</li>
-</ul>
-<p>使用网络上图片的URL有时候不能显示图片，特别是部署到github后，所以需要使用插件上传图片，hexo博客图片的问题在于，markdown文章使用的图片路径和hexo博客发布时的图片路径不一致。需要安装插件，再blog或者hexo目录下执行：</p>
-<pre><code>npm install hexo-asset-image --save</code></pre><p>然后在blog下的_config.yml中修改</p>
-<pre><code>post_asset_folder:true</code></pre><p>完成安装后用hexo新建文章的时候会发现_posts目录下面会多出一个和文章名字一样的文件夹。图片就可以放在文件夹下面。</p>
-<blockquote>
-<p>之前新建的文章不会有该目录！</p>
-</blockquote>
-<p>该目录的作用是将文章中需要用到的图片放入其中，在生成文章时hexo会将其和生成的文章一起放在public文件下。</p>
-<p>使用时只需要：</p>
-<pre><code>![logo](logo.jpg)</code></pre><p>即可，不需要加前缀，因为默认在同名文件下查找！</p>
-<ul>
-<li>Markdownpad2秘钥</li>
-</ul>
-<pre><code>邮箱：
-
-Soar360@live.com
-
-
-授权秘钥：
-
-GBPduHjWfJU1mZqcPM3BikjYKF6xKhlKIys3i1MU2eJHqWGImDHzWd    D6xhMNLGVpbP2M5SN6bnxn2kSE8qHqNY5QaaRxmO3YSMHxlv2EYpjd    wLcPwfeTG7kUdnhKE0vVy4RidP6Y2wZ0q74f47fzsZo45JE2hfQBFi    2O9Jldjp1mW8HUpTtLA2a5/sQytXJUQl/    QKO0jUQY4pa5CCx20sV1ClOTZtAGngSOJtIOFXK599sBr5aIEFyH0K    7H4BoNMiiDMnxt1rD8Vb/ikJdhGMMQr0R4B    +L3nWU97eaVPTRKfWGDE8/eAgKzpGwrQQoDh+nzX1xoVQ8NAuH    +s4UcSeQ==</code></pre><p>使用后可解锁更多功能！</p>
-<ul>
-<li>主题头像</li>
-</ul>
-<p>使用网络上的图像的URL后再本地可以显示，但是上传到github上不能显示，所以将图片都存入一个文件内，将头像地址直接指向本地文件的路径，等上传到github上的时候文件也会一并上传</p>
-<pre><code>在blog/source下创建文件夹assets/blogImg目录，在该目录中存放图片6711866_014214_8838.jpg</code></pre><p>在主题配置文件中使用该地址即可</p>
-<pre><code>/assets/blogImg/6711866_014214_8838.jpg</code></pre><p>默认会在source文件下寻找，即source就是根目录。</p>
-<ul>
-<li><p>标签和分类<br>标签和分类都是页面，所以要先创建页面：</p>
-<pre><code>hexo new page tags</code></pre><p>会在source文件夹下创建一个tags目录，里面有index.md文件，该文件就是标签页</p>
-<blockquote>
-<p>当点击博客中的标签选项时就会跳转到该页面，每个文章中的tags就会集中显示</p>
-</blockquote>
-</li>
-</ul>
-<p>打开后是：</p>
-<pre><code>---
-title: tags
-date: 2019-10-31 14:10:12
----</code></pre><p>要添加一行：</p>
-<pre><code>---
-title: tags
-date: 2019-10-31 14:10:12
-type: &quot;tags&quot;
----</code></pre><p><strong>保存并关闭文件</strong></p>
-<p>在<strong>博客文章的头部</strong>新增属性：</p>
-<pre><code>---
-title: Hexo 添加分类及标签
-date: 2019-04-24 15:40:24
-categories: hexo
-tags: hexo
----</code></pre>
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
   </div>
 
   
@@ -1507,20 +1409,20 @@ tags: hexo
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">11</span>
+          <span class="site-state-item-count">12</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-count">6</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-count">9</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
