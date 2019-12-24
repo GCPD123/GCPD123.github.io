@@ -181,6 +181,152 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/10/25/%E5%88%A9%E7%94%A8%E5%88%86%E6%94%AF%E5%90%8C%E6%AD%A5%E5%8D%9A%E5%AE%A2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/assets/blogImg/6711866_014214_8838.jpg">
+      <meta itemprop="name" content="XXX">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/10/25/%E5%88%A9%E7%94%A8%E5%88%86%E6%94%AF%E5%90%8C%E6%AD%A5%E5%8D%9A%E5%AE%A2/" class="post-title-link" itemprop="url">利用分支同步博客</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-10-25 19:08:48" itemprop="dateCreated datePublished" datetime="2019-10-25T19:08:48+08:00">2019-10-25</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2019-12-04 20:50:23" itemprop="dateModified" datetime="2019-12-04T20:50:23+08:00">2019-12-04</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%8D%9A%E5%AE%A2/" itemprop="url" rel="index">
+                    <span itemprop="name">博客</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h3 id="利用分支进行多终端操作"><a href="#利用分支进行多终端操作" class="headerlink" title="利用分支进行多终端操作"></a>利用分支进行多终端操作</h3><p>一台电脑将博客提交到github上后另一台电脑想接着后面提交文章，则之前的文章会被覆盖，github上传不是追加而是直接覆盖，所以需要利用分支将博客源文件和生成的html文件分开存储</p>
+<h3 id="机制"><a href="#机制" class="headerlink" title="机制"></a>机制</h3><p>由于 hexo d命令是将Public文件夹下的内容同步到github上，不包含源文件</p>
+<p><img src="/2019/10/25/%E5%88%A9%E7%94%A8%E5%88%86%E6%94%AF%E5%90%8C%E6%AD%A5%E5%8D%9A%E5%AE%A2/v2-32ab30d0d28b916a204c03de4ed0fc4f_hd.jpg" alt></p>
+<p>也就是说上传的内容在.deploy_git里面其他所有文件都不上传</p>
+<p><img src="/2019/10/25/%E5%88%A9%E7%94%A8%E5%88%86%E6%94%AF%E5%90%8C%E6%AD%A5%E5%8D%9A%E5%AE%A2/v2-59bb330178a4e010d9818911f789082b_hd.jpg" alt></p>
+<p>所以可以利用git的分支管理，将源文件上传到github的另一个分支即可。</p>
+<h3 id="创建并上传分支"><a href="#创建并上传分支" class="headerlink" title="创建并上传分支"></a>创建并上传分支</h3><p>首先，先在github上新建一个hexo分支，如图：<br><img src="/2019/10/25/%E5%88%A9%E7%94%A8%E5%88%86%E6%94%AF%E5%90%8C%E6%AD%A5%E5%8D%9A%E5%AE%A2/v2-ebb3e05632e85ab036663390305caa1c_hd.jpg" alt><br>然后在这个仓库的settings中，选择默认分支为hexo分支（这样每次同步的时候就不用指定分支，比较方便）</p>
+<blockquote>
+<p>github默认上传的分支是master</p>
+</blockquote>
+<p><img src="/2019/10/25/%E5%88%A9%E7%94%A8%E5%88%86%E6%94%AF%E5%90%8C%E6%AD%A5%E5%8D%9A%E5%AE%A2/v2-1899b6219f3787832652813b958b9b3d_hd.jpg" alt></p>
+<p>然后在本地的任意目录下，打开git bash 输入：</p>
+<pre><code>git clone git@github.com:GCPD123/GCPD123.github.io.git</code></pre><p>将刚创建好的分支拷贝到本地</p>
+<blockquote>
+<p>创建的分支是从master拷贝来的，也就是说此时两个分支都是一样的，但是当你修改并上传后，就不一样的，因为全部会覆盖<br>接下来将克隆下来的文件把<strong>除了.git以外的文件全部删除</strong>，接着，把之前写的博客源文件全部复制过来，<strong>除了.deploy_git</strong><br>这里应该说一句，复制过来的源文件应该有一个.gitignore，用来忽略一些不需要的文件，如果没有的话，自己新建一个，在里面写上如下，表示这些类型文件不需要git：<br>.DS_Store<br>Thumbs.db<br>db.json<br><em>.log<br>node_modules/<br>public/<br>.deploy</em>/</p>
+</blockquote>
+<p>注意，如果你之前克隆过theme中的主题文件，那么应该把主题文件中的.git文件夹删掉，因为git不能嵌套上传，最好是显示隐藏文件，检查一下有没有，否则上传的时候会出错，导致你的主题文件无法上传，这样你的配置在别的电脑上就用不了了。如果主题上传之后是一个空文件夹，那么需要使用：git rm –cached themes/next/命令，该命令用于清楚缓存区和仓库的制定文件，然后再执行之前的本地上传和同步到github。</p>
+<blockquote>
+<p>因为使用Git上传必须有企鹅仅有一个.git文件，嵌套都不行</p>
+</blockquote>
+<p>然后</p>
+<pre><code>git add .
+git commit –m &quot;add branch&quot;
+git push </code></pre><blockquote>
+<p>add .是添加当前目录的所有文件</p>
+</blockquote>
+<p>这样就上传完了，可以去你的github上看一看hexo分支有没有上传上去，其中node_modules、public、db.json已经被忽略掉了，没有关系，不需要上传的，因为在别的电脑上需要重新输入命令安装 </p>
+<p><img src="/2019/10/25/%E5%88%A9%E7%94%A8%E5%88%86%E6%94%AF%E5%90%8C%E6%AD%A5%E5%8D%9A%E5%AE%A2/v2-a94330ca825f4debde8ce7ceeb8f8394_hd.jpg" alt></p>
+<p>这样就上传完了。</p>
+<h3 id="更换电脑操作"><a href="#更换电脑操作" class="headerlink" title="更换电脑操作"></a>更换电脑操作</h3><p>与之前一样</p>
+<pre><code>安装Git，设置用户，设置ssh key
+安装nodejs
+安装hexo</code></pre><p>但是安装好hexo后不需要初始化了直接在博客目录下</p>
+<pre><code>git clone git@github.com:GCPD213/GCPD123.github.io.git</code></pre><p>然后到克隆的目录下</p>
+<pre><code>npm install
+npm install hexo-deployer-git --save</code></pre><p>然后</p>
+<pre><code>hexo g
+hexo d -g</code></pre><blockquote>
+<p>此时是克隆下来的源文件，所以要生成然后部署，即与github上同步，之后就可以开始新文章的编写了</p>
+</blockquote>
+<h3 id="Tips"><a href="#Tips" class="headerlink" title="Tips"></a>Tips</h3><ol>
+<li><p>不要忘了每次写完文章后要同步提交到branch分支（此时已经是默认分支）</p>
+<p> git add .<br> git commit –m “xxxx”<br> git push </p>
+<blockquote>
+<p>此时当前目录已经有之前的所有文章了，所以可以覆盖之前的</p>
+</blockquote>
+</li>
+<li><p>若在已经提交过的电脑上，已经有clone文件夹了，那么</p>
+<p> git pull</p>
+</li>
+</ol>
+<p>将github上的全部同步过来即可，它会自动比较文件，全部更新。</p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><ol>
+<li><p>正常写文章时用于部署到github上的命令是hexo d -g该命令会将public文件夹下的所有内容部署到github主页上</p>
+</li>
+<li><p>在hexo根目录中.gitignore文件中记录的是不上传到github上的文件，其中就包括public,所以可以利用这点将博客源文件同步到github同一个仓库到的其他分支</p>
+</li>
+<li><p>在hexo根目录上新建一个hexo分支</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git branch hexo</span><br><span class="line">git checkout hexo</span><br></pre></td></tr></table></figure>
+
+<p>此时是与master分支到内容一模一样，然后</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git status</span><br><span class="line">git add .</span><br><span class="line">git commit -m &quot;上传理由&quot;</span><br></pre></td></tr></table></figure>
+
+<p>这样就把源文件上传到本地仓库到hexo分支中了</p>
+</li>
+<li><p>将本地分支上传到github对应的分支，如果github上没有hexo分支，则会自动创建，有的话会提示你要上传有冲突（因为原来该分支上已经存在文件）要先fetch后再上传这里直接强行同步就可以将之前的覆盖</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git push origin hexo -f</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>之后换电脑了，直接安装git然后使用git pull从仓库拉取博客源文件，安装相应的hexo和插件后就可以正常运行，注意，hexo d -g使用的是hexo配置中已经指定好的仓库和分支，与git push制定的仓库是同一个但是分支不同，以此达到备份源文件的目的</p>
+</li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/10/24/Hexo-github%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E7%B3%BB%E7%BB%9F/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -500,14 +646,14 @@ tags: hexo
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">12</span>
+          <span class="site-state-item-count">13</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-count">7</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">

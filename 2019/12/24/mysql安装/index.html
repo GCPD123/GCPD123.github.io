@@ -50,18 +50,20 @@
   };
 </script>
 
-  <meta name="description" content="先停止mysql服务 进入控制面板卸载mysql 删除mysql文件，一般在C:\Program Files (x86)下有个mysql文件夹，直接删除 在运行中输入regedit打开注册表，删除HKEY_LOCAL_MACHINE\SYSTEM\ControlSet001\Services\Eventlog\Application\MySQL文件夹和HKEY_LOCAL_MACHINE\SYS">
+  <meta name="description" content="Linux上Mysql安装 下载并安装mysql官方的yum Repository  在Linux中yum就是包管理软件，可以用来安装各种软件并解决各种依赖，yum的下载软件的地方称作yum源，软件的来源，是在&#x2F;etc&#x2F;yum.repose.d&#x2F;目录中  这些repo文件中就是记录了软件下载的来源，不同软件下载来源肯定不一样，所以在软件的官网都会提供yum源来下载 1wget -i -c http">
 <meta name="keywords" content="mysql">
 <meta property="og:type" content="article">
-<meta property="og:title" content="完全卸载mysql">
-<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;10&#x2F;31&#x2F;%E5%AE%8C%E5%85%A8%E5%8D%B8%E8%BD%BDmysql&#x2F;index.html">
+<meta property="og:title" content="mysql安装">
+<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;12&#x2F;24&#x2F;mysql%E5%AE%89%E8%A3%85&#x2F;index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="先停止mysql服务 进入控制面板卸载mysql 删除mysql文件，一般在C:\Program Files (x86)下有个mysql文件夹，直接删除 在运行中输入regedit打开注册表，删除HKEY_LOCAL_MACHINE\SYSTEM\ControlSet001\Services\Eventlog\Application\MySQL文件夹和HKEY_LOCAL_MACHINE\SYS">
+<meta property="og:description" content="Linux上Mysql安装 下载并安装mysql官方的yum Repository  在Linux中yum就是包管理软件，可以用来安装各种软件并解决各种依赖，yum的下载软件的地方称作yum源，软件的来源，是在&#x2F;etc&#x2F;yum.repose.d&#x2F;目录中  这些repo文件中就是记录了软件下载的来源，不同软件下载来源肯定不一样，所以在软件的官网都会提供yum源来下载 1wget -i -c http">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-11-27T12:04:25.363Z">
+<meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;12&#x2F;24&#x2F;mysql%E5%AE%89%E8%A3%85&#x2F;1.png">
+<meta property="og:updated_time" content="2019-12-24T13:47:21.918Z">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;12&#x2F;24&#x2F;mysql%E5%AE%89%E8%A3%85&#x2F;1.png">
 
-<link rel="canonical" href="http://yoursite.com/2019/10/31/%E5%AE%8C%E5%85%A8%E5%8D%B8%E8%BD%BDmysql/">
+<link rel="canonical" href="http://yoursite.com/2019/12/24/mysql%E5%AE%89%E8%A3%85/">
 
 
 <script id="page-configurations">
@@ -75,7 +77,7 @@
   };
 </script>
 
-  <title>完全卸载mysql | Hexo</title>
+  <title>mysql安装 | Hexo</title>
   
 
 
@@ -185,7 +187,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/10/31/%E5%AE%8C%E5%85%A8%E5%8D%B8%E8%BD%BDmysql/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/12/24/mysql%E5%AE%89%E8%A3%85/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/assets/blogImg/6711866_014214_8838.jpg">
@@ -198,7 +200,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          完全卸载mysql
+          mysql安装
         </h1>
 
         <div class="post-meta">
@@ -207,24 +209,18 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
+              
 
-              <time title="创建时间：2019-10-31 10:30:00" itemprop="dateCreated datePublished" datetime="2019-10-31T10:30:00+08:00">2019-10-31</time>
+              <time title="创建时间：2019-12-24 21:23:39 / 修改时间：21:47:21" itemprop="dateCreated datePublished" datetime="2019-12-24T21:23:39+08:00">2019-12-24</time>
             </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2019-11-27 20:04:25" itemprop="dateModified" datetime="2019-11-27T20:04:25+08:00">2019-11-27</time>
-              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/" itemprop="url" rel="index">
-                    <span itemprop="name">数据库</span>
+                  <a href="/categories/mysql/" itemprop="url" rel="index">
+                    <span itemprop="name">mysql</span>
                   </a>
                 </span>
             </span>
@@ -240,15 +236,60 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <ol>
-<li>先停止mysql服务</li>
-<li>进入控制面板卸载mysql</li>
-<li>删除mysql文件，一般在C:\Program Files (x86)下有个mysql文件夹，直接删除</li>
-<li>在运行中输入regedit打开注册表，删除<strong>HKEY_LOCAL_MACHINE\SYSTEM\ControlSet001\Services\Eventlog\Application\MySQL文件夹</strong>和<strong>HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\Eventlog\Application\MySQL的文件夹</strong><blockquote>
-<p>ControlSet001和CurrentControlSet的区别若后者没有mysql可以不删</p>
-</blockquote>
-</li>
+        <h3 id="Linux上Mysql安装"><a href="#Linux上Mysql安装" class="headerlink" title="Linux上Mysql安装"></a>Linux上Mysql安装</h3><ol>
+<li>下载并安装mysql官方的yum Repository</li>
 </ol>
+<p>在Linux中yum就是包管理软件，可以用来安装各种软件并解决各种依赖，<strong>yum的下载软件的地方称作yum源</strong>，软件的来源，是在/etc/yum.repose.d/目录中</p>
+<p><img src="/2019/12/24/mysql%E5%AE%89%E8%A3%85/1.png" alt></p>
+<p>这些repo文件中就是记录了软件下载的来源，不同软件下载来源肯定不一样，所以在软件的官网都会提供yum源来下载</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget -i -c http://dev.mysql.com/get/mysql57-community-release-el7-10.noarch.rpm</span><br></pre></td></tr></table></figure>
+
+<p>下载的是yum源文件，还要安装到本地，才能用该源去下载mysql</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum -y install mysql57-community-release-el7-10.noarch.rpm</span><br></pre></td></tr></table></figure>
+
+<p>安装mysql服务器</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum -y install mysql-community-server</span><br></pre></td></tr></table></figure>
+
+<p>此时下载安装的mysql就是从yum源中的地址来的</p>
+<ol start="2">
+<li>mysql数据库设置</li>
+</ol>
+<p>启动MySQL</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl start  mysqld.service</span><br></pre></td></tr></table></figure>
+
+<p>查看MySQL运行状态</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl status mysqld.service</span><br></pre></td></tr></table></figure>
+
+<p><strong>此时MySQL已经开始正常运行，需要找出root的密码</strong></p>
+<p>因为初始化的mysql是随机密码必须先登陆才能修改</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">grep "password" /var/log/mysqld.log</span><br></pre></td></tr></table></figure>
+
+<p>如下命令登录mysql</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql -uroot -p</span><br></pre></td></tr></table></figure>
+
+<p>登陆之后第一件事是修改密码为123456</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">set password for root@localhost = password(&apos;123456&apos;);</span><br></pre></td></tr></table></figure>
+
+<p>这时会提示密码过于简单无法创建，需要需改创建密码规则</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">set global validate_password_policy=0;</span><br><span class="line">set global validate_password_length=1;</span><br></pre></td></tr></table></figure>
+
+<p>然后就可以正常设置了</p>
+<p>解决远程登陆问题</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">#任何主机</span><br><span class="line">mysql&gt;GRANT ALL PRIVILEGES ON *.* TO &apos;root&apos;@&apos;%&apos; IDENTIFIED BY &apos;123456&apos; WITH GRANT OPTION;</span><br><span class="line"></span><br><span class="line">#指定主机</span><br><span class="line">mysql&gt;GRANT ALL PRIVILEGES ON *.* TO &apos;jack&apos;@’10.10.50.127’ IDENTIFIED BY &apos;654321&apos; WITH GRANT OPTION;</span><br><span class="line"></span><br><span class="line"># 然后刷新权限</span><br><span class="line">mysql&gt;flush privileges;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>为了支持中文需要修改编码为utf-8</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/my.cnf</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">[client]</span><br><span class="line">port=3306</span><br><span class="line">socket=/var/lib/mysql/mysql.sock</span><br><span class="line">default-character-set=utf8</span><br><span class="line"></span><br><span class="line">[mysqld]</span><br><span class="line">datadir=/var/lib/mysql</span><br><span class="line">socket=/var/lib/mysql/mysql.sock</span><br><span class="line">user=mysql</span><br><span class="line"><span class="meta">#</span><span class="bash"> Disabling symbolic-links is recommended to prevent assorted security risks</span></span><br><span class="line">symbolic-links=0</span><br><span class="line">character-set-server=utf8</span><br><span class="line"></span><br><span class="line">[mysql]</span><br><span class="line">no-auto-rehash</span><br><span class="line">default-character-set=utf8</span><br><span class="line"></span><br><span class="line">[mysqld_safe]</span><br><span class="line">log-error=/var/log/mysqld.log</span><br><span class="line">pid-file=/var/run/mysqld/mysqld.pid</span><br></pre></td></tr></table></figure>
+
+<p>重启mysql服务</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">service mysqld restart</span><br></pre></td></tr></table></figure>
+
+<p>查看数据库编码</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">show variables like &apos;character_set%&apos;;</span><br></pre></td></tr></table></figure>
+
 
     </div>
 
@@ -265,17 +306,14 @@
 
           <div class="post-nav">
             <div class="post-nav-next post-nav-item">
-                <a href="/2019/10/26/asd/" rel="next" title="git基本操作">
-                  <i class="fa fa-chevron-left"></i> git基本操作
+                <a href="/2019/12/22/springIoc/" rel="next" title="springIoc">
+                  <i class="fa fa-chevron-left"></i> springIoc
                 </a>
             </div>
 
             <span class="post-nav-divider"></span>
 
             <div class="post-nav-prev post-nav-item">
-                <a href="/2019/11/06/%E5%8F%8D%E5%B0%84/" rel="prev" title="反射">
-                  反射 <i class="fa fa-chevron-right"></i>
-                </a>
             </div>
           </div>
       </footer>
@@ -314,6 +352,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Linux上Mysql安装"><span class="nav-number">1.</span> <span class="nav-text">Linux上Mysql安装</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
