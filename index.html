@@ -335,7 +335,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2019-12-24 21:08:58" itemprop="dateModified" datetime="2019-12-24T21:08:58+08:00">2019-12-24</time>
+                <time title="修改时间：2019-12-26 20:59:27" itemprop="dateModified" datetime="2019-12-26T20:59:27+08:00">2019-12-26</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -425,6 +425,38 @@
 <p>因为依赖是在具体的类中，所以配置是在<bean>标签中，<strong>告诉spring容器，创建这个类的时候这些变量应该是什么值</strong>，其中name属性是指定变量的名称，准确说是指定set方法后面的名称，如setName()和setname()两个方法的name属性值分别是Name和name,<strong>注意不是成员变量名字，虽然大多数情况下都相同</strong></bean></p>
 <p>value属性表示希望注入的值，<strong>注意由于value后面都是有双引号，所以值的类型都是字符串</strong>如age是Integer类型的变量，但是注入是“18”spring会自动进行类型转换，将字符串类型转换为其他所有能够转换的类型。value只能提供基本类型和string类型的数据</p>
 <p>ref属性表示引用容器中其他的类，值为其他bean的id</p>
+<h3 id="注解配置"><a href="#注解配置" class="headerlink" title="注解配置"></a>注解配置</h3><p>注解的分类：</p>
+<ol>
+<li>用于创建对象 和<bean>功能一样</bean></li>
+<li>用于注入数据 和<property>功能一样，<strong>但是注解注入就不需要set方法</strong></property></li>
+<li>用于改变作用范围 和<scop>功能一样</scop></li>
+<li>和生命周期相关 和<init-method>功能一样</init-method></li>
+</ol>
+<p>首先启用注解功能需要导入约束</p>
+<p><img src="/2019/12/22/springIoc/18.png" alt></p>
+<p>context就是注解的约束，注意选中部分也是要导入的，一个功能有两份地址“context”和“xsd”</p>
+<p>使用注解要在文件中配置</p>
+<p><img src="/2019/12/22/springIoc/19.png" alt></p>
+<p>告诉spring表示扫描的包</p>
+<ol>
+<li>创建对象的注解</li>
+</ol>
+<p><img src="/2019/12/22/springIoc/20.png" alt></p>
+<p>表示以反射创建该对象（默认构造方法，也就是空参）并以首字母小写为id存入容器中，可以以该id取出来。</p>
+<p>注解中如果只有一个value属性则该value属性可以不写，直接写值，比如“accountService”表示通过反射创建该类并以accountService为id存入容器中</p>
+<ol start="2">
+<li>依赖注入的注解</li>
+</ol>
+<p>有两种：@Autowired和@value前者只能注入容器中已存在的bean，后者可以注入基本类型和string，而且是从文件中读取</p>
+<p>@Autowired表示只以<strong>类型</strong>在容器中查找相同类的对象并赋值给该变量</p>
+<p><img src="/2019/12/22/springIoc/21.png" alt></p>
+<p>自动找AccountDao类的对象，<strong>注意实现了AccountDao接口的对象也算是该类</strong>，所以可能会有多个，如果找到多个，则根据变量名决定，如果容器中有id为accountDao的对象则注入。<strong>所以使用注解注入不需要set方法</strong></p>
+<p><img src="/2019/12/22/springIoc/22.png" alt></p>
+<p><img src="/2019/12/22/springIoc/23.png" alt></p>
+<p>value注入直接在属性中写入值即可注入，但是只能是基本类型和string类型，由于Date类型不是基本类型，所以无法通过value注入</p>
+<p><img src="/2019/12/22/springIoc/24.png" alt></p>
+<p><img src="/2019/12/22/springIoc/25.png" alt></p>
+<p>Date可以这样注入创建到容器中，再通过Aurowired取出</p>
 
       
     </div>
