@@ -50,14 +50,18 @@
   };
 </script>
 
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Hexo">
-<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;categories&#x2F;%E6%95%B0%E6%8D%AE%E5%BA%93&#x2F;index.html">
+  <meta name="description" content="练习时候遇到问题 理解项目中的jdk与maven中的jdk：一个项目中依赖的jdk如1.8，则maven编译插件的可选jdk必须小于等于1.8，不能超过该项目的依赖版本,存在一个交叉编译的原理，高的可兼容低的，前提是电脑上必须安装了1.8的jdk。修改如下  12345678910111213&amp;lt;build&amp;gt;     &amp;lt;plugins&amp;gt;         &amp;lt;plugin&amp;">
+<meta name="keywords" content="spring">
+<meta property="og:type" content="article">
+<meta property="og:title" content="练习遇到的问题汇总">
+<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2020&#x2F;01&#x2F;10&#x2F;%E7%BB%83%E4%B9%A0%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98%E6%B1%87%E6%80%BB&#x2F;index.html">
 <meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="练习时候遇到问题 理解项目中的jdk与maven中的jdk：一个项目中依赖的jdk如1.8，则maven编译插件的可选jdk必须小于等于1.8，不能超过该项目的依赖版本,存在一个交叉编译的原理，高的可兼容低的，前提是电脑上必须安装了1.8的jdk。修改如下  12345678910111213&amp;lt;build&amp;gt;     &amp;lt;plugins&amp;gt;         &amp;lt;plugin&amp;">
 <meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2020-01-10T05:48:51.358Z">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="http://yoursite.com/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">
+<link rel="canonical" href="http://yoursite.com/2020/01/10/%E7%BB%83%E4%B9%A0%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98%E6%B1%87%E6%80%BB/">
 
 
 <script id="page-configurations">
@@ -65,13 +69,13 @@
   CONFIG.page = {
     sidebar: "",
     isHome: false,
-    isPost: false,
+    isPost: true,
     isPage: false,
     isArchive: false
   };
 </script>
 
-  <title>分类: 数据库 | Hexo</title>
+  <title>练习遇到的问题汇总 | Hexo</title>
   
 
 
@@ -176,50 +180,103 @@
           <div class="content">
             
 
+  <div class="posts-expand">
+      
   
   
-  
-  <div class="post-block">
-    <div class="posts-collapse">
-      <div class="collection-title">
-        <h1 class="collection-header">数据库
-          <small>分类</small>
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/01/10/%E7%BB%83%E4%B9%A0%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98%E6%B1%87%E6%80%BB/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/assets/blogImg/6711866_014214_8838.jpg">
+      <meta itemprop="name" content="XXX">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          练习遇到的问题汇总
         </h1>
-      </div>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-01-10 13:48:00 / 修改时间：13:48:51" itemprop="dateCreated datePublished" datetime="2020-01-10T13:48:00+08:00">2020-01-10</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/java%E6%A1%86%E6%9E%B6/" itemprop="url" rel="index">
+                    <span itemprop="name">java框架</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-    <div class="collection-year">
-      <h1 class="collection-header">2019</h1>
+        <h3 id="练习时候遇到问题"><a href="#练习时候遇到问题" class="headerlink" title="练习时候遇到问题"></a>练习时候遇到问题</h3><ol>
+<li>理解项目中的jdk与maven中的jdk：一个项目中依赖的jdk如1.8，则maven编译插件的可选jdk必须小于等于1.8，不能超过该项目的依赖版本,存在一个交叉编译的原理，高的可兼容低的，前提是电脑上必须安装了1.8的jdk。修改如下</li>
+</ol>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&lt;build&gt;</span><br><span class="line">     &lt;plugins&gt;</span><br><span class="line">         &lt;plugin&gt;</span><br><span class="line">             &lt;groupId&gt;org.apache.maven.plugins&lt;/groupId&gt;</span><br><span class="line">             &lt;artifactId&gt;maven-compiler-plugin&lt;/artifactId&gt;</span><br><span class="line">             &lt;configuration&gt;</span><br><span class="line">                 &lt;source&gt;1.8&lt;/source&gt;</span><br><span class="line">                 &lt;target&gt;1.8&lt;/target&gt;</span><br><span class="line">                 &lt;encoding&gt;UTF-8&lt;/encoding&gt;</span><br><span class="line">             &lt;/configuration&gt;</span><br><span class="line">         &lt;/plugin&gt;</span><br><span class="line">     &lt;/plugins&gt;</span><br><span class="line"> &lt;/build&gt;</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>@propertySource与@value注解必须在spring5.0.2中才生效，版本低了比如4.2.4中不生效，而该spring必须要jdk1.8才生效，问题查了很久</li>
+<li>spring中事务相关的包有：spring-jdbc（提供了DataSourceTransactionManager类，该类是PlatformTransactionManage的实现类）spring-tx（PlatformTransactionManage接口在该包中）也就是说实现类和接口是在分开的包中的所以都要导入</li>
+</ol>
+
     </div>
 
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+    
+    
+    
 
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2019-10-31T10:30:00+08:00"
-              content="2019-10-31">
-          10-31
-        </time>
-      </div>
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/spring/" rel="tag"># spring</a>
+          </div>
 
-      <h2 class="post-title">
-          <a class="post-title-link" href="/2019/10/31/%E5%AE%8C%E5%85%A8%E5%8D%B8%E8%BD%BDmysql/" itemprop="url">
-            <span itemprop="name">完全卸载mysql</span>
-          </a>
-      </h2>
+        
 
-    </header>
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+                <a href="/2020/01/08/springTransaction/" rel="next" title="springTransaction">
+                  <i class="fa fa-chevron-left"></i> springTransaction
+                </a>
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+            </div>
+          </div>
+      </footer>
+    
   </article>
+  
+  
+  
 
-    </div>
   </div>
-  
-  
-  
-
-  
-
 
 
           </div>
@@ -248,6 +305,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#练习时候遇到问题"><span class="nav-number">1.</span> <span class="nav-text">练习时候遇到问题</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 

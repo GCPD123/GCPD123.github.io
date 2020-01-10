@@ -181,6 +181,84 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/01/10/%E7%BB%83%E4%B9%A0%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98%E6%B1%87%E6%80%BB/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/assets/blogImg/6711866_014214_8838.jpg">
+      <meta itemprop="name" content="XXX">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/01/10/%E7%BB%83%E4%B9%A0%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98%E6%B1%87%E6%80%BB/" class="post-title-link" itemprop="url">练习遇到的问题汇总</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-01-10 13:48:00 / 修改时间：13:48:51" itemprop="dateCreated datePublished" datetime="2020-01-10T13:48:00+08:00">2020-01-10</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/java%E6%A1%86%E6%9E%B6/" itemprop="url" rel="index">
+                    <span itemprop="name">java框架</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h3 id="练习时候遇到问题"><a href="#练习时候遇到问题" class="headerlink" title="练习时候遇到问题"></a>练习时候遇到问题</h3><ol>
+<li>理解项目中的jdk与maven中的jdk：一个项目中依赖的jdk如1.8，则maven编译插件的可选jdk必须小于等于1.8，不能超过该项目的依赖版本,存在一个交叉编译的原理，高的可兼容低的，前提是电脑上必须安装了1.8的jdk。修改如下</li>
+</ol>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&lt;build&gt;</span><br><span class="line">     &lt;plugins&gt;</span><br><span class="line">         &lt;plugin&gt;</span><br><span class="line">             &lt;groupId&gt;org.apache.maven.plugins&lt;/groupId&gt;</span><br><span class="line">             &lt;artifactId&gt;maven-compiler-plugin&lt;/artifactId&gt;</span><br><span class="line">             &lt;configuration&gt;</span><br><span class="line">                 &lt;source&gt;1.8&lt;/source&gt;</span><br><span class="line">                 &lt;target&gt;1.8&lt;/target&gt;</span><br><span class="line">                 &lt;encoding&gt;UTF-8&lt;/encoding&gt;</span><br><span class="line">             &lt;/configuration&gt;</span><br><span class="line">         &lt;/plugin&gt;</span><br><span class="line">     &lt;/plugins&gt;</span><br><span class="line"> &lt;/build&gt;</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>@propertySource与@value注解必须在spring5.0.2中才生效，版本低了比如4.2.4中不生效，而该spring必须要jdk1.8才生效，问题查了很久</li>
+<li>spring中事务相关的包有：spring-jdbc（提供了DataSourceTransactionManager类，该类是PlatformTransactionManage的实现类）spring-tx（PlatformTransactionManage接口在该包中）也就是说实现类和接口是在分开的包中的所以都要导入</li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/01/08/springTransaction/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -307,7 +385,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-01-08 20:53:05" itemprop="dateModified" datetime="2020-01-08T20:53:05+08:00">2020-01-08</time>
+                <time title="修改时间：2020-01-10 13:49:13" itemprop="dateModified" datetime="2020-01-10T13:49:13+08:00">2020-01-10</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -1300,131 +1378,6 @@ Python 3.7.0</code></pre><p>file命令是查看一个文件的属性，可以看
   
   
 
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/11/06/%E5%8F%8D%E5%B0%84/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/assets/blogImg/6711866_014214_8838.jpg">
-      <meta itemprop="name" content="XXX">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/11/06/%E5%8F%8D%E5%B0%84/" class="post-title-link" itemprop="url">反射</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2019-11-06 16:21:59" itemprop="dateCreated datePublished" datetime="2019-11-06T16:21:59+08:00">2019-11-06</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2019-11-27 20:04:25" itemprop="dateModified" datetime="2019-11-27T20:04:25+08:00">2019-11-27</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/java/" itemprop="url" rel="index">
-                    <span itemprop="name">java</span>
-                  </a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h3 id="反射：框架设计的灵魂"><a href="#反射：框架设计的灵魂" class="headerlink" title="反射：框架设计的灵魂"></a>反射：框架设计的灵魂</h3><ul>
-<li>框架： 半成品软件，可以在框架上进行软件开发，简化编码</li>
-<li>概念： 将类的各个组成部分封装为其他对象</li>
-</ul>
-<h3 id="java代码的三个阶段"><a href="#java代码的三个阶段" class="headerlink" title="java代码的三个阶段"></a>java代码的三个阶段</h3><p><img src="/2019/11/06/%E5%8F%8D%E5%B0%84/Java%E4%BB%A3%E7%A0%81%E7%9A%84%E4%B8%89%E4%B8%AA%E9%98%B6%E6%AE%B5.bmp" alt></p>
-<ol>
-<li><p>编写好的代码，一个类中包括成员变量和方法两大部分，变量记录状态，方法提供解决方案，方法可以改变变量的值，也即是改变对象状态。编写好的代码经过javac编译变成class文件，即源代码与目标文件（person.class文件）都是在<strong>硬盘上</strong>还没有进入到内存</p>
-</li>
-<li><p>类加载器（ClassLoader）将字节码文件（class文件）加载到内存中。只有将类加载到内存中后，才能new对象出来，因为程序必须要在内存中才能运行，在内存中要描述person.class这个文件，万物皆对象，所以有一个<strong>Class类</strong>专门用来描述.class文件，注意：是一个类描述一个物理文件！所有字节码文件中都会有：<strong>成员变量</strong>、<strong>构造方法</strong>、<strong>成员方法</strong>，所以Class对象中就有描述这三种的东西，实际上是Class中的成员变量</p>
-<blockquote>
-<p>如：将person.class文件中成员变量封装成Class类中的Field[]对象并作为其成员变量，构造方法封装成constructor[]对象并作为成员变量，成员方法封装成Method[]对象并作为其成员变量，数组是因为有多个成员变量、构造方法、成员方法需要封装</p>
-</blockquote>
-</li>
-<li><p>创建对象，通过new来创建对象都是通过<strong>Class类对象</strong>来创建对象的，也就是说，person.class有一个Class类对象，它负责创建person的对象</p>
-</li>
-</ol>
-<blockquote>
-<p>反射的好处：可在程序运行的过程中，操作这些对象。比如eclipse的代码提示功能，当String str = “abc”,然后使用str.时，后面会自动弹出很多方法，这些方法都是通过反射得来的，定义了字符串后，程序会将String的字节码文件加载进内存也即是String.class文件加载进内存，在内存中有一个Class类对象，该对象已经把所有的String中的方法抽取出来组成了Method[]对象，所以只要遍历该数组，即可得到String中的所有方法</p>
-</blockquote>
-<h3 id="获取Class类对象的三种方式"><a href="#获取Class类对象的三种方式" class="headerlink" title="获取Class类对象的三种方式"></a>获取Class类对象的三种方式</h3><ol>
-<li>ClassforName(“类的全名”) ：主要用于字节码文件阶段，该文件还没进入内存中，将字节码文件加载进内存，并返回Class类对象，该文件的Class类对象，一个文件一个Class类对象</li>
-<li>类名.class：通过属性获取，若class文件已经进入了内存，也即是<strong>已经生成了该文件的Class类对象</strong>只需要获取</li>
-<li>对象.getClass():通过方法获取，此时已经生成了对象(new或者其他方法生成对象)，可以使用该对象继承自object类的getClass()方法</li>
-</ol>
-<blockquote>
-<p>同一个字节码文件在一次程序运行过程中<strong>只会被加载一次</strong>，不论哪一种方法获取的Class对象都是同一个，都是该加载进内存的对象如：person和student的Class类对象就不相同</p>
-</blockquote>
-<h3 id="使用Class对象的功能"><a href="#使用Class对象的功能" class="headerlink" title="使用Class对象的功能"></a>使用Class对象的功能</h3><ol>
-<li>获取成员对象们<ul>
-<li>Field[] getFields() 获取所有public修饰的成员变量</li>
-<li>Field[] getField(String name)获取指定成员变量</li>
-<li>加上declared表示不考虑修饰符，获取所有成员变量，若要获取指定的成员变量切不考虑修饰符则要是用暴力反射，在成员变量名上使用setAccessible(true)方法</li>
-<li>获取遍历数组后得到一个Field对象，该对象有set()和get()方法可以设置、获取成员变量的值</li>
-</ul>
-</li>
-<li>获取构造方法们<ul>
-<li>Constructor[] getConstructors()</li>
-<li>Constructor getConstructors(String.class,int.class…) （此处是将类的class文件对象作为参数传递，所以传递的形式是String.class或者int.class）</li>
-<li>Constructor中有newInstance()方法可创建对象</li>
-<li>Class类中有一个newInstance（）方法，可以直接用来床架空参的对象，就不用了先获取构造器了</li>
-</ul>
-</li>
-<li>获取成员方法们<ul>
-<li>Methods[] getMethod()</li>
-<li>Method getMethod(String name,String.class,int.class…)</li>
-<li>Method类中有一个执行方法，invoke（Object obj,Object…arg）(传递真实的对象和实际参数，真实的对象就是哪个对象执行该方法，因为一个类有多个对象，每个对象状态都不一样)</li>
-</ul>
-</li>
-</ol>
-<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>获取对应类的Class对象，有了它就能获取到类的所有信息，有如上三种方式可获取，获取之后可以通过Class类中的方法得到成员变量、构造方法、成员方法，获取这些部分后，这些部分也被封装成为新的类（Field、Constructor、Method），这些新的类又有各自的方法，这些方法可以直接操作原类，如改变成员变量的值、创建对象、执行方法。Class对象中有newInstance（）方法可直接创建空参对象，不需要获得原类的构造器，故经常使用。</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
   </div>
 
   
@@ -1475,7 +1428,7 @@ Python 3.7.0</code></pre><p>file命令是查看一个文件的属性，可以看
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">15</span>
+          <span class="site-state-item-count">16</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
