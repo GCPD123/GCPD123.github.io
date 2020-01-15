@@ -58,7 +58,7 @@
 <meta property="og:site_name" content="Hexo">
 <meta property="og:description" content="练习时候遇到问题 理解项目中的jdk与maven中的jdk：一个项目中依赖的jdk如1.8，则maven编译插件的可选jdk必须小于等于1.8，不能超过该项目的依赖版本,存在一个交叉编译的原理，高的可兼容低的，前提是电脑上必须安装了1.8的jdk。修改如下  12345678910111213&amp;lt;build&amp;gt;     &amp;lt;plugins&amp;gt;         &amp;lt;plugin&amp;">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2020-01-10T05:48:51.358Z">
+<meta property="og:updated_time" content="2020-01-15T00:45:27.324Z">
 <meta name="twitter:card" content="summary">
 
 <link rel="canonical" href="http://yoursite.com/2020/01/10/%E7%BB%83%E4%B9%A0%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98%E6%B1%87%E6%80%BB/">
@@ -207,10 +207,16 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2020-01-10 13:48:00 / 修改时间：13:48:51" itemprop="dateCreated datePublished" datetime="2020-01-10T13:48:00+08:00">2020-01-10</time>
+              <time title="创建时间：2020-01-10 13:48:00" itemprop="dateCreated datePublished" datetime="2020-01-10T13:48:00+08:00">2020-01-10</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-01-15 08:45:27" itemprop="dateModified" datetime="2020-01-15T08:45:27+08:00">2020-01-15</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
@@ -242,7 +248,22 @@
 <ol start="2">
 <li>@propertySource与@value注解必须在spring5.0.2中才生效，版本低了比如4.2.4中不生效，而该spring必须要jdk1.8才生效，问题查了很久</li>
 <li>spring中事务相关的包有：spring-jdbc（提供了DataSourceTransactionManager类，该类是PlatformTransactionManage的实现类）spring-tx（PlatformTransactionManage接口在该包中）也就是说实现类和接口是在分开的包中的所以都要导入</li>
+<li>在写jsp等时候会出现功能不出现的问题，可以先删除源文件重新生成即可</li>
 </ol>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">&lt;script src=<span class="string">"/js/jquery.min.js"</span>&gt;<span class="xml"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span></span><br><span class="line"></span><br><span class="line">    &lt;script&gt;</span><br><span class="line">        <span class="comment">//页面加载 绑定点击按钮事件</span></span><br><span class="line">        $(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">            $(<span class="string">"#btn"</span>).click(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">                <span class="comment">// alert("hello btn")</span></span><br><span class="line">                $.ajax(&#123;</span><br><span class="line">                    <span class="comment">//json格式数据</span></span><br><span class="line">                    url:<span class="string">"param/testAjax"</span>,</span><br><span class="line">                    contentType:<span class="string">"application/json;charset=UTF-8"</span>,</span><br><span class="line">                    data:<span class="string">'&#123;"username":"xuefeihuang","password":"555555","money":"77.9"&#125;'</span>,</span><br><span class="line">                    dataType:<span class="string">"json"</span>,</span><br><span class="line">                    type:<span class="string">"post"</span>,</span><br><span class="line">                    success:<span class="function"><span class="keyword">function</span> (<span class="params">data</span>) </span>&#123;</span><br><span class="line">                        <span class="comment">//data是服务器返回的数据</span></span><br><span class="line">                        alert(data)</span><br><span class="line">                        alert(data.username)</span><br><span class="line"></span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;)</span><br><span class="line">            &#125;)</span><br><span class="line"></span><br><span class="line">        &#125;)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    &lt;<span class="regexp">/script&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>其中脚本要先引入，使用的函数都在引入的脚本中，所以要开放该路径，spring前端控制器会拦截所有请求的路径所以开放路径</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;mvc:resources mapping="/js/**" location="/js/"&gt;&lt;/mvc:resources&gt;</span><br></pre></td></tr></table></figure>
+
+<p>mapping是请求路径，location是文件的位置</p>
+<ol start="5">
+<li>springmvc文件上传功能中，需要导入commons-fileupload第三方文件上传包，然后文件解析器是在spring-web中，也就是说解析和上传在不同的包中完成，且文件解析器id必须是固定名称</li>
+</ol>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">文件上传包</span><br><span class="line">&lt;dependency&gt;</span><br><span class="line">      &lt;groupId&gt;commons-fileupload&lt;/groupId&gt;</span><br><span class="line">      &lt;artifactId&gt;commons-fileupload&lt;/artifactId&gt;</span><br><span class="line">      &lt;version&gt;1.3.1&lt;/version&gt;</span><br><span class="line">    &lt;/dependency&gt;</span><br><span class="line">文件解析包，直接获取文件项，封装到形参中</span><br><span class="line">&lt;dependency&gt;</span><br><span class="line">      &lt;groupId&gt;org.springframework&lt;/groupId&gt;</span><br><span class="line">      &lt;artifactId&gt;spring-web&lt;/artifactId&gt;</span><br><span class="line">      &lt;version&gt;$&#123;spring.version&#125;&lt;/version&gt;</span><br><span class="line">    &lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&lt;bean id=<span class="string">"multipartResolver"</span> <span class="class"><span class="keyword">class</span></span>=<span class="string">"org.springframework.web.multipart.commons.CommonsMultipartResolver"</span>&gt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        &lt;property name=<span class="string">"defaultEncoding"</span> value=<span class="string">"UTF-8"</span> /&gt;</span><br><span class="line">        &lt;property name=<span class="string">"maxUploadSize"</span> value=<span class="string">"10240000"</span> /&gt;</span><br><span class="line">        &lt;!-- 设置在文件上传时允许写到内存中的最大值，以字节为单位计算，默认是<span class="number">10240</span> --&gt;</span><br><span class="line">        &lt;!-- 但是经实验，上传文件大小若小于此参数，则不会生成临时文件，故改为<span class="number">2048</span> --&gt;</span><br><span class="line">        &lt;property name=<span class="string">"maxInMemorySize"</span> value=<span class="string">"2048"</span> /&gt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    &lt;/bean&gt;</span><br></pre></td></tr></table></figure>
+
+<p>此id只能叫这个</p>
 
     </div>
 
