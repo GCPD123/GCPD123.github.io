@@ -59,7 +59,7 @@
 <meta property="og:description" content="Linux上Mysql安装 下载并安装mysql官方的yum Repository  在Linux中yum就是包管理软件，可以用来安装各种软件并解决各种依赖，yum的下载软件的地方称作yum源，软件的来源，是在&#x2F;etc&#x2F;yum.repose.d&#x2F;目录中  这些repo文件中就是记录了软件下载的来源，不同软件下载来源肯定不一样，所以在软件的官网都会提供yum源来下载 1wget -i -c http">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;12&#x2F;24&#x2F;mysql%E5%AE%89%E8%A3%85&#x2F;1.png">
-<meta property="og:updated_time" content="2019-12-24T13:47:21.918Z">
+<meta property="og:updated_time" content="2020-02-02T03:14:10.997Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;12&#x2F;24&#x2F;mysql%E5%AE%89%E8%A3%85&#x2F;1.png">
 
@@ -209,10 +209,16 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2019-12-24 21:23:39 / 修改时间：21:47:21" itemprop="dateCreated datePublished" datetime="2019-12-24T21:23:39+08:00">2019-12-24</time>
+              <time title="创建时间：2019-12-24 21:23:39" itemprop="dateCreated datePublished" datetime="2019-12-24T21:23:39+08:00">2019-12-24</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-02-02 11:14:10" itemprop="dateModified" datetime="2020-02-02T11:14:10+08:00">2020-02-02</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
@@ -290,6 +296,20 @@
 <p>查看数据库编码</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">show variables like &apos;character_set%&apos;;</span><br></pre></td></tr></table></figure>
 
+<h3 id="使用客户端工具导入较大sql文件"><a href="#使用客户端工具导入较大sql文件" class="headerlink" title="使用客户端工具导入较大sql文件"></a>使用客户端工具导入较大sql文件</h3><p>出现</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ERROR 2006 (HY000): MySQL server has gone away</span><br></pre></td></tr></table></figure>
+
+<p>表示文件过大，而缓存区太小，无法成功导入，所以需要扩大缓存</p>
+<p>查看通信缓冲区的最大长度：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">show</span> <span class="keyword">global</span> <span class="keyword">variables</span> <span class="keyword">like</span> <span class="string">'max_allowed_packet'</span>;</span><br></pre></td></tr></table></figure>
+
+<p>默认最大是1M，可以修改通信缓冲区的最大长度，修改为16M:</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">set</span> <span class="keyword">global</span> max_allowed_packet=<span class="number">1024</span>*<span class="number">1024</span>*<span class="number">16</span>;</span><br></pre></td></tr></table></figure>
+
+<p>注：修改只对当前有效， 重启了MySQL他就还是会恢复原来的大小。如果是想永久生效，可以修改配置文件，在my.ini（windows下）或者my.cnf（linux下）加入或修改配置 （再最前面添加 后面不成功）：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">max_allowed_packet = 16M</span><br></pre></td></tr></table></figure>
+
+<p>重启MySQL服务…</p>
 
     </div>
 
@@ -355,7 +375,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Linux上Mysql安装"><span class="nav-number">1.</span> <span class="nav-text">Linux上Mysql安装</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Linux上Mysql安装"><span class="nav-number">1.</span> <span class="nav-text">Linux上Mysql安装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用客户端工具导入较大sql文件"><span class="nav-number">2.</span> <span class="nav-text">使用客户端工具导入较大sql文件</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -371,20 +391,20 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">16</span>
+          <span class="site-state-item-count">18</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-count">9</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-count">11</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>

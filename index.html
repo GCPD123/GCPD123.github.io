@@ -181,6 +181,281 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/02/07/fastDFS-Nginx%E5%9B%BE%E7%89%87%E4%B8%8A%E4%BC%A0%E4%B8%8B%E8%BD%BD/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/assets/blogImg/6711866_014214_8838.jpg">
+      <meta itemprop="name" content="XXX">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/02/07/fastDFS-Nginx%E5%9B%BE%E7%89%87%E4%B8%8A%E4%BC%A0%E4%B8%8B%E8%BD%BD/" class="post-title-link" itemprop="url">fastDFS+Nginx图片上传下载</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-02-07 17:48:05 / 修改时间：22:40:27" itemprop="dateCreated datePublished" datetime="2020-02-07T17:48:05+08:00">2020-02-07</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%84%9A%E6%89%8B%E6%9E%B6/" itemprop="url" rel="index">
+                    <span itemprop="name">脚手架</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h3 id="FastDFS"><a href="#FastDFS" class="headerlink" title="FastDFS"></a>FastDFS</h3><blockquote>
+<p>FastDFS是是一个轻量级、高性能的开源分布式文件系统，用纯C语言开发，包括文件存储、文件同步、文件访问（上传、下载）、存取负载均衡、在线扩容、相同内容只存储一份等功能，适合有大容量存储需求的应用或系统。</p>
+</blockquote>
+<h3 id="FastDFS安装"><a href="#FastDFS安装" class="headerlink" title="FastDFS安装"></a>FastDFS安装</h3><p><code>/u01/app</code>: 软件安装位置<br><code>/u01/soft</code>: 软件包位置</p>
+<p>安装FastDFS之前先要安装环境libfastcommon，libfastcommon是从 FastDFS 和 FastDHT 中提取出来的公共 C 函数库，基础环境</p>
+<h4 id="libfastcommon下载"><a href="#libfastcommon下载" class="headerlink" title="libfastcommon下载"></a>libfastcommon下载</h4><p>当前目录下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">git clone https://github.com/happyfish100/libfastcommon.git</span><br><span class="line">cd libfastcommon</span><br><span class="line">git checkout V1.0.43</span><br><span class="line">./make.sh clean &amp;&amp; ./make.sh &amp;&amp; ./make.sh install</span><br></pre></td></tr></table></figure>
+
+<p>当前若没有libfastcommon目录，使用git后会自动创建该目录，并将内容克隆进去，这样环境就安装完成</p>
+<h4 id="FastDFS下载"><a href="#FastDFS下载" class="headerlink" title="FastDFS下载"></a>FastDFS下载</h4><p>当前目录下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">git clone https://github.com/happyfish100/fastdfs.git</span><br><span class="line">cd fastdfs</span><br><span class="line">git checkout V6.06</span><br><span class="line">./make.sh clean &amp;&amp; ./make.sh &amp;&amp; ./make.sh install</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h4><p>安装完成后会生成相应的文件与目录</p>
+<ol>
+<li>服务脚本</li>
+</ol>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">/etc/<span class="keyword">init</span>.d/fdfs_storaged</span><br><span class="line">/etc/<span class="keyword">init</span>.d/fdfs_tracke</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>配置文件</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">/etc/fdfs/client.conf.sample</span><br><span class="line">/etc/fdfs/storage.conf.sample</span><br><span class="line">/etc/fdfs/tracker.conf.sample</span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li>命令工具，/usr/bin目录下</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">./fdfs_upload_appender</span><br><span class="line">./fdfs_download_file</span><br><span class="line">./fdfs_appender_test1</span><br><span class="line">./fdfs_trackerd</span><br><span class="line">./fdfs_storaged</span><br><span class="line">./fdfs_test1</span><br><span class="line">./fdfs_appender_test</span><br><span class="line">./fdfs_upload_file</span><br><span class="line">./fdfs_test</span><br><span class="line">./fdfs_file_info</span><br><span class="line">./fdfs_crc32</span><br><span class="line">./fdfs_monitor</span><br><span class="line">./fdfs_append_file</span><br><span class="line">./fdfs_delete_file</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="配置FastDFS跟踪器（Tracker）"><a href="#配置FastDFS跟踪器（Tracker）" class="headerlink" title="配置FastDFS跟踪器（Tracker）"></a>配置FastDFS跟踪器（Tracker）</h4><p>/etc/fdfs目录下：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cp tracker.conf.sample tracker.conf</span><br></pre></td></tr></table></figure>
+
+<p>修改<code>tracker.conf</code>配置</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 配置文件是否不生效，false 为生效</span></span><br><span class="line">disabled=<span class="literal">false</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 提供服务的端口</span></span><br><span class="line">port=22122</span><br><span class="line"></span><br><span class="line"><span class="comment"># Tracker 数据和日志目录地址(根目录必须存在,子目录会自动创建)</span></span><br><span class="line">base_path=/home/fastdfs/tracker</span><br><span class="line"></span><br><span class="line"><span class="comment"># HTTP 服务端口</span></span><br><span class="line">http.server_port=8080</span><br></pre></td></tr></table></figure>
+
+<p>启动tracker服务，并监听</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">service fdfs_trackerd start</span><br><span class="line">netstat -unltp|grep fdfs</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="配置FastDFS存储（Storage）"><a href="#配置FastDFS存储（Storage）" class="headerlink" title="配置FastDFS存储（Storage）"></a>配置FastDFS存储（Storage）</h4><p>/etc/fdfs目录下：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cp storage.conf.sample storage.conf</span><br></pre></td></tr></table></figure>
+
+<p>修改<code>storage.conf</code>配置</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 配置文件是否不生效，false 为生效</span></span><br><span class="line">disabled=<span class="literal">false</span> </span><br><span class="line"></span><br><span class="line"><span class="comment"># 指定此 storage server 所在 组(卷)</span></span><br><span class="line">group_name=group1</span><br><span class="line"></span><br><span class="line"><span class="comment"># storage server 服务端口</span></span><br><span class="line">port=23000</span><br><span class="line"></span><br><span class="line"><span class="comment"># 心跳间隔时间，单位为秒 (这里是指主动向 tracker server 发送心跳)</span></span><br><span class="line">heart_beat_interval=30</span><br><span class="line"></span><br><span class="line"><span class="comment"># Storage 数据和日志目录地址(根目录必须存在，子目录会自动生成)</span></span><br><span class="line">base_path=/home/fastdfs/storage</span><br><span class="line"></span><br><span class="line"><span class="comment"># 存放文件时 storage server 支持多个路径。这里配置存放文件的基路径数目，通常只配一个目录。</span></span><br><span class="line">store_path_count=1</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 逐一配置 store_path_count 个路径，索引号基于 0。</span></span><br><span class="line"><span class="comment"># 如果不配置 store_path0，那它就和 base_path 对应的路径一样。</span></span><br><span class="line">store_path0=/home/fastdfs/storage</span><br><span class="line"></span><br><span class="line"><span class="comment"># FastDFS 存储文件时，采用了两级目录。这里配置存放文件的目录个数。 </span></span><br><span class="line"><span class="comment"># 如果本参数只为 N（如： 256），那么 storage server 在初次运行时，会在 store_path 下自动创建 N * N 个存放文件的子目录。</span></span><br><span class="line">subdir_count_per_path=256</span><br><span class="line"></span><br><span class="line"><span class="comment"># tracker_server 的列表 ，会主动连接 tracker_server</span></span><br><span class="line"><span class="comment"># 有多个 tracker server 时，每个 tracker server 写一行 此处地址应该是服务器的外网地址，可以访问到的地址，而不是其他任何地址</span></span><br><span class="line">tracker_server=106.14.192.9:22122</span><br><span class="line"></span><br><span class="line"><span class="comment"># 允许系统同步的时间段 (默认是全天) 。一般用于避免高峰同步产生一些问题而设定。</span></span><br><span class="line">sync_start_time=00:00</span><br><span class="line">sync_end_time=23:59</span><br><span class="line"></span><br><span class="line"><span class="comment"># 访问端口</span></span><br><span class="line">http.server_port=8888</span><br></pre></td></tr></table></figure>
+
+<p>启动<code>storage</code>服务，并监听</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">service fdfs_storaged start</span><br><span class="line">netstat -unltp|grep fdfs</span><br></pre></td></tr></table></figure>
+
+
+
+<p>查看Storage和Tracker是否在通信</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/usr/bin/fdfs_monitor /etc/fdfs/storage.conf</span><br></pre></td></tr></table></figure>
+
+<p>ACTIVE说明是在通信</p>
+<p>设置开机自启动</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">chkconfig fdfs_storaged on</span><br><span class="line">chkconfig fdfs_trackerd on</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="上传测试"><a href="#上传测试" class="headerlink" title="上传测试"></a>上传测试</h4><p>/etc/fdfs目录下：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cp client.conf.sample client.conf</span><br></pre></td></tr></table></figure>
+
+<p>修改<code>client.conf</code>配置</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Client 的数据和日志目录</span></span><br><span class="line">base_path=/home/fastdfs/client</span><br><span class="line"></span><br><span class="line"><span class="comment"># Tracker端口</span></span><br><span class="line">tracker_server=106.14.192.9:22122</span><br><span class="line"></span><br><span class="line"><span class="comment"># HTTP端口</span></span><br><span class="line">http.tracker_server_port=80</span><br></pre></td></tr></table></figure>
+
+<p>上传文件</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/usr/bin/fdfs_upload_file /etc/fdfs/client.conf images.jpg</span><br></pre></td></tr></table></figure>
+
+<p>上传成功后返回文件的ID号group1/M00/00/00/rBEAA1w97zqAERTjAAS5JrxON9k590.jpg</p>
+<p>组名  磁盘  2级目录   文件名组成一个ID</p>
+<p>致辞FastDFS安装完毕，且能够上传，但是无法下载和通过http访问，必须安装nginx作为服务器以支持http方式访问</p>
+<h3 id="Nginx"><a href="#Nginx" class="headerlink" title="Nginx"></a>Nginx</h3><h4 id="安装编译工具及库文件"><a href="#安装编译工具及库文件" class="headerlink" title="安装编译工具及库文件"></a>安装编译工具及库文件</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum -y install gcc gcc-c++ make libtool zlib zlib-devel openssl openssl-devel pcre pcre-devel</span><br></pre></td></tr></table></figure>
+
+<h4 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h4><p>只有nginx是无法结合FastDFS一起使用的，必须在nginx中加入fast-nginx-module模块才能使用，而该模块的版本与nginx和fastDFS版本必须要求一致，否则编译不通过这里版本为：libfastcommonV1.0.43 FastDFS V6.06 Nginx1.16.1  fast-nginx-moduleV1.22</p>
+<h4 id="下载Nginx"><a href="#下载Nginx" class="headerlink" title="下载Nginx"></a>下载Nginx</h4><p>直接官网下载源码安装</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">wget http://nginx.org/download/nginx-1.16.1.tar.gz</span><br><span class="line">tar -zxvf nginx-1.16.1.tar.gz -C /usr/local/u01/app/</span><br></pre></td></tr></table></figure>
+
+<p>####下载fast-nginx-module模块</p>
+<p>在/usr/local/u01/app/ 目录（将nginx和模块放到同一目录下a）</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git clone https://github.com/happyfish100/fastdfs-nginx-module</span><br><span class="line">cd fastdfs-nginx-module;</span><br><span class="line">git checkout V1.22</span><br></pre></td></tr></table></figure>
+
+<p>至此 模块下载完成，不能单独编译，必须让它加载到nginx中一起编译</p>
+<h4 id="编译安装nginx"><a href="#编译安装nginx" class="headerlink" title="编译安装nginx"></a>编译安装nginx</h4><p>进入到nginx的安装目录/usr/local/u01/app/:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./configure --prefix=/usr/local/nginx --add-module=../fastdfs-nginx-module/src/</span><br></pre></td></tr></table></figure>
+
+<p>编译安装</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">make &amp;&amp; make install</span><br></pre></td></tr></table></figure>
+
+<p>查看nginx版本及模块</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/usr/local/nginx/sbin/nginx -V</span><br></pre></td></tr></table></figure>
+
+<p>###配置nginx和fastdfs-nginx-module</p>
+<p>在/usr/local/u01/app/fastdfs-nginx-module/src<code>目录下复制</code>mod_fastdfs.conf<code>文件到</code>/etc/fdfs目录下</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cp mod_fastdfs.conf /etc/fdfs/</span><br></pre></td></tr></table></figure>
+
+<p>在<code>/etc/fdfs</code>目录下修改<code>mod_fastdfs.conf</code>配置</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">base_path=/home/fastdfs</span><br><span class="line"></span><br><span class="line"><span class="comment"># 连接超时时间</span></span><br><span class="line">connect_timeout=10</span><br><span class="line"></span><br><span class="line"><span class="comment"># Tracker Server 该地址一定要指定 不能是tracker</span></span><br><span class="line">tracker_server=106.14.192.9:22122</span><br><span class="line"></span><br><span class="line"><span class="comment"># StorageServer 默认端口</span></span><br><span class="line">storage_server_port=23000</span><br><span class="line"></span><br><span class="line"><span class="comment"># 如果文件ID的uri中包含/group**，则要设置为true</span></span><br><span class="line">url_have_group_name = <span class="literal">true</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Storage 配置的store_path0路径，必须和storage.conf中的一致</span></span><br><span class="line">store_path0=/home/fastdfs/storage</span><br></pre></td></tr></table></figure>
+
+
+
+<p>在<code>/usr/local/nginx/conf</code>目录下配置nginx，修改<code>nginx.conf</code>文件</p>
+<p>必须加到location那一块：</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">location ~/M00 &#123;</span><br><span class="line">    root /home/fastdfs/storage/<span class="keyword">data</span>;</span><br><span class="line">    ngx_fastdfs_module;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>拷贝fasdfs/conf<code>目录下的</code>http.conf、mime.types<code>文件到</code>/etc/fdfs/目录下</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cp http.conf mime.types /etc/fdfs/</span><br></pre></td></tr></table></figure>
+
+<p>启动nginx</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/usr/<span class="built_in">local</span>/nginx/sbin/nginx</span><br></pre></td></tr></table></figure>
+
+<p>打开浏览器:<a href="http://106.14.192.9/group1/M00/00/00/xxxxxxxxxxxxxxx.jpg能够访问到说明成功！" target="_blank" rel="noopener">http://106.14.192.9/group1/M00/00/00/xxxxxxxxxxxxxxx.jpg能够访问到说明成功！</a></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/01/26/OGNL%E8%A1%A8%E8%BE%BE%E5%BC%8F/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/assets/blogImg/6711866_014214_8838.jpg">
+      <meta itemprop="name" content="XXX">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/01/26/OGNL%E8%A1%A8%E8%BE%BE%E5%BC%8F/" class="post-title-link" itemprop="url">OGNL表达式</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-01-26 11:52:47" itemprop="dateCreated datePublished" datetime="2020-01-26T11:52:47+08:00">2020-01-26</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-02-02 10:33:51" itemprop="dateModified" datetime="2020-02-02T10:33:51+08:00">2020-02-02</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%A1%A8%E8%BE%BE%E5%BC%8F/" itemprop="url" rel="index">
+                    <span itemprop="name">表达式</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h3 id="OGNL表达式"><a href="#OGNL表达式" class="headerlink" title="OGNL表达式"></a>OGNL表达式</h3><p>object graphic navigation language</p>
+<p>对象  试图 导航  语言</p>
+<p>他是通过对象的取值方法（get方法）来获取数据，在写法上把gey省略掉了，</p>
+<p>比如:我们获取用户的名称</p>
+<p>类中的写法：user.getUsername();</p>
+<p>OGNL表达式写法：user.username   (直接用对象点get方法点后面名称)</p>
+<p>mybatis中为什么直接写username，而不用写user.username：因为在parametertype中已经提供了属性所属的类，所以直接写属性名</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">update</span> <span class="attr">id</span>=<span class="string">"updateUser"</span> <span class="attr">parameterType</span>=<span class="string">"com.itheima.domain.User"</span>&gt;</span></span><br><span class="line">       update user set username=#&#123;username&#125;,address=#&#123;address&#125;,sex=#&#123;sex&#125;,birthday=#&#123;birthday&#125; where id=#&#123;id&#125;;</span><br><span class="line">   <span class="tag">&lt;/<span class="name">update</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="URL"><a href="#URL" class="headerlink" title="URL"></a>URL</h3><p>URL:统一资源定位符，他可以唯一标识一个资源的位置</p>
+<p>写法：协议  主机  端口   URI</p>
+<p><a href="http://localhost:8080/mybatisserver/demo1Servlet" target="_blank" rel="noopener">http://localhost:8080/mybatisserver/demo1Servlet</a></p>
+<p>URI:统一资源标识符 他在应用中可以唯一定位一个资源</p>
+<p>在windows系统中URL是file:///xxxxxxx来表示一个文件 file是协议///最后一个/是默认端口号</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/01/10/%E7%BB%83%E4%B9%A0%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98%E6%B1%87%E6%80%BB/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -212,7 +487,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-01-15 11:40:50" itemprop="dateModified" datetime="2020-01-15T11:40:50+08:00">2020-01-15</time>
+                <time title="修改时间：2020-02-05 15:01:29" itemprop="dateModified" datetime="2020-02-05T15:01:29+08:00">2020-02-05</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -273,6 +548,9 @@
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span>.在tomcat的配置文件(tomcat文件夹下的conf/web.xml)里面加上</span><br><span class="line">		&lt;param-name&gt;readonly&lt;/param-name&gt;</span><br><span class="line">		&lt;param-value&gt;false&lt;/param-value&gt;</span><br><span class="line">		注：加在:</span><br><span class="line">		&lt;servlet&gt;</span><br><span class="line">					&lt;init-param&gt;</span><br><span class="line">				            &lt;param-name&gt;debug&lt;/param-name&gt;</span><br><span class="line">				            &lt;param-value&gt;0&lt;/param-value&gt;</span><br><span class="line">							&lt;param-name&gt;readonly&lt;/param-name&gt;</span><br><span class="line">							&lt;param-value&gt;false&lt;/param-value&gt;</span><br><span class="line">	        		&lt;/init-param&gt;</span><br><span class="line">		&lt;/servlet&gt;</span><br><span class="line"><span class="number">2</span>.在项目目录/target/项目目录/添加uploads文件夹</span><br></pre></td></tr></table></figure>
 
 <p>然后重启所有tomcat。</p>
+<ol start="7">
+<li>Linux安装redis后 客户端无法访问的问题：因为redis默认监听的ip是127.0.0.1我们要修改为监听所有 也就是0.0.0.0 在redis.conf里面修改即可，改后重启服务</li>
+</ol>
 
       
     </div>
@@ -550,10 +828,16 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2019-12-24 21:23:39 / 修改时间：21:47:21" itemprop="dateCreated datePublished" datetime="2019-12-24T21:23:39+08:00">2019-12-24</time>
+              <time title="创建时间：2019-12-24 21:23:39" itemprop="dateCreated datePublished" datetime="2019-12-24T21:23:39+08:00">2019-12-24</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-02-02 11:14:10" itemprop="dateModified" datetime="2020-02-02T11:14:10+08:00">2020-02-02</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
@@ -631,6 +915,20 @@
 <p>查看数据库编码</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">show variables like &apos;character_set%&apos;;</span><br></pre></td></tr></table></figure>
 
+<h3 id="使用客户端工具导入较大sql文件"><a href="#使用客户端工具导入较大sql文件" class="headerlink" title="使用客户端工具导入较大sql文件"></a>使用客户端工具导入较大sql文件</h3><p>出现</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ERROR 2006 (HY000): MySQL server has gone away</span><br></pre></td></tr></table></figure>
+
+<p>表示文件过大，而缓存区太小，无法成功导入，所以需要扩大缓存</p>
+<p>查看通信缓冲区的最大长度：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">show</span> <span class="keyword">global</span> <span class="keyword">variables</span> <span class="keyword">like</span> <span class="string">'max_allowed_packet'</span>;</span><br></pre></td></tr></table></figure>
+
+<p>默认最大是1M，可以修改通信缓冲区的最大长度，修改为16M:</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">set</span> <span class="keyword">global</span> max_allowed_packet=<span class="number">1024</span>*<span class="number">1024</span>*<span class="number">16</span>;</span><br></pre></td></tr></table></figure>
+
+<p>注：修改只对当前有效， 重启了MySQL他就还是会恢复原来的大小。如果是想永久生效，可以修改配置文件，在my.ini（windows下）或者my.cnf（linux下）加入或修改配置 （再最前面添加 后面不成功）：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">max_allowed_packet = 16M</span><br></pre></td></tr></table></figure>
+
+<p>重启MySQL服务…</p>
 
       
     </div>
@@ -858,10 +1156,16 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2019-12-11 15:45:11 / 修改时间：16:31:10" itemprop="dateCreated datePublished" datetime="2019-12-11T15:45:11+08:00">2019-12-11</time>
+              <time title="创建时间：2019-12-11 15:45:11" itemprop="dateCreated datePublished" datetime="2019-12-11T15:45:11+08:00">2019-12-11</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-01-23 23:16:50" itemprop="dateModified" datetime="2020-01-23T23:16:50+08:00">2020-01-23</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
@@ -1195,222 +1499,6 @@
   
   
 
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/11/13/Python%E5%AE%89%E8%A3%85/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/assets/blogImg/6711866_014214_8838.jpg">
-      <meta itemprop="name" content="XXX">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/11/13/Python%E5%AE%89%E8%A3%85/" class="post-title-link" itemprop="url">Python安装</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2019-11-13 19:23:47" itemprop="dateCreated datePublished" datetime="2019-11-13T19:23:47+08:00">2019-11-13</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2019-11-27 20:04:25" itemprop="dateModified" datetime="2019-11-27T20:04:25+08:00">2019-11-27</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Python/" itemprop="url" rel="index">
-                    <span itemprop="name">Python</span>
-                  </a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h3 id="Linux上安装python"><a href="#Linux上安装python" class="headerlink" title="Linux上安装python"></a>Linux上安装python</h3><p>目前Linux中都自带python2，使用</p>
-<pre><code>python --version</code></pre><p>查看python版本</p>
-<blockquote>
-<p>python2已成过去，以后不会有支持，建议不用，但是Linux中有依赖python2，所以也不能卸载，直接安装python3即可</p>
-</blockquote>
-<h3 id="安装前准备"><a href="#安装前准备" class="headerlink" title="安装前准备"></a>安装前准备</h3><pre><code>cd /usr/local/
-mkdir python3</code></pre><p>此目录作为Python的主目录</p>
-<ol>
-<li>安装GCC编译器</li>
-</ol>
-<pre><code>gcc --version</code></pre><p>查看是否安装，若没有安装，则</p>
-<pre><code>yum -y install gcc</code></pre><ol start="2">
-<li><p>安装其他依赖包</p>
-<pre><code>yum -y install zlib-devel bzip2-devel openssl-devel ncurses-devel sqlite-develreadline-devel tk-devel gdbm-devel db4-devel libpcap-devel xz-devel libffi-devel</code></pre></li>
-</ol>
-<h3 id="下载安装包"><a href="#下载安装包" class="headerlink" title="下载安装包"></a>下载安装包</h3><pre><code>cd python3/
-wget https://www.python.org/ftp/python/3.7.0/Python-3.7.0.tgz</code></pre><h3 id="解压"><a href="#解压" class="headerlink" title="解压"></a>解压</h3><pre><code>tar -xzvf Python-3.7.0.tgz</code></pre><blockquote>
-<p>tar命令报错，可能是没有安装tar，直接yum -y install tar</p>
-</blockquote>
-<p>使用</p>
-<pre><code>tree -d -L 1 Python-3.7.0</code></pre><p>可以使用树形查看目录，更清楚</p>
-<blockquote>
-<p>若没有该命令则，yum -y install tree</p>
-</blockquote>
-<h3 id="开始安装"><a href="#开始安装" class="headerlink" title="开始安装"></a>开始安装</h3><p>进入到刚解压出来的文件中即Python -3.7.0</p>
-<h4 id="将创建的文件夹设置为程序主目录"><a href="#将创建的文件夹设置为程序主目录" class="headerlink" title="将创建的文件夹设置为程序主目录"></a>将创建的文件夹设置为程序主目录</h4><p>意思是：安装的目录就是这个指定的目录，相关文件全放在这里</p>
-<pre><code>./configure --prefix=/usr/local/python3</code></pre><h3 id="编译安装"><a href="#编译安装" class="headerlink" title="编译安装"></a>编译安装</h3><p>还是在刚才目录</p>
-<pre><code>make &amp;&amp; make install</code></pre><h3 id="建立软连接"><a href="#建立软连接" class="headerlink" title="建立软连接"></a>建立软连接</h3><p>如果不建立连接，则只有在安装的目录中才能使用Python,建立连接是要在任何地方都能使用，要达到这个目的，还需要环境变量，即在任何地方使用命令，都会在环境变量路径中查找该命令</p>
-<pre><code>ln -s /usr/local/python3/bin/python3.7 /usr/bin/python3
-
-ln -s /usr/local/python3/pip3.7 /usr/bin/pip3</code></pre><blockquote>
-<p>pip是python的包管理工具，相当于nodejs中的npm</p>
-</blockquote>
-<p><strong>安装成功后此Linux中就有两个python 版本2和版本3，现在只想使用版本3</strong></p>
-<pre><code>file /usr/bin/python</code></pre><p>输出打印</p>
-<pre><code>/usr/bin/python: symbolic link to `python2&apos;</code></pre><p>表示输入python实际上运行的是python2</p>
-<pre><code>which python2</code></pre><p>找到Python2安装的位置，在环境变量的路径中找，python3也一样</p>
-<pre><code>mv /usr/bin/python /usr/bin/python_bk</code></pre><p>将该路径去除，实际上是改名了，然后就可以将Python3连接过来</p>
-<pre><code>ln -s /usr/bin/python3 /usr/bin/python</code></pre><blockquote>
-<p>/usr/bin/python就相当于python</p>
-</blockquote>
-<pre><code>python -V
-Python 3.7.0</code></pre><p>file命令是查看一个文件的属性，可以看到它的连接，然后依次往下查找就可以找到唯一的运行文件，因为连接也是文件</p>
-<p>ln是创建连接，源文件  目标文件</p>
-<p>which是在环境变量中查找文件</p>
-<p>链接（link）：系统中的链接是一个已经存在的文件的另一个名字，它不复制文件的内容。有两种链接方式，一种是硬链接（hard link），另一种是符号链接（symbolic link），又称软链接。硬链接和原有文件是存储在同一物理地址的两个不同的名字，因此硬链接是相互的；符号链接的内容只是一个所链接文件的文件名，在使用ls –l时，符号链接的第一项的第一位为“l”。 </p>
-<p>指向一个文件的所有 硬链接都删掉的话文件的内容才会被删掉<br>软链接只要删掉了源链接文件，软链接也就失效了</p>
-<p>ln和file在查看上是相反的，ln将存在的文件创建一个新名字，file是显示目前查看的文件的本名字是谁</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/11/10/%E5%85%B3%E4%BA%8E%E5%A4%96%E7%BA%BF%E6%9C%8D%E5%8A%A1%E5%8F%B0%E5%A3%B0%E9%9F%B3%E5%B0%8F%E6%83%85%E5%86%B5%E8%AF%B4%E6%98%8E/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/assets/blogImg/6711866_014214_8838.jpg">
-      <meta itemprop="name" content="XXX">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/11/10/%E5%85%B3%E4%BA%8E%E5%A4%96%E7%BA%BF%E6%9C%8D%E5%8A%A1%E5%8F%B0%E5%A3%B0%E9%9F%B3%E5%B0%8F%E6%83%85%E5%86%B5%E8%AF%B4%E6%98%8E/" class="post-title-link" itemprop="url">关于外线服务台话音失真情况说明</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2019-11-10 11:21:41" itemprop="dateCreated datePublished" datetime="2019-11-10T11:21:41+08:00">2019-11-10</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2019-11-27 20:04:25" itemprop="dateModified" datetime="2019-11-27T20:04:25+08:00">2019-11-27</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h3 id="故障现象"><a href="#故障现象" class="headerlink" title="故障现象"></a>故障现象</h3><p>根据船上外线服务台使用情况反馈，当船外用户呼叫船上值班室的外线服务台时，通话质量不佳，主要体现在：当船外用户声音低沉时，外线服务台收听到的声音非常小，而且会出现掉字的情况，如，当船外用户说出“1、2、3”时，如果“2”的声音小，则外线服务台只能听到“1、3”。</p>
-<h3 id="业务流程"><a href="#业务流程" class="headerlink" title="业务流程"></a>业务流程</h3><p>流程如图所示：<img src="/2019/11/10/%E5%85%B3%E4%BA%8E%E5%A4%96%E7%BA%BF%E6%9C%8D%E5%8A%A1%E5%8F%B0%E5%A3%B0%E9%9F%B3%E5%B0%8F%E6%83%85%E5%86%B5%E8%AF%B4%E6%98%8E/%E6%88%AA%E5%9B%BE20191110114449.png" alt></p>
-<ol>
-<li>当船外用户拨打船内提供的外线号码后，第一跳到达岸上的程控交换机中，通过电信号交换将主叫用户的呼叫请求转发到相应的出端口上</li>
-<li>出端口出来后通过光缆到达船上的光缆卷车室</li>
-<li>由光缆卷车室到达广播室的网元中的O卡上，通过该网元的CMUE板卡的交换功能找到被叫用户即外线服务台</li>
-<li>外线服务台振铃并接通后，即可与船外用户通话</li>
-</ol>
-<h3 id="问题分析"><a href="#问题分析" class="headerlink" title="问题分析"></a>问题分析</h3><p>业务流程如上所述，假设船外用户呼叫外线服务台这一系列链路中无任何信号衰减，则可视为一条透传的链路，即两端话音不失真的传递到对端，但目前的故障问题显然是话音在传递的过程中有失真，该失真有可能出现自链路中的任何一环节，故需要做一组对比试验来判定失真出现在哪一段</p>
-<h3 id="试验环境"><a href="#试验环境" class="headerlink" title="试验环境"></a>试验环境</h3><p>试验环境如图：<br><img src="/2019/11/10/%E5%85%B3%E4%BA%8E%E5%A4%96%E7%BA%BF%E6%9C%8D%E5%8A%A1%E5%8F%B0%E5%A3%B0%E9%9F%B3%E5%B0%8F%E6%83%85%E5%86%B5%E8%AF%B4%E6%98%8E/%E6%88%AA%E5%9B%BE20191110121549.png" alt></p>
-<p><strong>经过分析怀疑是岸上的程控交换机到船上这一段链路上有信号的衰减，为了验证该结论于是搭建上述试验环境，将“岸上的程控交换机-光缆卷车室”替换成“生活电话-自备的程控交换机-网元”模式。</strong></p>
-<blockquote>
-<p>该模式下可正常使用，“生活电话”相当于之前的“船外用户”，“自备的程控交换机”相当于“岸上的程控交换机”</p>
-</blockquote>
-<h3 id="试验过程"><a href="#试验过程" class="headerlink" title="试验过程"></a>试验过程</h3><ol>
-<li>生活电话摘机拨打602<blockquote>
-<p>602是自备的程控交换机上连接网元侧的号码，拨打此号码相当于入局</p>
-</blockquote>
-</li>
-</ol>
-<ol start="2">
-<li>网元1中fox卡相应的指示灯亮起，表示有用户入局</li>
-<li>fxo卡将入局信号转发到cmue板卡上，cmue通过查号表得知被叫用户在网元3，于是将呼叫请求转发到网元3</li>
-<li>网元3的cmue板卡收到呼叫请求，查找本地的号码表得知被叫号码是本网元的外线服务台，于是将请求转发到外线服务台</li>
-<li>外线服务台振铃，摘机接听，生活电话端故意压低声音依次从1数到10</li>
-<li><strong>外线服务台声音清晰，未出现掉字、模糊的现象</strong></li>
-<li>经过多次试验，且多次更换网元、生活电话、外线服务台后，现象没有变化</li>
-</ol>
-<h3 id="试验结论"><a href="#试验结论" class="headerlink" title="试验结论"></a>试验结论</h3><p>多次试验并对比后可以得出结论：外线服务台话音失真问题原因在于岸上程控交换机到船内一段链路有较大信号衰减，</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
   </div>
 
   
@@ -1461,20 +1549,20 @@ Python 3.7.0</code></pre><p>file命令是查看一个文件的属性，可以看
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">16</span>
+          <span class="site-state-item-count">18</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-count">9</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-count">11</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>

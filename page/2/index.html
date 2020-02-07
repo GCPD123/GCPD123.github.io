@@ -181,6 +181,222 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/11/13/Python%E5%AE%89%E8%A3%85/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/assets/blogImg/6711866_014214_8838.jpg">
+      <meta itemprop="name" content="XXX">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/11/13/Python%E5%AE%89%E8%A3%85/" class="post-title-link" itemprop="url">Python安装</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-11-13 19:23:47" itemprop="dateCreated datePublished" datetime="2019-11-13T19:23:47+08:00">2019-11-13</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2019-11-27 20:04:25" itemprop="dateModified" datetime="2019-11-27T20:04:25+08:00">2019-11-27</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Python/" itemprop="url" rel="index">
+                    <span itemprop="name">Python</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h3 id="Linux上安装python"><a href="#Linux上安装python" class="headerlink" title="Linux上安装python"></a>Linux上安装python</h3><p>目前Linux中都自带python2，使用</p>
+<pre><code>python --version</code></pre><p>查看python版本</p>
+<blockquote>
+<p>python2已成过去，以后不会有支持，建议不用，但是Linux中有依赖python2，所以也不能卸载，直接安装python3即可</p>
+</blockquote>
+<h3 id="安装前准备"><a href="#安装前准备" class="headerlink" title="安装前准备"></a>安装前准备</h3><pre><code>cd /usr/local/
+mkdir python3</code></pre><p>此目录作为Python的主目录</p>
+<ol>
+<li>安装GCC编译器</li>
+</ol>
+<pre><code>gcc --version</code></pre><p>查看是否安装，若没有安装，则</p>
+<pre><code>yum -y install gcc</code></pre><ol start="2">
+<li><p>安装其他依赖包</p>
+<pre><code>yum -y install zlib-devel bzip2-devel openssl-devel ncurses-devel sqlite-develreadline-devel tk-devel gdbm-devel db4-devel libpcap-devel xz-devel libffi-devel</code></pre></li>
+</ol>
+<h3 id="下载安装包"><a href="#下载安装包" class="headerlink" title="下载安装包"></a>下载安装包</h3><pre><code>cd python3/
+wget https://www.python.org/ftp/python/3.7.0/Python-3.7.0.tgz</code></pre><h3 id="解压"><a href="#解压" class="headerlink" title="解压"></a>解压</h3><pre><code>tar -xzvf Python-3.7.0.tgz</code></pre><blockquote>
+<p>tar命令报错，可能是没有安装tar，直接yum -y install tar</p>
+</blockquote>
+<p>使用</p>
+<pre><code>tree -d -L 1 Python-3.7.0</code></pre><p>可以使用树形查看目录，更清楚</p>
+<blockquote>
+<p>若没有该命令则，yum -y install tree</p>
+</blockquote>
+<h3 id="开始安装"><a href="#开始安装" class="headerlink" title="开始安装"></a>开始安装</h3><p>进入到刚解压出来的文件中即Python -3.7.0</p>
+<h4 id="将创建的文件夹设置为程序主目录"><a href="#将创建的文件夹设置为程序主目录" class="headerlink" title="将创建的文件夹设置为程序主目录"></a>将创建的文件夹设置为程序主目录</h4><p>意思是：安装的目录就是这个指定的目录，相关文件全放在这里</p>
+<pre><code>./configure --prefix=/usr/local/python3</code></pre><h3 id="编译安装"><a href="#编译安装" class="headerlink" title="编译安装"></a>编译安装</h3><p>还是在刚才目录</p>
+<pre><code>make &amp;&amp; make install</code></pre><h3 id="建立软连接"><a href="#建立软连接" class="headerlink" title="建立软连接"></a>建立软连接</h3><p>如果不建立连接，则只有在安装的目录中才能使用Python,建立连接是要在任何地方都能使用，要达到这个目的，还需要环境变量，即在任何地方使用命令，都会在环境变量路径中查找该命令</p>
+<pre><code>ln -s /usr/local/python3/bin/python3.7 /usr/bin/python3
+
+ln -s /usr/local/python3/pip3.7 /usr/bin/pip3</code></pre><blockquote>
+<p>pip是python的包管理工具，相当于nodejs中的npm</p>
+</blockquote>
+<p><strong>安装成功后此Linux中就有两个python 版本2和版本3，现在只想使用版本3</strong></p>
+<pre><code>file /usr/bin/python</code></pre><p>输出打印</p>
+<pre><code>/usr/bin/python: symbolic link to `python2&apos;</code></pre><p>表示输入python实际上运行的是python2</p>
+<pre><code>which python2</code></pre><p>找到Python2安装的位置，在环境变量的路径中找，python3也一样</p>
+<pre><code>mv /usr/bin/python /usr/bin/python_bk</code></pre><p>将该路径去除，实际上是改名了，然后就可以将Python3连接过来</p>
+<pre><code>ln -s /usr/bin/python3 /usr/bin/python</code></pre><blockquote>
+<p>/usr/bin/python就相当于python</p>
+</blockquote>
+<pre><code>python -V
+Python 3.7.0</code></pre><p>file命令是查看一个文件的属性，可以看到它的连接，然后依次往下查找就可以找到唯一的运行文件，因为连接也是文件</p>
+<p>ln是创建连接，源文件  目标文件</p>
+<p>which是在环境变量中查找文件</p>
+<p>链接（link）：系统中的链接是一个已经存在的文件的另一个名字，它不复制文件的内容。有两种链接方式，一种是硬链接（hard link），另一种是符号链接（symbolic link），又称软链接。硬链接和原有文件是存储在同一物理地址的两个不同的名字，因此硬链接是相互的；符号链接的内容只是一个所链接文件的文件名，在使用ls –l时，符号链接的第一项的第一位为“l”。 </p>
+<p>指向一个文件的所有 硬链接都删掉的话文件的内容才会被删掉<br>软链接只要删掉了源链接文件，软链接也就失效了</p>
+<p>ln和file在查看上是相反的，ln将存在的文件创建一个新名字，file是显示目前查看的文件的本名字是谁</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/11/10/%E5%85%B3%E4%BA%8E%E5%A4%96%E7%BA%BF%E6%9C%8D%E5%8A%A1%E5%8F%B0%E5%A3%B0%E9%9F%B3%E5%B0%8F%E6%83%85%E5%86%B5%E8%AF%B4%E6%98%8E/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/assets/blogImg/6711866_014214_8838.jpg">
+      <meta itemprop="name" content="XXX">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/11/10/%E5%85%B3%E4%BA%8E%E5%A4%96%E7%BA%BF%E6%9C%8D%E5%8A%A1%E5%8F%B0%E5%A3%B0%E9%9F%B3%E5%B0%8F%E6%83%85%E5%86%B5%E8%AF%B4%E6%98%8E/" class="post-title-link" itemprop="url">关于外线服务台话音失真情况说明</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-11-10 11:21:41" itemprop="dateCreated datePublished" datetime="2019-11-10T11:21:41+08:00">2019-11-10</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2019-11-27 20:04:25" itemprop="dateModified" datetime="2019-11-27T20:04:25+08:00">2019-11-27</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h3 id="故障现象"><a href="#故障现象" class="headerlink" title="故障现象"></a>故障现象</h3><p>根据船上外线服务台使用情况反馈，当船外用户呼叫船上值班室的外线服务台时，通话质量不佳，主要体现在：当船外用户声音低沉时，外线服务台收听到的声音非常小，而且会出现掉字的情况，如，当船外用户说出“1、2、3”时，如果“2”的声音小，则外线服务台只能听到“1、3”。</p>
+<h3 id="业务流程"><a href="#业务流程" class="headerlink" title="业务流程"></a>业务流程</h3><p>流程如图所示：<img src="/2019/11/10/%E5%85%B3%E4%BA%8E%E5%A4%96%E7%BA%BF%E6%9C%8D%E5%8A%A1%E5%8F%B0%E5%A3%B0%E9%9F%B3%E5%B0%8F%E6%83%85%E5%86%B5%E8%AF%B4%E6%98%8E/%E6%88%AA%E5%9B%BE20191110114449.png" alt></p>
+<ol>
+<li>当船外用户拨打船内提供的外线号码后，第一跳到达岸上的程控交换机中，通过电信号交换将主叫用户的呼叫请求转发到相应的出端口上</li>
+<li>出端口出来后通过光缆到达船上的光缆卷车室</li>
+<li>由光缆卷车室到达广播室的网元中的O卡上，通过该网元的CMUE板卡的交换功能找到被叫用户即外线服务台</li>
+<li>外线服务台振铃并接通后，即可与船外用户通话</li>
+</ol>
+<h3 id="问题分析"><a href="#问题分析" class="headerlink" title="问题分析"></a>问题分析</h3><p>业务流程如上所述，假设船外用户呼叫外线服务台这一系列链路中无任何信号衰减，则可视为一条透传的链路，即两端话音不失真的传递到对端，但目前的故障问题显然是话音在传递的过程中有失真，该失真有可能出现自链路中的任何一环节，故需要做一组对比试验来判定失真出现在哪一段</p>
+<h3 id="试验环境"><a href="#试验环境" class="headerlink" title="试验环境"></a>试验环境</h3><p>试验环境如图：<br><img src="/2019/11/10/%E5%85%B3%E4%BA%8E%E5%A4%96%E7%BA%BF%E6%9C%8D%E5%8A%A1%E5%8F%B0%E5%A3%B0%E9%9F%B3%E5%B0%8F%E6%83%85%E5%86%B5%E8%AF%B4%E6%98%8E/%E6%88%AA%E5%9B%BE20191110121549.png" alt></p>
+<p><strong>经过分析怀疑是岸上的程控交换机到船上这一段链路上有信号的衰减，为了验证该结论于是搭建上述试验环境，将“岸上的程控交换机-光缆卷车室”替换成“生活电话-自备的程控交换机-网元”模式。</strong></p>
+<blockquote>
+<p>该模式下可正常使用，“生活电话”相当于之前的“船外用户”，“自备的程控交换机”相当于“岸上的程控交换机”</p>
+</blockquote>
+<h3 id="试验过程"><a href="#试验过程" class="headerlink" title="试验过程"></a>试验过程</h3><ol>
+<li>生活电话摘机拨打602<blockquote>
+<p>602是自备的程控交换机上连接网元侧的号码，拨打此号码相当于入局</p>
+</blockquote>
+</li>
+</ol>
+<ol start="2">
+<li>网元1中fox卡相应的指示灯亮起，表示有用户入局</li>
+<li>fxo卡将入局信号转发到cmue板卡上，cmue通过查号表得知被叫用户在网元3，于是将呼叫请求转发到网元3</li>
+<li>网元3的cmue板卡收到呼叫请求，查找本地的号码表得知被叫号码是本网元的外线服务台，于是将请求转发到外线服务台</li>
+<li>外线服务台振铃，摘机接听，生活电话端故意压低声音依次从1数到10</li>
+<li><strong>外线服务台声音清晰，未出现掉字、模糊的现象</strong></li>
+<li>经过多次试验，且多次更换网元、生活电话、外线服务台后，现象没有变化</li>
+</ol>
+<h3 id="试验结论"><a href="#试验结论" class="headerlink" title="试验结论"></a>试验结论</h3><p>多次试验并对比后可以得出结论：外线服务台话音失真问题原因在于岸上程控交换机到船内一段链路有较大信号衰减，</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/11/06/%E5%8F%8D%E5%B0%84/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -992,20 +1208,20 @@ tags: hexo
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">16</span>
+          <span class="site-state-item-count">18</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-count">9</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-count">11</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
