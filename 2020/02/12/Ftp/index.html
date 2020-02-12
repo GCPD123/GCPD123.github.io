@@ -58,7 +58,7 @@
 <meta property="og:site_name" content="Hexo">
 <meta property="og:description" content="Linux上安装Ftp在Linux上Ftp叫做vsftpd,安装： 1yum -y install vsftpd  启动： 1service vsftpd start  重启： 1service vsftpd restart  开机自启动： 1chkconfig vsftpd on  Ftp配置配置vsftpd主配置文件&#x2F;etc&#x2F;vsftpd&#x2F;vsftpd.conf local_enable=YE">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2020-02-12T05:25:32.292Z">
+<meta property="og:updated_time" content="2020-02-12T05:27:02.471Z">
 <meta name="twitter:card" content="summary">
 
 <link rel="canonical" href="http://yoursite.com/2020/02/12/Ftp/">
@@ -209,7 +209,7 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2020-02-12 12:56:58 / 修改时间：13:25:32" itemprop="dateCreated datePublished" datetime="2020-02-12T12:56:58+08:00">2020-02-12</time>
+              <time title="创建时间：2020-02-12 12:56:58 / 修改时间：13:27:02" itemprop="dateCreated datePublished" datetime="2020-02-12T12:56:58+08:00">2020-02-12</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -267,6 +267,7 @@
 <li>修改/etc/vsftpd/ftpusers和user_list文件，将root用户注释掉（可使用root登陆）</li>
 <li>在filezilla客户端中连接使用“只使用明文ftp（不安全）”（安装的vsftp不支持加密）</li>
 <li>大招: 如果以上都不行，则直接使用sftp协议连接（linux上默认已经安装，和ftp一模一样 手动开启/etc/init.d/sshd start/stop）</li>
+<li>以上修改都需要service vsftpd restart重启服务</li>
 </ol>
 
     </div>
