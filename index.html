@@ -181,6 +181,109 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/02/12/Ftp/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/assets/blogImg/6711866_014214_8838.jpg">
+      <meta itemprop="name" content="XXX">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/02/12/Ftp/" class="post-title-link" itemprop="url">Ftp</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-02-12 12:56:58 / 修改时间：13:25:32" itemprop="dateCreated datePublished" datetime="2020-02-12T12:56:58+08:00">2020-02-12</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%84%9A%E6%89%8B%E6%9E%B6/" itemprop="url" rel="index">
+                    <span itemprop="name">脚手架</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h3 id="Linux上安装Ftp"><a href="#Linux上安装Ftp" class="headerlink" title="Linux上安装Ftp"></a>Linux上安装Ftp</h3><p>在Linux上Ftp叫做vsftpd,安装：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum -y install vsftpd</span><br></pre></td></tr></table></figure>
+
+<p>启动：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">service vsftpd start</span><br></pre></td></tr></table></figure>
+
+<p>重启：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">service vsftpd restart</span><br></pre></td></tr></table></figure>
+
+<p>开机自启动：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chkconfig vsftpd on</span><br></pre></td></tr></table></figure>
+
+<h3 id="Ftp配置"><a href="#Ftp配置" class="headerlink" title="Ftp配置"></a>Ftp配置</h3><p>配置vsftpd主配置文件<code>/etc/vsftpd/vsftpd.conf</code></p>
+<p><code>local_enable=YES</code>：是否允许本地用户（本地用户指在本机上注册过的用户，root等） 。<br><code>write_enable=YES</code>：是否允许本地用户对 FTP 服务器文件具有写权限 ， 默认设置为 YES 允许。</p>
+<p>配置用户访问锁定到自己的家目录下（不可以访问其他目录）：<br><code>chroot_list_enable=YES</code>：设置为 NO 时，用户登录FTP 服务器后具有访问自己目录以外的其他文件的权限， 设置为 YES 时 ， 用户被锁定在自己的 home 目录中，vsftpd 将在下面 chroot_list_file 选项值的位置寻找 chroot_list 文件，此文件需用户建立, 再将需锁定在自己home 目录的用户列入其中，每行一个用户。<strong>该选项需要设置为NO，不然只能操作当前目录</strong></p>
+<h4 id="用户是否访问服务器"><a href="#用户是否访问服务器" class="headerlink" title="用户是否访问服务器"></a>用户是否访问服务器</h4><ol>
+<li>/etc/vsftpd/ftpusers: 禁止使用ftp服务的用户，里面默认的有root，所以要想使用root登陆，就应该注释掉</li>
+<li>/etc/vsftpd/user_list: 禁止或允许使用ftp的用户列表，<strong>当userlist_enable=YES时user_list文件中的用户可以登陆，若为NO时，则ftpusers文件中的用户禁止登陆</strong></li>
+</ol>
+<p>一句话：使用root远程登录</p>
+<p>修改/etc/vsftpd/vsftpd.con配置文件</p>
+<blockquote>
+<p>#anonymous_enable=YES</p>
+<p>pam_service_name=vsftpd</p>
+<p>userlist_enable=YES</p>
+</blockquote>
+<p>修改/etc/vsftpd/ftpusers和user_list文件，将root用户注释掉。</p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>要想ftp能正常使用配置：</p>
+<ol>
+<li>/etc/vsftpd/vsftpd.conf中 chroot_list_enable=NO（可访问其他目录）</li>
+<li>修改/etc/vsftpd/ftpusers和user_list文件，将root用户注释掉（可使用root登陆）</li>
+<li>在filezilla客户端中连接使用“只使用明文ftp（不安全）”（安装的vsftp不支持加密）</li>
+<li>大招: 如果以上都不行，则直接使用sftp协议连接（linux上默认已经安装，和ftp一模一样 手动开启/etc/init.d/sshd start/stop）</li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/02/09/Solr%E4%B8%8E%E4%B8%AD%E6%96%87%E5%88%86%E8%AF%8D%E5%99%A8IK/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -206,7 +309,7 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2020-02-09 11:26:17 / 修改时间：12:07:13" itemprop="dateCreated datePublished" datetime="2020-02-09T11:26:17+08:00">2020-02-09</time>
+              <time title="创建时间：2020-02-09 11:26:17 / 修改时间：12:17:12" itemprop="dateCreated datePublished" datetime="2020-02-09T11:26:17+08:00">2020-02-09</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -1356,172 +1459,6 @@
   
   
 
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/12/07/maven/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/assets/blogImg/6711866_014214_8838.jpg">
-      <meta itemprop="name" content="XXX">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/12/07/maven/" class="post-title-link" itemprop="url">maven</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2019-12-07 21:16:03" itemprop="dateCreated datePublished" datetime="2019-12-07T21:16:03+08:00">2019-12-07</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2019-12-11 15:35:14" itemprop="dateModified" datetime="2019-12-11T15:35:14+08:00">2019-12-11</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/java/" itemprop="url" rel="index">
-                    <span itemprop="name">java</span>
-                  </a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h3 id="为什么要用maven"><a href="#为什么要用maven" class="headerlink" title="为什么要用maven"></a>为什么要用maven</h3><p><img src="/2019/12/07/maven/1.png" alt></p>
-<p>目前开发中存在的问题：</p>
-<ol>
-<li>一个项目就是一个工程<br>如果项目非常庞大，就不适合继续使用package来划分模块。最好是每一个模块对应一个项目，利于分工协作。<br>借助于maven就可以将一个项目拆分成多个工程。</li>
-<li>项目中需要的jar包必须手动“复制”、”粘贴” 到WEB-INF/lib 项目下<br>带来的问题：同样的jar包文件重复出现在不同的项目工程中，一方面浪费存储空间，另外也让工程比较臃肿。<br>借助Maven，可以将jar包仅仅保存在“仓库”中，有需要使用的工程“引用”这个文件，并不需要重复复制。</li>
-<li>jar包需要别人替我们准备好，或到官网下载<br>所有知名框架或第三方工具jar包已经按照统一规范放在了Maven的中央仓库中。</li>
-<li>一个jar包依赖的其他jar包需要自己手动加到项目中<br>Maven会自动将被依赖的jar包导入进来。</li>
-</ol>
-<h3 id="maven是什么"><a href="#maven是什么" class="headerlink" title="maven是什么"></a>maven是什么</h3><ol>
-<li>Maven 是 Apache 软件基金会组织维护的一款自动化构建工具，专注服务于 Java 平台的项目构建和依赖管理 。Maven 这个单词的本意是：专家，内行。读音是[‘meɪv(ə)n]或[‘mevn]。<br>构建工具的发展：Make→Ant→Maven→Gradle</li>
-<li>构建：就是以我们编写的Java代码、框架配置文件、国际化等其他资源文件、jsp页面和图片等静态资源作为“原材料”，去“生产”出一个可以运行的项目的过程。</li>
-</ol>
-<p><img src="/2019/12/07/maven/2.png" alt></p>
-<p>在web工程中主要有三个目录：src(存放源文件)、build(存放编译后的class文件)、WebContent(存放页面资源和配置的文件)。工程经过部署后就要在服务器上运行，也就是tomcat上，tomcat对部署的工程有严格的目录要求，对应关系是：<strong>工程名字就是运行的根目录，Chiken是工程名也是tomcat上应用的名字</strong>WebContent目录下的所有文件都会到应用到根目录下，其中build下的内容会到WEB-INF目录下，所谓的类路径说的就是编译后的class文件的路径，即：<strong>tomcat中WEB-INF=build+WEB-INF，应用根目录=WebContent</strong></p>
-<p>总结：应用=WebContent+build 其中build到了WEB-INF中了，因为WEB-INF中的东西不能直接访问，为了安全所以class文件在其中</p>
-<h4 id="构建的几个主要环节"><a href="#构建的几个主要环节" class="headerlink" title="构建的几个主要环节"></a>构建的几个主要环节</h4><p>①清理：删除以前的编译结果，为重新编译做好准备。<br>②编译：将Java源程序编译为字节码文件。<br>③测试：针对项目中的关键点进行测试，确保项目在迭代开发过程中关键点的正确性。<br>④报告：将每一次测试后以标准的格式记录和展示测试结果。<br>⑤打包：将一个包含诸多文件的工程封装为一个压缩文件用于安装或部署。Java工程对应jar包，Web工程对象war包。<br>⑥安装：在Maven环境下特指将打包的结果——Jar包或War包安装到本地仓库中。<br>⑦部署：将打包的结果部署到远程仓库或将war包部署到服务器上运行。</p>
-<h3 id="maven工程"><a href="#maven工程" class="headerlink" title="maven工程"></a>maven工程</h3><p><img src="/2019/12/07/maven/3.png" alt></p>
-<p>遵守约定的目录结构的意义</p>
-<p>我们在开发中如果需要让第三方工具或框架知道我们自己创建的资源在哪，那么基本上就是两种方式：<br>①以配置文件的方式明确告诉框架 如 &lt; param-value&gt;classpath:spring-context.xml &lt; /param-value&gt;<br>②遵循框架内部已经存在的约定 如log4j的配置文件名规定必须为 log4j.properties 或 log4j.xml ；Maven 使用约定的目录结构</p>
-<p>第三方：第一方是JDK、第二方是开发者、第三方是JDK和开发者都无法解决的东西需要其他包来完成</p>
-<p>###maven常用命令</p>
-<p>【1】mvn clean : 清理<br>【2】mvn compile : 编译主程序<br>【3】mvn test-compile : 编译测试程序<br>【4】mvn test : 执行测试<br>【5】mvn package : 打包<br>【6】mvn install ： 安装<br>【7】mvn site ：生成站点</p>
-<ol>
-<li>Maven 的核心程序中仅仅定义了抽象的生命周期，但是具体的工作必须有特定的插件来完成。而插件本身不包含在Maven核心程序中。</li>
-<li>当我们执行的Maven命令需要用到某些插件时，Maven核心程序会首先到本地仓库中查找。</li>
-<li>本地仓库的默认位置：[系统登陆用户的家目录] \ .m2\repository</li>
-<li>Maven核心程序如果在本地仓库中找不到需要的插件，那么它会自动连接外网，到中央仓库下载。</li>
-<li>如果此时无法连接外网，则构建失败。</li>
-<li>修改默认本地仓库的位置可以让Maven核心程序到我们事先准备好的目录下查找插件<br>①找到Maven解压目录\conf\settings.xml<br>②在setting.xml 文件中找到 localRepository 标签<br>③将 &lt; localRepository&gt;/path/to/local/repo&lt; /localRepository&gt;从注释中取出<br>④将标签体内容修改为自定义的Maven仓库目录</li>
-</ol>
-<h3 id="POM"><a href="#POM" class="headerlink" title="POM"></a>POM</h3><ol>
-<li>含义：Project Object Model 项目对象模型<br>DOM ：Document Object Model 文档对象模型</li>
-<li>pom.xml 对于 Maven工程是核心配置文件，与构建过程相关的一切设置都在这个文件中进行配置。<br>重要程度相当于web.xml 对于动态web工程</li>
-</ol>
-<h3 id="坐标"><a href="#坐标" class="headerlink" title="坐标"></a>坐标</h3><ol>
-<li><p>数学中的坐标：<br>①在平面中，使用X,Y坐标可以唯一的定位平面中任何一个点。<br>②在空间中，使用X,Y，Z三个向量可以唯一的定位空间中的任何一个点。</p>
-</li>
-<li><p>Maven的坐标：<br>使用下面三个向量在仓库中唯一定位一个Maven工程</p>
-</li>
-<li><p>①groupid:公司或组织域名倒序+项目名</p>
-<blockquote>
-<p>&lt; groupid&gt;com.atguigu.maven&lt; /groupid&gt;</p>
-</blockquote>
-<p>②artifactid:模块名</p>
-<blockquote>
-<p>&lt; artifactid&gt;Hello&lt; /artifactid&gt;</p>
-</blockquote>
-<p>③version：版本</p>
-<blockquote>
-<p>&lt; version&gt;1.0.0&lt; /version&gt;</p>
-</blockquote>
-<p>坐标又叫“gav”，全部是第一个首字母</p>
-</li>
-</ol>
-<p>   Maven 工程的坐标与仓库中路径的对应关系，以spring为例</p>
-<blockquote>
-<p>&lt; groupId&gt;org.springframework&lt; /groupId&gt;<br>&lt; artifactId&gt;spring-core&lt; /artifactId&gt;<br>&lt; version&gt;4.0.0.RELEASE&lt; /version&gt;</p>
-<p>org/springframework/spring-core/4.0.0.RELEASE/spring-core-4.0.0.RELEASE.jar</p>
-</blockquote>
-<p>全部一个一个拼起来就可以定位一个文件的位置，所以称作坐标</p>
-<h3 id="依赖"><a href="#依赖" class="headerlink" title="依赖"></a>依赖</h3><p>当 A jar 包用到了 B jar 包中的某些类时，A 就对 B 产生了依赖，这是概念上的描述。Maven解析依赖信息时会到仓库中查找被依赖的jar包。<br>对于我们自己开发的Maven工程，要使用mvn install 命令安装后就可以进入仓库。</p>
-<p><img src="/2019/12/07/maven/4.png" alt></p>
-<h4 id="依赖的范围"><a href="#依赖的范围" class="headerlink" title="依赖的范围"></a>依赖的范围</h4><p><img src="/2019/12/07/maven/5.png" alt></p>
-<p>compile范围的依赖主要在编译阶段有效，即主程序和测试程序都需要编译，所以都有效，有效的意思是：在源码中导入相应的包后可以使用</p>
-<p>test范围的依赖只在测试阶段有效，即在主程序的源码中导包后并不能使用，提示没有相应的依赖</p>
-<p>compile范围依赖<br>》对主程序是否有效：有效<br>》对测试程序是否有效：有效<br>》是否参与打包：参与<br>》是否参与部署：参与<br>》典型例子：spring-core</p>
-<p>test范围依赖<br>》对主程序是否有效：无效<br>》对测试程序是否有效：有效<br>》是否参与打包：不参与<br>》是否参与部署：不参与<br>》典型例子：Junit</p>
-<p>因为test的包不需要部署到服务器上，所以也不需要打包，打包的目的就是为了部署（编译测试打包安装部署运行）</p>
-<p><img src="/2019/12/07/maven/6.png" alt></p>
-<p>provided的依赖意思是：在开发阶段可以使用，打包和部署则由servlet容器提供</p>
-<p>》对主程序是否有效：有效<br>》对测试程序是否有效：有效<br>》是否参与打包：不参与<br>》是否参与部署：不参与<br>》典型例子：Servlet-api.jar</p>
-<h3 id="生命周期"><a href="#生命周期" class="headerlink" title="生命周期"></a>生命周期</h3><ol>
-<li>各个构建环节执行的顺序：不能打乱顺序，必须按照既定的正确顺序来执行。</li>
-<li>Maven的核心程序中定义了抽象的生命周期，生命周期中各个阶段的具体任务是由插件来完成的。</li>
-<li>Maven核心程序为了更好的实现自动化构建，按照这一特点执行生命周期中各个阶段：不论现在要执行生命周期中的哪一阶段，都是从这个生命周期最初的位置开始执行。</li>
-<li>Maven有三套相互独立的生命周期，分别是：<br>①Clean Lifecycle 在进行真正的构建之前进行一些清理工作。<br>②Default Lifecycle 构建的核心部分，编译、测试、打包、安装、部署等等。<br>③Site Lifecycle 生成项目报告，站点，发布站点。</li>
-</ol>
-<p>他们相互独立。也可以直接运行 mvn clean install site 运行所有这三套生命周期。</p>
-<p>每套生命周期都由一组阶段(Phase)组成，我们平时在命令行输入的命令总会对应于一个特定的阶段。比如，运行 mvn clean，这个 clean 是 Clean 生命周期的一个阶段。有 Clean 生命周期，也有 clean 阶段。</p>
-<p>Default声明周期<br>Default 生命周期是 Maven 生命周期中最重要的一个，绝大部分工作都发生在这个生命周期中。这里，只解释一些比较重要和常用的阶段：<br>validate<br>generate-sources<br>process-sources<br>generate-resources<br>process-resources 复制并处理资源文件，至目标目录，准备打包。<br>compile 编译项目的源代码。<br>process-classes<br>generate-test-sources<br>process-test-sources<br>generate-test-resources<br>process-test-resources 复制并处理资源文件，至目标测试目录。<br>test-compile 编译测试源代码。<br>process-test-classes<br>test 使用合适的单元测试框架运行测试。这些测试代码不会被打包或部署。<br>prepare-package<br>package 接受编译好的代码，打包成可发布的格式，如 JAR。<br>pre-integration-test<br>integration-test<br>post-integration-test<br>verify<br>install 将包安装至本地仓库，以让其它项目依赖。<br>deploy 将最终的包复制到远程的仓库，以让其它开发人员与项目共享或部署到服务器上运行。</p>
-<p><strong>总结：编译 测试 打包 安装 部署运行</strong></p>
-<p>插件和目标<br>Maven的核心仅仅定义了抽象的生命周期，具体的任务都是交由插件完成的。<br>每个插件都实现多个功能，每个功能就是一个插件目标<br>Maven的生命周期与插件目标相互绑定，以完成某个具体的构建任务。<br>可以将目标看做“调用插件功能的命令”</p>
-<p>例如：compile 就是插件 maven-compiler-plugin 的一个目标；pre-clean 是插件 maven-clean-plugin 的一个目标。</p>
-<p>插件：目标（一个插件可以有多个目标）</p>
-<h3 id="继承"><a href="#继承" class="headerlink" title="继承"></a>继承</h3><p>现状<br>Hello依赖的Junit：4.0<br>HelloFriend依赖的Junit：4.0<br>MakeFriends依赖的Junit：4.9</p>
-<p>由于test范围的依赖不能传递，所以必然会分散在各个模块工程中，很容易造成版本不一致。</p>
-<p>需求：统一管理各个模块工程中对Junit依赖的版本。</p>
-<p>解决思路：将Junit依赖统一提取到“父”工程中，在子工程中声明Junit依赖是不指定版本，以父工程中统一设定的为准。同时也便于修改。</p>
-<p>子工程依赖父工程，在子工程中删除不同的地方，也即是版本号，也就继承了父的版本号</p>
-<h3 id="聚合"><a href="#聚合" class="headerlink" title="聚合"></a>聚合</h3><p>非聚合状态下是一个一个工程编译打包安装，但是聚合后就可以一键安装，指定聚合工程中包含的模块，然后只用在聚合工程上点击安装，其他模块都会自动安装。</p>
-<p><img src="/2019/12/07/maven/7.png" alt></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
   </div>
 
   
@@ -1572,7 +1509,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">19</span>
+          <span class="site-state-item-count">20</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -1585,7 +1522,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">12</span>
+        <span class="site-state-item-count">13</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
